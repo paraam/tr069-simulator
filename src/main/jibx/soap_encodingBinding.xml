@@ -1,0 +1,345 @@
+<binding xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" trim-whitespace="true">
+  <namespace uri="http://schemas.xmlsoap.org/soap/encoding/" prefix="soapenc"/>
+  <mapping abstract="true" type-name="soapenc:commonAttributes-AttributeGroup" class="org.dslforum.cwmp_1_0.CommonAttributes">
+    <value style="attribute" name="id" get-method="getId" set-method="setId" usage="optional"/>
+    <value style="attribute" name="href" get-method="getHref" set-method="setHref" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:arrayAttributes-AttributeGroup" class="org.dslforum.cwmp_1_0.ArrayAttributes">
+    <structure get-method="getArrayType" set-method="setArrayType" usage="optional">
+      <value style="attribute" name="arrayType" ns="http://schemas.xmlsoap.org/soap/encoding/" get-method="getArrayType" set-method="setArrayType" usage="optional"/>
+    </structure>
+    <structure get-method="getOffset" set-method="setOffset" usage="optional">
+      <value style="attribute" name="offset" ns="http://schemas.xmlsoap.org/soap/encoding/" get-method="getOffset" set-method="setOffset" usage="optional"/>
+    </structure>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:Array-Group" class="org.dslforum.cwmp_1_0.Array">
+    <structure get-method="getAnyList" set-method="setAnyList" usage="optional" marshaller="org.jibx.extras.DomListMapper" unmarshaller="org.jibx.extras.DomListMapper"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:Array" class="org.dslforum.cwmp_1_0.Array1">
+    <structure map-as="soapenc:Array-Group" get-method="getArray" set-method="setArray" usage="optional"/>
+    <structure map-as="soapenc:arrayAttributes-AttributeGroup" get-method="getArrayAttributes" set-method="setArrayAttributes" usage="optional"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Array1" name="Array" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:Array"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:Struct-Group" class="org.dslforum.cwmp_1_0.Struct">
+    <structure get-method="getAnyList" set-method="setAnyList" usage="optional" marshaller="org.jibx.extras.DomListMapper" unmarshaller="org.jibx.extras.DomListMapper"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:Struct" class="org.dslforum.cwmp_1_0.Struct1">
+    <structure map-as="soapenc:Struct-Group" get-method="getStruct" set-method="setStruct" usage="optional"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Struct1" name="Struct" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:Struct"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:duration" class="org.dslforum.cwmp_1_0.Duration">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Duration" name="duration" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:duration"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:dateTime" class="org.dslforum.cwmp_1_0.DateTime">
+    <value style="text" get-method="getDateTime" set-method="setDateTime"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.DateTime" name="dateTime" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:dateTime"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:NOTATION" class="org.dslforum.cwmp_1_0.NOTATION">
+    <value style="text" get-method="getQName" set-method="setQName"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NOTATION" name="NOTATION" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:NOTATION"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:time" class="org.dslforum.cwmp_1_0.Time">
+    <value style="text" get-method="getTime" set-method="setTime"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Time" name="time" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:time"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:date" class="org.dslforum.cwmp_1_0.Date">
+    <value style="text" get-method="getDate" set-method="setDate"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Date" name="date" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:date"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:gYearMonth" class="org.dslforum.cwmp_1_0.GYearMonth">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GYearMonth" name="gYearMonth" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:gYearMonth"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:gYear" class="org.dslforum.cwmp_1_0.GYear">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GYear" name="gYear" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:gYear"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:gMonthDay" class="org.dslforum.cwmp_1_0.GMonthDay">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GMonthDay" name="gMonthDay" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:gMonthDay"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:gDay" class="org.dslforum.cwmp_1_0.GDay">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GDay" name="gDay" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:gDay"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:gMonth" class="org.dslforum.cwmp_1_0.GMonth">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GMonth" name="gMonth" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:gMonth"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:boolean" class="org.dslforum.cwmp_1_0._Boolean">
+    <value style="text" get-method="isBoolean" set-method="setBoolean"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Boolean" name="boolean" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:boolean"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:base64Binary" class="org.dslforum.cwmp_1_0.Base64Binary">
+    <value style="text" get-method="getBase64Binary" set-method="setBase64Binary"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Base64Binary" name="base64Binary" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:base64Binary"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:hexBinary" class="org.dslforum.cwmp_1_0.HexBinary">
+    <value style="text" get-method="getHexBinary" set-method="setHexBinary"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.HexBinary" name="hexBinary" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:hexBinary"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:float" class="org.dslforum.cwmp_1_0._Float">
+    <value style="text" get-method="getFloat" set-method="setFloat"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Float" name="float" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:float"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:double" class="org.dslforum.cwmp_1_0._Double">
+    <value style="text" get-method="getDouble" set-method="setDouble"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Double" name="double" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:double"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:anyURI" class="org.dslforum.cwmp_1_0.AnyURI">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.AnyURI" name="anyURI" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:anyURI"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:QName" class="org.dslforum.cwmp_1_0.QName">
+    <value style="text" get-method="getQName1" set-method="setQName1"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.QName" name="QName" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:QName"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:string" class="org.dslforum.cwmp_1_0._String">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._String" name="string" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:string"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:normalizedString" class="org.dslforum.cwmp_1_0.NormalizedString">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NormalizedString" name="normalizedString" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:normalizedString"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:token" class="org.dslforum.cwmp_1_0.Token">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Token" name="token" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:token"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:language" class="org.dslforum.cwmp_1_0.Language">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Language" name="language" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:language"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:Name" class="org.dslforum.cwmp_1_0.Name">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Name" name="Name" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:Name"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:NMTOKEN" class="org.dslforum.cwmp_1_0.NMTOKEN">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NMTOKEN" name="NMTOKEN" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:NMTOKEN"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:NCName" class="org.dslforum.cwmp_1_0.NCName">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NCName" name="NCName" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:NCName"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:NMTOKENS" class="org.dslforum.cwmp_1_0.NMTOKENS">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NMTOKENS" name="NMTOKENS" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:NMTOKENS"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:ID" class="org.dslforum.cwmp_1_0.ID1">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.ID1" name="ID" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:ID"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:IDREF" class="org.dslforum.cwmp_1_0.IDREF">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.IDREF" name="IDREF" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:IDREF"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:ENTITY" class="org.dslforum.cwmp_1_0.ENTITY">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.ENTITY" name="ENTITY" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:ENTITY"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:IDREFS" class="org.dslforum.cwmp_1_0.IDREFS">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.IDREFS" name="IDREFS" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:IDREFS"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:ENTITIES" class="org.dslforum.cwmp_1_0.ENTITIES">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.ENTITIES" name="ENTITIES" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:ENTITIES"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:decimal" class="org.dslforum.cwmp_1_0.Decimal">
+    <value style="text" get-method="getDecimal" set-method="setDecimal"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Decimal" name="decimal" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:decimal"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:integer" class="org.dslforum.cwmp_1_0._Integer">
+    <value style="text" get-method="getInteger" set-method="setInteger"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Integer" name="integer" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:integer"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:nonPositiveInteger" class="org.dslforum.cwmp_1_0.NonPositiveInteger">
+    <value style="text" get-method="getInteger" set-method="setInteger"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NonPositiveInteger" name="nonPositiveInteger" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:nonPositiveInteger"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:negativeInteger" class="org.dslforum.cwmp_1_0.NegativeInteger">
+    <value style="text" get-method="getInteger" set-method="setInteger"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NegativeInteger" name="negativeInteger" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:negativeInteger"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:long" class="org.dslforum.cwmp_1_0._Long">
+    <value style="text" get-method="getLong" set-method="setLong"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Long" name="long" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:long"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:int" class="org.dslforum.cwmp_1_0.Int">
+    <value style="text" get-method="getInt" set-method="setInt"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Int" name="int" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:int"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:short" class="org.dslforum.cwmp_1_0._Short">
+    <value style="text" get-method="getShort" set-method="setShort"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Short" name="short" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:short"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:byte" class="org.dslforum.cwmp_1_0._Byte">
+    <value style="text" get-method="getByte" set-method="setByte"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0._Byte" name="byte" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:byte"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:nonNegativeInteger" class="org.dslforum.cwmp_1_0.NonNegativeInteger">
+    <value style="text" get-method="getInteger" set-method="setInteger"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NonNegativeInteger" name="nonNegativeInteger" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:nonNegativeInteger"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:unsignedLong" class="org.dslforum.cwmp_1_0.UnsignedLong">
+    <value style="text" get-method="getLong" set-method="setLong"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.UnsignedLong" name="unsignedLong" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:unsignedLong"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:unsignedInt" class="org.dslforum.cwmp_1_0.UnsignedInt">
+    <value style="text" get-method="getInt" set-method="setInt"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.UnsignedInt" name="unsignedInt" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:unsignedInt"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:unsignedShort" class="org.dslforum.cwmp_1_0.UnsignedShort">
+    <value style="text" get-method="getShort" set-method="setShort"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.UnsignedShort" name="unsignedShort" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:unsignedShort"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:unsignedByte" class="org.dslforum.cwmp_1_0.UnsignedByte">
+    <value style="text" get-method="getByte" set-method="setByte"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.UnsignedByte" name="unsignedByte" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:unsignedByte"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenc:positiveInteger" class="org.dslforum.cwmp_1_0.PositiveInteger">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <structure map-as="soapenc:commonAttributes-AttributeGroup" get-method="getCommonAttributes" set-method="setCommonAttributes" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.PositiveInteger" name="positiveInteger" ns="http://schemas.xmlsoap.org/soap/encoding/">
+    <structure map-as="soapenc:positiveInteger"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.AnyType" name="anyType" ns="http://schemas.xmlsoap.org/soap/encoding/"/>
+</binding>

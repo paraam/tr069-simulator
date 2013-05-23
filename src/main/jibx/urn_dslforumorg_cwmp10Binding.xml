@@ -1,0 +1,294 @@
+<binding xmlns:tns="urn:dslforum-org:cwmp-1-0" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" trim-whitespace="true">
+  <namespace uri="urn:dslforum-org:cwmp-1-0" prefix="cwmp"/>
+  <namespace uri="http://schemas.xmlsoap.org/soap/envelope/" prefix="soapenv"/>
+  
+  <mapping class="org.dslforum.cwmp_1_0.ID" name="ID" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="text" get-method="getString" set-method="setString"/>
+    <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.HoldRequests" name="HoldRequests" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="text" get-method="isBoolean" set-method="setBoolean"/>
+    <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Fault" name="Fault" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="FaultCode" get-method="getFaultCode" set-method="setFaultCode"/>
+    <value style="element" name="FaultString" get-method="getFaultString" set-method="setFaultString" usage="optional"/>
+    <collection get-method="getSetParameterValuesFaultList" set-method="setSetParameterValuesFaultList" usage="optional" create-type="java.util.ArrayList">
+      <structure type="org.dslforum.cwmp_1_0.Fault$SetParameterValuesFault" name="SetParameterValuesFault">
+        <value style="element" name="ParameterName" get-method="getParameterName" set-method="setParameterName"/>
+        <value style="element" name="FaultCode" get-method="getFaultCode" set-method="setFaultCode"/>
+        <value style="element" name="FaultString" get-method="getFaultString" set-method="setFaultString" usage="optional"/>
+      </structure>
+    </collection>
+  </mapping>
+  <mapping abstract="true" type-name="tns:MethodList" class="org.dslforum.cwmp_1_0.MethodList">
+  <collection field="strings" >
+    	<value name="string" />
+  	</collection> 
+  </mapping>
+  <mapping abstract="true" type-name="tns:FaultStruct" class="org.dslforum.cwmp_1_0.FaultStruct">
+    <format type="org.dslforum.cwmp_1_0.FaultStruct$FaultCode" deserializer="org.dslforum.cwmp_1_0.FaultStruct$FaultCode.fromValue"/>
+    <value style="element" name="FaultCode" get-method="getFaultCode" set-method="setFaultCode"/>
+    <value style="element" name="FaultString" get-method="getFaultString" set-method="setFaultString"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:DeviceIdStruct" class="org.dslforum.cwmp_1_0.DeviceIdStruct">
+    <value style="element" name="Manufacturer" get-method="getManufacturer" set-method="setManufacturer"/>
+    <value style="element" name="OUI" get-method="getOUI" set-method="setOUI"/>
+    <value style="element" name="ProductClass" get-method="getProductClass" set-method="setProductClass"/>
+    <value style="element" name="SerialNumber" get-method="getSerialNumber" set-method="setSerialNumber"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:EventStruct" class="org.dslforum.cwmp_1_0.EventStruct">
+    <value style="element" name="EventCode" get-method="getEventCode" set-method="setEventCode"/>
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:EventList" class="org.dslforum.cwmp_1_0.EventList">
+  	<collection field="eventStruct" >
+  		<structure name="EventStruct" type="org.dslforum.cwmp_1_0.EventStruct">
+    		<value style="element" name="EventCode" get-method="getEventCode" set-method="setEventCode"/>
+    		<value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey" usage="optional"/>
+  		</structure>
+  	</collection>  
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterValueStruct" class="org.dslforum.cwmp_1_0.ParameterValueStruct">
+    <value style="element" name="Name" get-method="getName" set-method="setName"/>
+    <value style="element" name="Value" get-method="getValue" set-method="setValue"/>
+  </mapping>  
+  <mapping abstract="true" type-name="tns:ParameterValueList" class="org.dslforum.cwmp_1_0.ParameterValueList">  
+	<collection field="parameterValueStruct" >
+  		<structure name="ParameterValueStruct" type="org.dslforum.cwmp_1_0.ParameterValueStruct">
+    		<value style="element" name="Name" get-method="getName" set-method="setName"/>
+    		<value style="element" name="Value" get-method="getValue" set-method="setValue"/>
+  		</structure>
+  	</collection>  
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterInfoStruct" class="org.dslforum.cwmp_1_0.ParameterInfoStruct">
+    <value style="element" name="Name" get-method="getName" set-method="setName"/>
+    <value style="element" name="Writable" get-method="getWritable" set-method="setWritable"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterInfoList" class="org.dslforum.cwmp_1_0.ParameterInfoList">
+  	<collection field="parameterInfoStruct" >
+  		<structure name="ParameterInfoStruct" type="org.dslforum.cwmp_1_0.ParameterInfoStruct">
+    		<value style="element" name="Name" get-method="getName" set-method="setName"/>
+    		<value style="element" name="Writable" get-method="getWritable" set-method="setWritable"/>
+  		</structure>
+  	</collection>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterNames" class="org.dslforum.cwmp_1_0.ParameterNames">
+  	<collection field="strings" >
+    	<value name="string" />
+  	</collection>  
+  </mapping>
+  <mapping abstract="true" type-name="tns:AccessList" class="org.dslforum.cwmp_1_0.AccessList">
+    <collection field="strings" >
+    	<value name="string" />
+  	</collection> 
+  </mapping>
+  <mapping abstract="true" type-name="tns:SetParameterAttributesStruct" class="org.dslforum.cwmp_1_0.SetParameterAttributesStruct">
+    <format type="org.dslforum.cwmp_1_0.SetParameterAttributesStruct$Notification" deserializer="org.dslforum.cwmp_1_0.SetParameterAttributesStruct$Notification.fromValue"/>
+    <value style="element" name="Name" get-method="getName" set-method="setName" usage="optional"/>
+    <value style="element" name="NotificationChange" get-method="isNotificationChange" set-method="setNotificationChange"/>
+    <value style="element" name="Notification" get-method="getNotification" set-method="setNotification"/>
+    <value style="element" name="AccessListChange" get-method="isAccessListChange" set-method="setAccessListChange"/>
+    <structure map-as="tns:AccessList" get-method="getAccessList" set-method="setAccessList" name="AccessList"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:SetParameterAttributesList" class="org.dslforum.cwmp_1_0.SetParameterAttributesList">
+    <collection field="setParameterAttributesStruct" >
+  		<structure name="SetParameterAttributesStruct" type="org.dslforum.cwmp_1_0.SetParameterAttributesStruct">
+    		<value style="element" name="Name" get-method="getName" set-method="setName" usage="optional"/>
+    		<value style="element" name="NotificationChange" get-method="isNotificationChange" set-method="setNotificationChange"/>
+    		<value style="element" name="Notification" get-method="getNotification" set-method="setNotification"/>
+    		<value style="element" name="AccessListChange" get-method="isAccessListChange" set-method="setAccessListChange"/>
+    		<structure map-as="tns:AccessList" get-method="getAccessList" set-method="setAccessList" name="AccessList"/>
+  		</structure>
+  	</collection>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterAttributeStruct" class="org.dslforum.cwmp_1_0.ParameterAttributeStruct">
+    <format type="org.dslforum.cwmp_1_0.ParameterAttributeStruct$Notification" deserializer="org.dslforum.cwmp_1_0.ParameterAttributeStruct$Notification.fromValue"/>
+    <value style="element" name="Name" get-method="getName" set-method="setName"/>
+    <value style="element" name="Notification" get-method="getNotification" set-method="setNotification"/>
+    <structure map-as="tns:AccessList" get-method="getAccessList" set-method="setAccessList" name="AccessList"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ParameterAttributeList" class="org.dslforum.cwmp_1_0.ParameterAttributeList">
+	<collection field="parameterAttributeStruct" >
+  		<structure name="ParameterAttributeStruct" type="org.dslforum.cwmp_1_0.ParameterAttributeStruct">  
+  			<value style="element" name="Name" get-method="getName" set-method="setName"/>
+    		<value style="element" name="Notification" get-method="getNotification" set-method="setNotification"/>
+   		 	<structure map-as="tns:AccessList" get-method="getAccessList" set-method="setAccessList" name="AccessList"/>
+  		</structure>
+  	</collection>  
+  </mapping>
+  <mapping abstract="true" type-name="tns:QueuedTransferStruct" class="org.dslforum.cwmp_1_0.QueuedTransferStruct">
+    <format type="org.dslforum.cwmp_1_0.QueuedTransferStruct$State" deserializer="org.dslforum.cwmp_1_0.QueuedTransferStruct$State.fromValue"/>
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+    <value style="element" name="State" get-method="getState" set-method="setState"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:TransferList" class="org.dslforum.cwmp_1_0.TransferList">
+    <structure map-as="soapenc:Array"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:VoucherList" class="org.dslforum.cwmp_1_0.VoucherList">
+    <structure map-as="soapenc:Array"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:OptionStruct" class="org.dslforum.cwmp_1_0.OptionStruct">
+    <format type="org.dslforum.cwmp_1_0.OptionStruct$State" deserializer="org.dslforum.cwmp_1_0.OptionStruct$State.fromValue"/>
+    <format type="org.dslforum.cwmp_1_0.OptionStruct$Mode" deserializer="org.dslforum.cwmp_1_0.OptionStruct$Mode.fromValue"/>
+    <format type="org.dslforum.cwmp_1_0.OptionStruct$IsTransferable" deserializer="org.dslforum.cwmp_1_0.OptionStruct$IsTransferable.fromValue"/>
+    <value style="element" name="OptionName" get-method="getOptionName" set-method="setOptionName"/>
+    <value style="element" name="VoucherSN" get-method="getVoucherSN" set-method="setVoucherSN"/>
+    <value style="element" name="State" get-method="getState" set-method="setState"/>
+    <value style="element" name="Mode" get-method="getMode" set-method="setMode"/>
+    <value style="element" name="StartDate" get-method="getStartDate" set-method="setStartDate"/>
+    <value style="element" name="ExpirationDate" get-method="getExpirationDate" set-method="setExpirationDate" usage="optional"/>
+    <value style="element" name="IsTransferable" get-method="getIsTransferable" set-method="setIsTransferable"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:OptionList" class="org.dslforum.cwmp_1_0.OptionList">
+    <structure map-as="soapenc:Array"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:ArgStruct" class="org.dslforum.cwmp_1_0.ArgStruct">
+    <value style="element" name="Name" get-method="getName" set-method="setName"/>
+    <value style="element" name="Value" get-method="getValue" set-method="setValue"/>
+  </mapping>
+  <mapping abstract="true" type-name="tns:FileTypeArg" class="org.dslforum.cwmp_1_0.FileTypeArg">
+    <structure map-as="soapenc:Array"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetRPCMethods" name="GetRPCMethods" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.GetRPCMethodsResponse" name="GetRPCMethodsResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:MethodList" get-method="getMethodList" set-method="setMethodList" name="MethodList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.SetParameterValues" name="SetParameterValues" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterValueList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+    <value style="element" name="ParameterKey" get-method="getParameterKey" set-method="setParameterKey"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.SetParameterValuesResponse" name="SetParameterValuesResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <format type="org.dslforum.cwmp_1_0.SetParameterValuesResponse$Status" deserializer="org.dslforum.cwmp_1_0.SetParameterValuesResponse$Status.fromValue"/>
+    <value style="element" name="Status" get-method="getStatus" set-method="setStatus"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterValues" name="GetParameterValues" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterNames" get-method="getParameterNames" set-method="setParameterNames" name="ParameterNames"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterValuesResponse" name="GetParameterValuesResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterValueList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterNames" name="GetParameterNames" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="ParameterPath" get-method="getParameterPath" set-method="setParameterPath" usage="optional"/>
+    <value style="element" name="NextLevel" get-method="isNextLevel" set-method="setNextLevel"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterNamesResponse" name="GetParameterNamesResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterInfoList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.SetParameterAttributes" name="SetParameterAttributes" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:SetParameterAttributesList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.SetParameterAttributesResponse" name="SetParameterAttributesResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterAttributes" name="GetParameterAttributes" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterNames" get-method="getParameterNames" set-method="setParameterNames" name="ParameterNames"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetParameterAttributesResponse" name="GetParameterAttributesResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:ParameterAttributeList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.AddObject" name="AddObject" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="ObjectName" get-method="getObjectName" set-method="setObjectName"/>
+    <value style="element" name="ParameterKey" get-method="getParameterKey" set-method="setParameterKey"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.AddObjectResponse" name="AddObjectResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <format type="org.dslforum.cwmp_1_0.AddObjectResponse$Status" deserializer="org.dslforum.cwmp_1_0.AddObjectResponse$Status.fromValue"/>
+    <value style="element" name="InstanceNumber" get-method="getInstanceNumber" set-method="setInstanceNumber"/>
+    <value style="element" name="Status" get-method="getStatus" set-method="setStatus"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.DeleteObject" name="DeleteObject" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="ObjectName" get-method="getObjectName" set-method="setObjectName"/>
+    <value style="element" name="ParameterKey" get-method="getParameterKey" set-method="setParameterKey"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.DeleteObjectResponse" name="DeleteObjectResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <format type="org.dslforum.cwmp_1_0.DeleteObjectResponse$Status" deserializer="org.dslforum.cwmp_1_0.DeleteObjectResponse$Status.fromValue"/>
+    <value style="element" name="Status" get-method="getStatus" set-method="setStatus"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Download" name="Download" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+    <value style="element" name="FileType" get-method="getFileType" set-method="setFileType"/>
+    <value style="element" name="URL" get-method="getURL" set-method="setURL"/>
+    <value style="element" name="Username" get-method="getUsername" set-method="setUsername"/>
+    <value style="element" name="Password" get-method="getPassword" set-method="setPassword"/>
+    <value style="element" name="FileSize" get-method="getFileSize" set-method="setFileSize"/>
+    <value style="element" name="TargetFileName" get-method="getTargetFileName" set-method="setTargetFileName"/>
+    <value style="element" name="DelaySeconds" get-method="getDelaySeconds" set-method="setDelaySeconds"/>
+    <value style="element" name="SuccessURL" get-method="getSuccessURL" set-method="setSuccessURL"/>
+    <value style="element" name="FailureURL" get-method="getFailureURL" set-method="setFailureURL"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.DownloadResponse" name="DownloadResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <format type="org.dslforum.cwmp_1_0.DownloadResponse$Status" deserializer="org.dslforum.cwmp_1_0.DownloadResponse$Status.fromValue"/>
+    <value style="element" name="Status" get-method="getStatus" set-method="setStatus"/>
+    <value style="element" name="StartTime" get-method="getStartTime" set-method="setStartTime"/>
+    <value style="element" name="CompleteTime" get-method="getCompleteTime" set-method="setCompleteTime"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Reboot" name="Reboot" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.RebootResponse" name="RebootResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.GetQueuedTransfers" name="GetQueuedTransfers" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.GetQueuedTransfersResponse" name="GetQueuedTransfersResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:TransferList" get-method="getTransferList" set-method="setTransferList" name="TransferList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.ScheduleInform" name="ScheduleInform" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="DelaySeconds" get-method="getDelaySeconds" set-method="setDelaySeconds"/>
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.ScheduleInformResponse" name="ScheduleInformResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.SetVouchers" name="SetVouchers" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:VoucherList" get-method="getVoucherList" set-method="setVoucherList" name="VoucherList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.SetVouchersResponse" name="SetVouchersResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.GetOptions" name="GetOptions" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="OptionName" get-method="getOptionName" set-method="setOptionName"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.GetOptionsResponse" name="GetOptionsResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:OptionList" get-method="getOptionList" set-method="setOptionList" name="OptionList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Upload" name="Upload" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+    <value style="element" name="FileType" get-method="getFileType" set-method="setFileType"/>
+    <value style="element" name="URL" get-method="getURL" set-method="setURL"/>
+    <value style="element" name="Username" get-method="getUsername" set-method="setUsername"/>
+    <value style="element" name="Password" get-method="getPassword" set-method="setPassword"/>
+    <value style="element" name="DelaySeconds" get-method="getDelaySeconds" set-method="setDelaySeconds"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.UploadResponse" name="UploadResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <format type="org.dslforum.cwmp_1_0.UploadResponse$Status" deserializer="org.dslforum.cwmp_1_0.UploadResponse$Status.fromValue"/>
+    <value style="element" name="Status" get-method="getStatus" set-method="setStatus"/>
+    <value style="element" name="StartTime" get-method="getStartTime" set-method="setStartTime"/>
+    <value style="element" name="CompleteTime" get-method="getCompleteTime" set-method="setCompleteTime"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.FactoryReset" name="FactoryReset" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.FactoryResetResponse" name="FactoryResetResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.Inform" name="Inform" ns="urn:dslforum-org:cwmp-1-0">
+    <structure map-as="tns:DeviceIdStruct" get-method="getDeviceId" set-method="setDeviceId" name="DeviceId"/>
+    <structure map-as="tns:EventList" get-method="getEvent" set-method="setEvent" name="Event"/>
+    <value style="element" name="MaxEnvelopes" get-method="getMaxEnvelopes" set-method="setMaxEnvelopes"/>
+    <value style="element" name="CurrentTime" get-method="getCurrentTime" set-method="setCurrentTime"/>
+    <value style="element" name="RetryCount" get-method="getRetryCount" set-method="setRetryCount"/>
+    <structure map-as="tns:ParameterValueList" get-method="getParameterList" set-method="setParameterList" name="ParameterList"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.InformResponse" name="InformResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="MaxEnvelopes" get-method="getMaxEnvelopes" set-method="setMaxEnvelopes"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.TransferComplete" name="TransferComplete" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
+    <structure map-as="tns:FaultStruct" get-method="getFaultStruct" set-method="setFaultStruct" name="FaultStruct"/>
+    <value style="element" name="StartTime" get-method="getStartTime" set-method="setStartTime"/>
+    <value style="element" name="CompleteTime" get-method="getCompleteTime" set-method="setCompleteTime"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.TransferCompleteResponse" name="TransferCompleteResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+  <mapping class="org.dslforum.cwmp_1_0.Kicked" name="Kicked" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="Command" get-method="getCommand" set-method="setCommand"/>
+    <value style="element" name="Referer" get-method="getReferer" set-method="setReferer"/>
+    <value style="element" name="Arg" get-method="getArg" set-method="setArg"/>
+    <value style="element" name="Next" get-method="getNext" set-method="setNext"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.KickedResponse" name="KickedResponse" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="NextURL" get-method="getNextURL" set-method="setNextURL"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.RequestDownload" name="RequestDownload" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="element" name="FileType" get-method="getFileType" set-method="setFileType"/>
+    <structure map-as="tns:FileTypeArg" get-method="getFileTypeArg" set-method="setFileTypeArg" name="FileTypeArg"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.RequestDownloadResponse" name="RequestDownloadResponse" ns="urn:dslforum-org:cwmp-1-0"/>
+</binding>

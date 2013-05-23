@@ -1,0 +1,6 @@
+<binding name="binding" package="org.dslforum.cwmp_1_0" trim-whitespace="true">
+  <namespace uri="http://schemas.xmlsoap.org/soap/envelope/" prefix="soapenv"/>
+  <include path="urn_dslforumorg_cwmp10Binding.xml"/>
+  <include path="soap_envelopeBinding.xml"/>
+  <include path="soap_encodingBinding.xml"/>
+</binding>

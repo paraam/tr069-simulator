@@ -1,0 +1,2 @@
+startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype
+192.168.1.231, 192.168.1.232, http://snmp.me:9090/tr069/ws?wsdl, /wsdl, 8035, 300, /dump/microcell/, myuser, mypasswd, basic

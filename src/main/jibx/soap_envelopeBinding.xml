@@ -1,0 +1,42 @@
+<binding xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:dslforum-org:cwmp-1-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" trim-whitespace="true">
+
+  <namespace uri="http://schemas.xmlsoap.org/soap/encoding/" prefix="soapenc"/>
+  <namespace uri="urn:dslforum-org:cwmp-1-0" prefix="cwmp"/>
+  <namespace uri="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
+  <namespace uri="http://www.w3.org/2001/XMLSchema" prefix="xsd"/>
+
+  <mapping abstract="true" type-name="soapenv:Envelope" class="org.dslforum.cwmp_1_0.Envelope">
+    <structure type="org.dslforum.cwmp_1_0.Header" get-method="getHeader" set-method="setHeader" usage="optional"/>
+    <structure type="org.dslforum.cwmp_1_0.Body" get-method="getBody" set-method="setBody"/>
+    <structure get-method="getAnyList" set-method="setAnyList" usage="optional" marshaller="org.jibx.extras.DomListMapper" unmarshaller="org.jibx.extras.DomListMapper"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Envelope" name="Envelope" ns="http://schemas.xmlsoap.org/soap/envelope/">
+    <structure map-as="soapenv:Envelope"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenv:Header" class="org.dslforum.cwmp_1_0.Header">
+	<collection field="objects" >
+  	</collection>    
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Header" name="Header" ns="http://schemas.xmlsoap.org/soap/envelope/">
+    <structure map-as="soapenv:Header"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenv:Body" class="org.dslforum.cwmp_1_0.Body">  
+  	<collection field="objects" >
+  	</collection>  
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Body" name="Body" ns="http://schemas.xmlsoap.org/soap/envelope/">
+    <structure map-as="soapenv:Body"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenv:Fault" class="org.dslforum.cwmp_1_0.Fault1">
+    <value style="element" name="faultcode" get-method="getFaultcode" set-method="setFaultcode"/>
+    <value style="element" name="faultstring" get-method="getFaultstring" set-method="setFaultstring"/>
+    <value style="element" name="faultactor" get-method="getFaultactor" set-method="setFaultactor" usage="optional"/>
+    <structure map-as="soapenv:detail" get-method="getDetail" set-method="setDetail" usage="optional" name="detail"/>
+  </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.Fault1" name="Fault" ns="http://schemas.xmlsoap.org/soap/envelope/">
+    <structure map-as="soapenv:Fault"/>
+  </mapping>
+  <mapping abstract="true" type-name="soapenv:detail" class="org.dslforum.cwmp_1_0.Detail">
+    <structure get-method="getAnyList" set-method="setAnyList" usage="optional" marshaller="org.jibx.extras.DomListMapper" unmarshaller="org.jibx.extras.DomListMapper"/>
+  </mapping>
+</binding>
