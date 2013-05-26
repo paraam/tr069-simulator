@@ -14,7 +14,7 @@ public class CPEUtil {
 	
 	public ArrayList<String> parseFile(String filepath) {
 		ArrayList<String> agentlist = new ArrayList<String>();
-		System.out.println( "deserialize CpeConfDB >>>>>> : " + filepath);
+		//System.out.println( "deserialize CpeConfDB >>>>>> : " + filepath);
 		try {
 			BufferedReader input = null;
 			File infile = new File(filepath);
