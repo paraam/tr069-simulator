@@ -1,2 +1,2 @@
 startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype
-192.168.1.211, 192.168.1.211, http://192.168.1.50:8085/tr069/ws?wsdl&probe=257ea753-d04e-45f3-ae1a-b5965399d2bf, /wsdl, 8035, 300, /dump/microcell/
+192.168.1.211, 192.168.1.213, http://snmp.me/tr069/ws?wsdl, /wsdl, 8035, 300, /dump/microcell/, readonly, readonly, basic
