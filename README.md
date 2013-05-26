@@ -21,7 +21,7 @@ Period Inform Interval<br>
 Dump Location Path<br>
 Username<br>
 Password<br>
-Authtype<br><br>
+Authtype<br>
 
 You can modify these parameter according to your requirements. To simulate multiple CPE devices, provide the start and<br>
 end ipaddress. Periodic Inform Interval is in seconds. Simulator will send Inform request based on this parameter.<br><br> 
@@ -33,17 +33,17 @@ Simulator will check for two set of files.<br>
 
 getvalues.txt contains Name/Value data as XML Nodes. Simulator will respond to the ACS Server based on this Name/Value Pair.<br>
 getnames.txt contains ParameterInfoStruct XML Nodes. Access detail about the parameters are retrieved from this file.
-<br><br>
+<br>
 Currently, Femtocell device dump is being bundled with the JAR. If the user wish to simulate a different CPE, either they need to <br>
 create these xml two files manually or they need to take a dump from the real CPE device by reading the GetParameterValuesResponse
-and GetParameterNamesResponse.<br><br>
+and GetParameterNamesResponse.<br>
 
 If the ACS Server supports HTTP Authentication, provide the username, password and authentication type. Basic and Digest 
 methods are currently supported.<br><br>
 
 <b>To run:</b><br>
-java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
-
+java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (If jar, simulator.yml and agent.csv files are in same folder.)<br> 
+java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (if the jar is available in target folder.)<br>
 <b>Note:</b> Java must be available in your system.<br>
 
 
