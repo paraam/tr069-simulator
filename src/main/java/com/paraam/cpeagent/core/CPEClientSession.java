@@ -51,7 +51,7 @@ public class CPEClientSession {
 		WebResource 	service 		= client.resource(getBaseURI());
 		JSONObject 		data 			= new JSONObject();
 		JSONObject 		status 			= new JSONObject();		
-		String			filefolder  	= "D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//";
+		String			filefolder  	= "//dump//microcell//";
 		CpeDBReader 	confdb 			= new CpeDBReader().readFromGetMessages(filefolder);
 		CpeActions 		cpeAction 		= new CpeActions(confdb);	
 		
@@ -78,23 +78,23 @@ public class CPEClientSession {
 			} else {
 				service.addFilter(new HTTPBasicAuthFilter(username, passwd));
 			}
-			System.out.println("==========================> " + username + " " + passwd);
+			//System.out.println("==========================> " + username + " " + passwd);
 		}
-		System.out.println(" 2nd time ==============> " + username + " " + passwd);
+		//System.out.println(" 2nd time ==============> " + username + " " + passwd);
 	}	
 	
 	public void sendInform (Envelope envelope) {
 		
 		String informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
 		//String informBody  = getInformString();
-		System.out.println("Sending informBody >>>>> " );
+		//System.out.println("Sending informBody >>>>> " );
 		List<NewCookie> cookies = new ArrayList<NewCookie>();
 		ACSResponse acsresp 	= sendData (service, informBody, cookies);		
 		Envelope classobj 		= (Envelope)JibxHelper.unmarshalMessage(acsresp.getResponse(), cwmpver);		
 		InformResponse iresp 	= (InformResponse)classobj.getBody().getObjects().get(0);		
 		//System.out.println("Received InformResponse Max Envelopes ===== " + iresp.getMaxEnvelopes());
 		
-		System.out.println("Sending empty request =====>>>>>>>> " );
+		//System.out.println("Sending empty request =====>>>>>>>> " );
 		acsresp = sendData (service, "", acsresp.getCookies());		
 		//System.out.println("Response for empty request <<<<<<===== " + response);
 		
@@ -118,11 +118,7 @@ public class CPEClientSession {
 
 			handleACSRequest (newresp);
 			
-		} else {
-
-			System.out.println("Has no pending request >>>>>>>>> ");
-		}
-		
+		}		
 		//System.out.println(data.toString()) ;		
 		
 	}
@@ -132,7 +128,7 @@ public class CPEClientSession {
 		Builder builder = service.accept(MediaType.APPLICATION_XML)
 				.type(MediaType.APPLICATION_XML);
 		for ( NewCookie c : cookies ) {
-		    System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
+		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
 		    builder.cookie( c );
 		}
 		ClientResponse 	response 	= builder.post(ClientResponse.class, reqString);
@@ -142,11 +138,11 @@ public class CPEClientSession {
 		acsresp.setCookies(response.getCookies());
 		acsresp.setHeaders(response.getHeaders());		
 		if (rdata == null || rdata.length() <= 0) {
-			System.out.println("Response data is NULL ------> " + rdata + ". Closing connection  >>>>>>> ");
+			//System.out.println("Response data is NULL ------> " + rdata + ". Closing connection  >>>>>>> ");
 			//response.close();
 		}
-		System.out.println( "Printing Response  Headers      -------------------- " + response.getHeaders());
-		System.out.println( "Printing Response getCookies    -------------------- " +  response.getCookies());
+		//System.out.println( "Printing Response  Headers      -------------------- " + response.getHeaders());
+		//System.out.println( "Printing Response getCookies    -------------------- " +  response.getCookies());
 		//System.out.println( "Printing Response Data -------------------- " +  response. );
 		System.out.println(rdata);
 		return acsresp;
