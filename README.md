@@ -8,8 +8,8 @@ This simulator can support different type of CPE devices. Also you can simulate 
 
 <b>How to use:</b><br>
 To run this simulator,<br> 
-1. download the tr069-0.6.2-SNAPSHOT.jar available under target directory within this repository.<br>
-2. download the simulator.yml and the agent.csv files available from the root directory.<br>
+1. download the project and unzip it to a suitable location.<br>
+2. Modify the agent.csv configuration file available in the root directory.<br>
 
 <b>agent.csv</b> file is the csv configuration file that contains the following:<br>
 <div class="highlight"><pre>
@@ -47,11 +47,6 @@ If the ACS Server supports HTTP Authentication, provide the username, password a
 methods are currently supported. If authentication is not supported, these fields are not required.<br><br>
 
 <b>To run:</b><br>
-If jar, simulator.yml and agent.csv files are in same folder:
-<div class="highlight"><pre>
-java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml 
-</pre></div>
-if the jar is available in target folder:
 <div class="highlight"><pre>
 java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
 </pre></div>
