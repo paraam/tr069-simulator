@@ -12,6 +12,11 @@ To run this simulator,<br>
 2. download the simulator.yml and the agent.csv files available from the root directory.<br>
 
 <b>agent.csv</b> file is the csv configuration file that contains the following:<br>
+<div class="highlight"><pre>
+<span class="c1">startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype</span>
+<span class="kd">192.168.1.111, 192.168.1.120, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
+<span class="kd">192.168.2.211, 192.168.2.220, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
+</pre></div>
 Start IPAddress <br> 
 End IPAddress<br>
 ACS Server URL<br>
@@ -38,13 +43,20 @@ Currently, Femtocell device dump is being bundled with the JAR. If the user wish
 create these xml two files manually or they need to take a dump from the real CPE device by reading the GetParameterValuesResponse
 and GetParameterNamesResponse.<br>
 
-If the ACS Server supports HTTP Authentication, provide the username, password and authentication type. Basic and Digest 
-methods are currently supported.<br><br>
+If the ACS Server supports HTTP Authentication, provide the username, password and authentication type. basic and digest 
+methods are currently supported. If authentication is not supported, these fields are not required.<br><br>
 
 <b>To run:</b><br>
-java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (If jar, simulator.yml and agent.csv files are in same folder.)<br> 
-java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (if the jar is available in target folder.)<br>
-<b>Note:</b> Java must be available in your system.<br>
+If jar, simulator.yml and agent.csv files are in same folder:
+<div class="highlight"><pre>
+java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml 
+</pre></div>
+if the jar is available in target folder:
+<div class="highlight"><pre>
+java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
+</pre></div>
+<b>Note:</b> Java must be available in your system.
+<br>
 
 <b>License</b><br>
 MIT License.<br>
