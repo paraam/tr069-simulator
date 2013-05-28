@@ -46,6 +46,8 @@ java -jar tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (If jar, simulator.yml 
 java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml  (if the jar is available in target folder.)<br>
 <b>Note:</b> Java must be available in your system.<br>
 
+<b>License</b><br>
+MIT License.<br>
 
 <h2>Do you need an ACS Server to test your CPE devices?</h2>
 Our company <a href="nmsserver.com">nmsserver.com</a> has a hosted ACS Server that runs as a service. This ACSServer
