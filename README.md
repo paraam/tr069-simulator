@@ -56,12 +56,5 @@ java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
 <b>License</b><br>
 MIT License.<br>
 
-<h2>Do you need an ACS Server to test your CPE devices?</h2>
-Our company <a href="http://nmsserver.com">nmsserver.com</a> has a hosted ACS Server that runs as a service. This ACSServer
-can support different types of CPE devices from different vendor. You can get a private account to monitor/configure 
-you CPEs. This is absolutely free.<br>
-
-Email to siva@nmsserver.com to get an ACSServer account. 
-
 
 
