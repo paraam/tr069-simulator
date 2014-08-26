@@ -21,6 +21,10 @@
         </repository>
     </repositories>
 
+    <properties>
+        <dropwizard.version>0.6.2</dropwizard.version>
+    </properties>
+
     <dependencies>
     	<dependency>
         	<groupId>org.codehaus.jettison</groupId>
@@ -35,17 +39,17 @@
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
 			<groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-views</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
          <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-jdbi</artifactId>
-            <version>${project.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
