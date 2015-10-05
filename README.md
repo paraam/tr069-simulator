@@ -51,6 +51,11 @@ methods are currently supported. If authentication is not supported, these field
 java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
 </pre></div>
 <b>Note:</b> Java must be available in your system.
+
+### Requirement
+
+- JDK 1.7
+
 <br>
 
 <b>License</b><br>
