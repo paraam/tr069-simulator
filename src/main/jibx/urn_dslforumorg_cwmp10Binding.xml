@@ -6,6 +6,9 @@
     <value style="text" get-method="getString" set-method="setString"/>
     <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
   </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NoMoreRequests" name="NoMoreRequests" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="text" get-method="getString" set-method="setString"/>
+  </mapping>
   <mapping class="org.dslforum.cwmp_1_0.HoldRequests" name="HoldRequests" ns="urn:dslforum-org:cwmp-1-0">
     <value style="text" get-method="isBoolean" set-method="setBoolean"/>
     <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
