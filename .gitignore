@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 nb-configuration.xml
+nbactions.xml
 target
 
 
