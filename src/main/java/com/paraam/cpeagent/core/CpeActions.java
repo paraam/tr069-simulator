@@ -33,6 +33,7 @@ import org.dslforum.cwmp_1_0.Header;
 import org.dslforum.cwmp_1_0.ID;
 import org.dslforum.cwmp_1_0.Inform;
 import org.dslforum.cwmp_1_0.MethodList;
+import org.dslforum.cwmp_1_0.NoMoreRequests;
 import org.dslforum.cwmp_1_0.ParameterAttributeList;
 import org.dslforum.cwmp_1_0.ParameterAttributeStruct;
 import org.dslforum.cwmp_1_0.ParameterAttributeStruct.Notification;
@@ -82,9 +83,23 @@ public class CpeActions {
 		DeviceIdStruct deviceId = new DeviceIdStruct();
 		inform.setDeviceId(deviceId);
 		inform.setCurrentTime(new Date());
-		deviceId.setManufacturer(((ConfParameter)confdb.confs.get(confdb.props.getProperty("Manufacturer"))).value);		deviceId.setOUI(((ConfParameter)         confdb.confs.get(confdb.props.getProperty("ManufacturerOUI"))).value);
-		deviceId.setSerialNumber(((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value);		deviceId.setProductClass(((ConfParameter)confdb.confs.get(confdb.props.getProperty("ModelName"))).value);
-		ParameterValueList pvlist = new ParameterValueList();		// use a static list, for now		String[] pList = new String[] {				confdb.props.getProperty("HardwareVersion"),				confdb.props.getProperty("ProvisioningCode"),				confdb.props.getProperty("SoftwareVersion"),				confdb.props.getProperty("SpecVersion"),		             				confdb.props.getProperty("DeviceSummary"),				confdb.props.getProperty("ConnectionRequestURL"),				confdb.props.getProperty("ParameterKey"),				confdb.props.getProperty("ExternalIPAddress")		};
+		deviceId.setManufacturer(((ConfParameter)confdb.confs.get(confdb.props.getProperty("Manufacturer"))).value);
+		deviceId.setOUI(((ConfParameter)         confdb.confs.get(confdb.props.getProperty("ManufacturerOUI"))).value);
+		deviceId.setSerialNumber(((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value);
+		deviceId.setProductClass(((ConfParameter)confdb.confs.get(confdb.props.getProperty("ModelName"))).value);
+		ParameterValueList pvlist = new ParameterValueList();
+
+		// use a static list, for now
+		String[] pList = new String[] {
+				confdb.props.getProperty("HardwareVersion"),
+				confdb.props.getProperty("ProvisioningCode"),
+				confdb.props.getProperty("SoftwareVersion"),
+				confdb.props.getProperty("SpecVersion"),		             
+				confdb.props.getProperty("DeviceSummary"),
+				confdb.props.getProperty("ConnectionRequestURL"),
+				confdb.props.getProperty("ParameterKey"),
+				confdb.props.getProperty("ExternalIPAddress")
+		};
 		ArrayList arr = new ArrayList();
 		for (int i=0; i < pList.length; i++) {			
 			ParameterValueStruct pvstruct = new ParameterValueStruct();
@@ -96,10 +111,12 @@ public class CpeActions {
 		inform.setParameterList(pvlist);
 
 		//ArrayList<String> tlist = new ArrayList();
-		//tlist.add("1 BOOT");		EventList eventList = new EventList();
+		//tlist.add("1 BOOT");
+		EventList eventList = new EventList();
 		eventList.setEventStruct(eventKeyList);
 		inform.setEvent(eventList);
-		return inEnvelope(inform, "00001");
+
+		return inEnvelope(inform, "00001");
 	}
 	public Envelope doGetRPCMethods() {
 		GetRPCMethodsResponse resp = new GetRPCMethodsResponse();
@@ -332,16 +349,43 @@ public class CpeActions {
 		return inEnvelope(respobj, "00001" );
 	}
 	
-	/*	def doGetParameterAttributes( GetParameterAttributes getParameterAttributes ){				def nameList = getParameterAttributes.parameterNames.any		def attrs = confdb.confs.keySet().findAll{ confkey ->  				nameList.any{confkey.startsWith(it)} &&
+	/*
+	def doGetParameterAttributes( GetParameterAttributes getParameterAttributes ){		
+
+		def nameList = getParameterAttributes.parameterNames.any
+		def attrs = confdb.confs.keySet().findAll{ confkey ->  
+				nameList.any{confkey.startsWith(it)} &&
 				confdb.confs[confkey] instanceof ConfParameter &&
-				confdb.confs[confkey].notification != null							}.collect{				new ParameterAttributeStruct(						name: it, 						notification: Integer.parseInt(confdb.confs[it].notification),						accessList: new AccessList(any: confdb.confs[it].accessList.split(","))  ) 			}				return inEnvelope(new GetParameterAttributesResponse(parameterList: new ParameterAttributeList(any: attrs)))	}	def doSetParameterAttributes(SetParameterAttributes setParameterAttributes){		// add error handling		setParameterAttributes.parameterList.getAny().each{			def conf = confdb.confs[it.name]						conf.accessList = it.accessList.getAny().join(",")			conf.notification = it.notification.toString()		}				return inEnvelope(new SetParameterValuesResponse(status: 0))	}	 */
-		/*public static Envelope inEnvelope(Object cwmpObject) {
+				confdb.confs[confkey].notification != null				
+			}.collect{
+				new ParameterAttributeStruct(
+						name: it, 
+						notification: Integer.parseInt(confdb.confs[it].notification),
+						accessList: new AccessList(any: confdb.confs[it].accessList.split(","))  ) 
+			}		
+		return inEnvelope(new GetParameterAttributesResponse(parameterList: new ParameterAttributeList(any: attrs)))
+	}
+
+	def doSetParameterAttributes(SetParameterAttributes setParameterAttributes){
+		// add error handling
+		setParameterAttributes.parameterList.getAny().each{
+			def conf = confdb.confs[it.name]			
+			conf.accessList = it.accessList.getAny().join(",")
+			conf.notification = it.notification.toString()
+		}		
+		return inEnvelope(new SetParameterValuesResponse(status: 0))
+	}
+	 */
+	
+	/*public static Envelope inEnvelope(Object cwmpObject) {
 		Envelope envlope = new Envelope();
 		Body body = new Body();
 		ArrayList bodyobj = new ArrayList();
 		bodyobj.add(cwmpObject);
 		body.setObjects(bodyobj);
-		envlope.setBody(body);		return envlope;	}
+		envlope.setBody(body);
+		return envlope;
+	}
 */
 	public static Envelope inEnvelope(Object cwmpObject, String headerID) {
 		Envelope envlope = new Envelope();
@@ -349,9 +393,12 @@ public class CpeActions {
 		Header header = new Header();
 		ID id = new ID();
 		id.setMustUnderstand(true);
-		id.setString(headerID);		
+		id.setString(headerID);	
+//                NoMoreRequests noMore = new NoMoreRequests();
+//                noMore.setString("0");
 		ArrayList headobj = new ArrayList();
-		headobj.add(id);		
+		headobj.add(id);	
+//                headobj.add(noMore);
 		header.setObjects(headobj);
 		ArrayList bodyobj = new ArrayList();
 		bodyobj.add(cwmpObject);

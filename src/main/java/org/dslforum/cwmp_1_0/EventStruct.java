@@ -17,6 +17,11 @@ public class EventStruct
     private String eventCode;
     private String commandKey;
 
+    public EventStruct() {
+        this.eventCode = "";
+        this.commandKey = "";
+    }
+
     /** 
      * Get the 'EventCode' element value.
      * 
