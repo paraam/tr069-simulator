@@ -44,6 +44,8 @@ public class CPEClientSession {
 	String username 	= null; 
 	String passwd		= null; 
 	String authtype		= null;
+        
+        List<NewCookie> cookies;
 	
 	public static void main(String[] args) {
 		ClientConfig 	config 			= new DefaultClientConfig();
@@ -88,14 +90,15 @@ public class CPEClientSession {
 		String informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
 		//String informBody  = getInformString();
 		//System.out.println("Sending informBody >>>>> " );
-		List<NewCookie> cookies = new ArrayList<NewCookie>();
-		ACSResponse acsresp 	= sendData (service, informBody, cookies);		
+		this.cookies = new ArrayList<NewCookie>();
+		ACSResponse acsresp 	= sendData (service, informBody);		
 		Envelope classobj 		= (Envelope)JibxHelper.unmarshalMessage(acsresp.getResponse(), cwmpver);		
 		InformResponse iresp 	= (InformResponse)classobj.getBody().getObjects().get(0);		
 		//System.out.println("Received InformResponse Max Envelopes ===== " + iresp.getMaxEnvelopes());
+                this.cookies = acsresp.getCookies();
 		
 		//System.out.println("Sending empty request =====>>>>>>>> " );
-		acsresp = sendData (service, "", acsresp.getCookies());		
+		acsresp = sendData (service, "");	
 		//System.out.println("Response for empty request <<<<<<===== " + response);
 		
 		handleACSRequest (acsresp);
@@ -113,7 +116,7 @@ public class CPEClientSession {
 			String 		respBody 	= JibxHelper.marshalObject(envResp, "cwmp_1_0");
 			
 			//System.out.println("Sending Client response =====>>>>>>>> " + respBody );
-			ACSResponse newresp 	= sendData (service, respBody, acsresp.getCookies());			
+			ACSResponse newresp 	= sendData (service, respBody);			
 			//System.out.println("Response for new request <<<<<<===== " + newresp);
 
 			handleACSRequest (newresp);
@@ -123,7 +126,7 @@ public class CPEClientSession {
 		
 	}
 	
-	private ACSResponse sendData (WebResource service, String reqString, List<NewCookie> cookies) {
+	private ACSResponse sendData (WebResource service, String reqString) {
 		
 		Builder builder = service.accept(MediaType.APPLICATION_XML)
 				.type(MediaType.APPLICATION_XML);
@@ -132,19 +135,18 @@ public class CPEClientSession {
 		    builder.cookie( c );
 		}
 		ClientResponse 	response 	= builder.post(ClientResponse.class, reqString);
-		String 			rdata 		= response.getEntity(String.class);		
-		ACSResponse 	acsresp 	= new ACSResponse();
-		acsresp.setResponse(rdata);
+                ACSResponse 	acsresp 	= new ACSResponse();
 		acsresp.setCookies(response.getCookies());
 		acsresp.setHeaders(response.getHeaders());		
-		if (rdata == null || rdata.length() <= 0) {
-			//System.out.println("Response data is NULL ------> " + rdata + ". Closing connection  >>>>>>> ");
-			//response.close();
-		}
-		//System.out.println( "Printing Response  Headers      -------------------- " + response.getHeaders());
-		//System.out.println( "Printing Response getCookies    -------------------- " +  response.getCookies());
-		//System.out.println( "Printing Response Data -------------------- " +  response. );
-		System.out.println(rdata);
+                //if (response.getClientResponseStatus() == ClientResponse.Status.OK) {
+                //if (response.hasEntity()) {
+                if (response.getClientResponseStatus() == ClientResponse.Status.OK) {
+                    String 		rdata 	= response.getEntity(String.class);		
+                    acsresp.setResponse(rdata);
+                    System.out.println(rdata);
+                } else {
+                    System.out.println(response.getClientResponseStatus());
+                }		
 		return acsresp;
 	}
 	
