@@ -35,6 +35,12 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.HTTPDigestAuthFilter;
+import java.io.StringWriter;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class CPEClientSession {	
 	
@@ -87,7 +93,7 @@ public class CPEClientSession {
 	
 	public void sendInform (Envelope envelope) {
 		
-		String informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
+		String informBody = new XmlFormatter().format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
 		//String informBody  = getInformString();
 		//System.out.println("Sending informBody >>>>> " );
 		this.cookies = new ArrayList<NewCookie>();
