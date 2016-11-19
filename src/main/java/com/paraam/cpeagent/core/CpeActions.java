@@ -309,7 +309,7 @@ public class CpeActions {
 	public Envelope doAddObject(AddObject addObject) {
 		AddObjectResponse respobj = new AddObjectResponse();
 		Random rn = new Random();
-		respobj.setInstanceNumber(rn.nextInt());
+		respobj.setInstanceNumber(rn.nextInt(424242424) + 1);
 		respobj.setStatus(org.dslforum.cwmp_1_0.AddObjectResponse.Status._0);
 		return inEnvelope( respobj, "00001" );
 	}
@@ -397,7 +397,8 @@ public class CpeActions {
 //                NoMoreRequests noMore = new NoMoreRequests();
 //                noMore.setString("0");
 		ArrayList headobj = new ArrayList();
-		headobj.add(id);	
+		if(!headerID.equals("00001"))
+                    headobj.add(id);	
 //                headobj.add(noMore);
 		header.setObjects(headobj);
 		ArrayList bodyobj = new ArrayList();
