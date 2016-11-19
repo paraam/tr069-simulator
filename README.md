@@ -50,11 +50,12 @@ methods are currently supported. If authentication is not supported, these field
 <div class="highlight"><pre>
 java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
 </pre></div>
+Or simply doubleclick the batch launcher (for Windows).
 <b>Note:</b> Java must be available in your system.
 
 ### Requirement
 
-- JDK 1.7
+- JDK >=1.7
 
 <br>
 
