@@ -14,7 +14,9 @@ import org.dslforum.cwmp_1_0.Envelope;
 import org.dslforum.cwmp_1_0.EventStruct;
 
 public class CPEHttpServer implements Runnable {
-	ServerSocket serverSocket;	CpeActions cpeActions;
+
+	ServerSocket serverSocket;
+	CpeActions cpeActions;
 	CpeDBReader confdb;	
 	String 	username	= null;
 	String 	passwd		= null;
@@ -27,17 +29,39 @@ public class CPEHttpServer implements Runnable {
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
 	}
-	public void run() {
+
+	public void run() {
 		String reqURL = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ConnectionRequestURL"))).value;
-		//String reqURL = ((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.ConnectionRequestURL")).value;		try {			System.out.println("Starting CpeConnectionRequestServer" + reqURL);
-			this.port 			= new URL(reqURL).getPort();			this.serverSocket 	= new ServerSocket(port);			while(true) {			
+		//String reqURL = ((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.ConnectionRequestURL")).value;
+		try {
+			System.out.println("Starting CpeConnectionRequestServer" + reqURL);
+			this.port 			= new URL(reqURL).getPort();
+			this.serverSocket 	= new ServerSocket(port);
+
+			while(true) {			
 				if (serverSocket == null) {
 					break;
-				}				Socket 			socket 	= serverSocket.accept();						BufferedReader 	reader 	= new BufferedReader(new InputStreamReader(socket.getInputStream()));				String line = null;				while((line = reader.readLine()) != null) {											//System.out.println("Read [" + line + "]");					if(line.equals("")) {						break;					}				}								final OutputStream outputStream = socket.getOutputStream();				outputStream.write("HTTP/1.1 200 OK".getBytes());				outputStream.close();				socket.close();				//System.out.println ("Closed sockets...now send");
+				}
+				Socket 			socket 	= serverSocket.accept();		
+				BufferedReader 	reader 	= new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+				String line = null;
+				while((line = reader.readLine()) != null) {						
+					//System.out.println("Read [" + line + "]");
+					if(line.equals("")) {
+						break;
+					}
+				}				
+
+				final OutputStream outputStream = socket.getOutputStream();
+				outputStream.write("HTTP/1.1 200 OK".getBytes());
+				outputStream.close();
+				socket.close();
+				//System.out.println ("Closed sockets...now send");
 
 				ArrayList<EventStruct> eventKeyList = new ArrayList<EventStruct>();
 				EventStruct eventStruct = new EventStruct();
-				eventStruct.setEventCode("6 REQUEST");
+				eventStruct.setEventCode("6 CONNECTION REQUEST");
 				eventKeyList.add(eventStruct);
 				CpeActions cpeactions = new CpeActions(confdb);
 				Envelope informMessage = cpeactions.doInform(eventKeyList);
@@ -47,9 +71,17 @@ public class CPEHttpServer implements Runnable {
 
 				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
 				session.sendInform(informMessage);
-				//new CpeSession([ informMessage ]).run();				System.out.println ("...sent stuff");			}			//serverSocket.close();						} catch(final IOException e) {			System.out.println( "Failed to bind to port " + port + " " + e.getMessage());		}	finally {
+
+				//new CpeSession([ informMessage ]).run();
+				System.out.println ("...sent stuff");
+			}
+			//serverSocket.close();				
+		} catch(final IOException e) {
+			System.out.println( "Failed to bind to port " + port + " " + e.getMessage());
+		}	finally {
 			try {
 				serverSocket.close();
 			} catch (IOException e) { 	}	
-		}	}	
+		}
+	}	
 }
