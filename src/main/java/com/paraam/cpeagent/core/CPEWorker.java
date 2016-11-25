@@ -12,7 +12,7 @@ public class CPEWorker implements Runnable {
 	String acsurl; 
 	String requrl;
 	int informperiod = 1800;
-	int threadId = 1;
+	String instanceId = "";
 	String dumploc;
 	String 	username	= null;
 	String 	passwd		= null;
@@ -20,29 +20,30 @@ public class CPEWorker implements Runnable {
 	
 	public static void main(String args[]) {		
 		String mgmturl 	= "http://192.168.1.50:8085/ws?wsdl";
-		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, 1);
+		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, String.valueOf(1));
 		Thread cpthread = new Thread(worker, "WorkerThread");
 		cpthread.start();
 	}
 	
-	public CPEWorker(String ip, int port, String acsurl, String requrl, int informperiod, String dumploc, String username, String passwd, String authtype, int threadId) {
+	public CPEWorker(String ip, int port, String acsurl, String requrl, int informperiod, String dumploc, String username, String passwd, String authtype, String instanceId) {
 		this.ip 		= ip;
 		this.port		= port;
 		this.acsurl 	= acsurl;
 		this.requrl 	= requrl;
 		this.dumploc 	= dumploc;
-		this.threadId 	= threadId;
+		this.instanceId = instanceId;
 		this.username 	= username;
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
 		this.informperiod = informperiod;
 	}
 	
+        @Override
 	public void run () {
 		
 		String connreqURL  = "http://" + ip + ":" + port + requrl;
 		//System.out.println("ConnectionRequestURL >>>>>> " + connreqURL);
-		CpeDBReader confdb = new CpeDBReader().readFromGetMessages(dumploc);
+		CpeDBReader confdb = CpeDBReader.readFromGetMessages(dumploc);
 		//CpeDBReader confdb = CpeDBReader.readFromGetMessages("D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//");
 		//final CpeActions cpeActions = new CpeActions(confdb);
 		//System.out.println("Loaded Properties >>>>>>>>> "  + confdb.props.toString());
@@ -50,7 +51,7 @@ public class CPEWorker implements Runnable {
 		String serialNo = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value;
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("PeriodicInformInterval"))).value = "" + informperiod;
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("ConnectionRequestURL"))).value = connreqURL; // "/wsdl";
-		((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value = serialNo + "_" + threadId;
+		((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value = serialNo + (instanceId.equals("") ? "" : ("_" + instanceId));
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("ExternalIPAddress"))).value = ip;
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.PeriodicInformInterval")).value = "1800";
 
@@ -76,7 +77,7 @@ public class CPEWorker implements Runnable {
 
 		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
 		session.sendInform(informMessage);	
-	 	
+   
 	}
 
 }

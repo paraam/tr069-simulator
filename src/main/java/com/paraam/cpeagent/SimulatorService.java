@@ -87,10 +87,17 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				int port  		= Integer.parseInt(httpport);
 				int infmprd		= Integer.parseInt(infmperiod);
 				int ipsize 		= iplist.size();
+                                if (ipsize == 1) {
+                                        ipadr                   = iplist.get(0);
+                                        CPEWorker worker        = new CPEWorker(ipadr, port, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, "");
+                                        Thread cpthread         = new Thread(worker, "WorkerThread_" + threadcnt++);
+                                        cpthread.start();
+                                        continue;
+                                }                                
 				for (int i = 0; i < ipsize; i++) {
-					ipadr 				= iplist.get(i);
-					CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, threadcnt++);
-					Thread cpthread 	= new Thread(worker, "WorkerThread_" + threadcnt);
+					ipadr 			= iplist.get(i);
+					CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, String.valueOf(threadcnt));
+					Thread cpthread 	= new Thread(worker, "WorkerThread_" + threadcnt++);
 					cpthread.start();
 				}
 			}

@@ -35,12 +35,9 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.HTTPDigestAuthFilter;
-import java.io.StringWriter;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.io.IOException;
+import java.util.Set;
+import org.dslforum.cwmp_1_0.ParameterNames;
 
 public class CPEClientSession {	
 	
@@ -60,7 +57,7 @@ public class CPEClientSession {
 		JSONObject 		data 			= new JSONObject();
 		JSONObject 		status 			= new JSONObject();		
 		String			filefolder  	= "//dump//microcell//";
-		CpeDBReader 	confdb 			= new CpeDBReader().readFromGetMessages(filefolder);
+		CpeDBReader 	confdb 			= CpeDBReader.readFromGetMessages(filefolder);
 		CpeActions 		cpeAction 		= new CpeActions(confdb);	
 		
 		ArrayList<EventStruct> eventKeyList = new ArrayList<EventStruct>();
@@ -109,6 +106,8 @@ public class CPEClientSession {
 		
 		handleACSRequest (acsresp);
 		
+                String serial = ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("SerialNumber"))).value;
+                this.dumpCurrentConfiguration(this.cpeActions.confdb.getDumpLocation(), serial);
 	}
 	
 	public void handleACSRequest (ACSResponse acsresp) {
@@ -130,7 +129,7 @@ public class CPEClientSession {
 		}		
 		//System.out.println(data.toString()) ;		
 		
-	}
+        }
 	
 	private ACSResponse sendData (WebResource service, String reqString) {
 		
@@ -236,6 +235,37 @@ public class CPEClientSession {
 	}
 	
 	
+        public void dumpCurrentConfiguration(String dumploc, String serial) {
+                try {
+                        GetParameterNames allParameterNames = new GetParameterNames();
+                        allParameterNames.setParameterPath(cpeActions.confdb.props.getProperty("RootNode"));
+                        Envelope envNames = cpeActions.doGetParameterNames(allParameterNames);
+                        String 		namesDump 	= JibxHelper.marshalObject(envNames, "cwmp_1_0");
+                        CpeDBReader.serialize(dumploc + "getnames_" + serial + ".xml", new XmlFormatter().format(namesDump));
+
+                        ParameterNames pn = new ParameterNames();
+                        Set<String> namesSet = cpeActions.confdb.confs.keySet();
+                        pn.setStrings(namesSet.toArray(new String[namesSet.size()]));
+                        GetParameterValues allParameterValues = new GetParameterValues();
+                        allParameterValues.setParameterNames(pn);
+                        Envelope 	envValues	= cpeActions.doGetParameterValues(allParameterValues, false);		
+                        String 		valuesDump 	= JibxHelper.marshalObject(envValues, "cwmp_1_0");
+                        CpeDBReader.serialize(dumploc + "getvalues_" + serial + ".xml", new XmlFormatter().format(valuesDump));
+                        
+                        ParameterNames lpn = new ParameterNames();
+                        Set<String> learnedNamesSet = cpeActions.confdb.learns.keySet();
+                        lpn.setStrings(learnedNamesSet.toArray(new String[learnedNamesSet.size()]));
+                        GetParameterValues learnedParameterValues = new GetParameterValues();
+                        learnedParameterValues.setParameterNames(lpn);
+                        Envelope 	envLearnedValues	= cpeActions.doGetParameterValues(learnedParameterValues, false);		
+                        String 		learnedValuesDump 	= JibxHelper.marshalObject(envLearnedValues, "cwmp_1_0");
+                        CpeDBReader.serialize(dumploc + "learnedvalues_" + serial + ".xml", new XmlFormatter().format(learnedValuesDump));
+                } catch (IOException ioex) {
+                        ioex.printStackTrace();
+                }
+        }
+                
+                
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri("http://192.168.1.50:8085/ws?wsdl").build();
 	}	
@@ -352,5 +382,5 @@ public class CPEClientSession {
 		}
 	}
 	
-	
+
 }

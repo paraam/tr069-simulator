@@ -28,17 +28,31 @@ import org.dslforum.cwmp_1_0.ParameterValueStruct;
  * @author anders
  *
  */
-public class CpeDBReader implements Serializable {		private static final long serialVersionUID = -2634321577569129211L;	
-	private CpeDBReader INSTANCE 		= null;	
-	HashMap 	confs 	= new HashMap();	
-	Properties 	props 	= new Properties();	
+public class CpeDBReader implements Serializable {
 	
-	public CpeDBReader() { }
-		public CpeDBReader readFromGetMessages(String baseDir) {
-		CpeDBReader 	confDB 			= new CpeDBReader();
+	private static final long serialVersionUID = -2634321577569129211L;
+        private String dumploc;
+	HashMap<String, ConfObject> 	confs 	= new HashMap<String, ConfObject>();
+        HashMap<String, ConfObject>     learns  = new HashMap<String, ConfObject>();
+	Properties                      props 	= new Properties();	
+	
+	private CpeDBReader() { }
+        
+        public CpeDBReader(String dumploc) {
+                this.dumploc = dumploc;
+        }
+
+	
+        public String getDumpLocation() {
+            return this.dumploc;
+        }
+                        
+        
+	public static CpeDBReader readFromGetMessages(String baseDir) {
+		CpeDBReader 	confDB 			= new CpeDBReader(baseDir);
 		String 			cwmpver 		= "cwmp_1_0";
 		String 			xmlfile 		= baseDir + "getnames.txt";
-		String 			xmlcontent1		= deserialize (xmlfile);
+		String 			xmlcontent1		= confDB.deserialize(xmlfile);
 		Envelope 		classobj 		= (Envelope)JibxHelper.unmarshalMessage(xmlcontent1, cwmpver);
 		Object 			tempobj 		= classobj.getBody().getObjects().get(0);
 		GetParameterNamesResponse resp 	= (GetParameterNamesResponse)tempobj;
@@ -47,7 +61,7 @@ public class CpeDBReader implements Serializable {		private static final long 
 
 		//System.out.println(	"  ParameterInfoList Classes ---- " + tempobj1.getClass().getName());
 		String 			xmlfile2 		= baseDir + "getvalues.txt";
-		String 			xmlcontent2 	= deserialize (xmlfile2);
+		String 			xmlcontent2 	= confDB.deserialize (xmlfile2);
 		Envelope 		classobj2 		= (Envelope)JibxHelper.unmarshalMessage(xmlcontent2, cwmpver);	
 		
 		for (Iterator e = namelist.iterator() ; e.hasNext();) {
@@ -58,12 +72,16 @@ public class CpeDBReader implements Serializable {		private static final long 
 			if(namestr.endsWith(".")) {
 				ConfObject confobj = new ConfObject();
 				confobj.name = namestr;
-				confobj.writable = ""+boolnum;				confDB.confs.put(namestr, confobj);			} else {
+				confobj.writable = ""+boolnum;
+				confDB.confs.put(namestr, confobj);
+			} else {
 				ConfParameter confobj = new ConfParameter();
 				confobj.name = namestr;
 				confobj.writable = ""+boolnum ;
 				confobj.notification = "0";
-				confobj.accessList = "Subscriber";				confDB.confs.put(namestr, confobj);			}		
+				confobj.accessList = "Subscriber";
+				confDB.confs.put(namestr, confobj);
+			}		
 		}
 		Object 		tempobj2		= classobj2.getBody().getObjects().get(0);
 		ParameterValueList 	pvlist 	= ((GetParameterValuesResponse)tempobj2).getParameterList();
@@ -92,9 +110,10 @@ public class CpeDBReader implements Serializable {		private static final long 
 				//System.out.println("Adding key/value   " + namestr + " = " + valuestr );
 			
 		}
-		confDB.props = setCPEKeyProperties(baseDir);
+		confDB.props = confDB.setCPEKeyProperties(baseDir);
 		//def keys = confDB.confs.keySet().asList().sort();
-		return confDB;	}
+		return confDB;
+	}
 	
 	/*public static String getXMLString (Element element) {
 		StringWriter buffer = new StringWriter();		
@@ -105,7 +124,8 @@ public class CpeDBReader implements Serializable {		private static final long 
 		}
 		return  buffer.toString();
 		
-	}*/		
+	}*/
+		
 	static void serialize(String filepath, String content) throws IOException {
 		if (filepath == null) {
 			throw new IllegalArgumentException("File should not be null.");
@@ -117,7 +137,9 @@ public class CpeDBReader implements Serializable {		private static final long 
 		} finally {
 			output.close();
 		}
-	}	public String deserialize(String filepath) {
+	}
+
+	public String deserialize(String filepath) {
 		//File aFile = new File (filepath);
 		System.out.println( "deserialize CpeConfDB >>>>>> : " + filepath);
 		StringBuilder contents = new StringBuilder();	    
@@ -174,7 +196,8 @@ public class CpeDBReader implements Serializable {		private static final long 
 		}
 		if (tprops == null) {
 			tprops = new Properties();
-			tprops.setProperty("MgmtServer_URL", "InternetGatewayDevice.ManagementServer.URL");
+			tprops.setProperty("RootNode", "InternetGatewayDevice.");
+                        tprops.setProperty("MgmtServer_URL", "InternetGatewayDevice.ManagementServer.URL");
 			tprops.setProperty("ConnectionRequestURL", "InternetGatewayDevice.ManagementServer.ConnectionRequestURL");
 			tprops.setProperty("PeriodicInformInterval", "InternetGatewayDevice.ManagementServer.PeriodicInformInterval");
 			tprops.setProperty("SerialNumber", "InternetGatewayDevice.DeviceInfo.SerialNumber");
@@ -186,12 +209,66 @@ public class CpeDBReader implements Serializable {		private static final long 
 
 	public static void main(String[] args){
 		System.out.println( "Starting CpeConfDB");
-				//def c = CpeConfDB.readFromGetMessages('testfiles/parameters_zyxel2602/')	
+		
+		//def c = CpeConfDB.readFromGetMessages('testfiles/parameters_zyxel2602/')	
 		//CpeDBReader c = CpeDBReader.readFromGetMessages("D://Paraam//ACS//femto//microcell//");
 		CpeDBReader c = new CpeDBReader().readFromGetMessages("/dump/microcell/");		
 
 		//CpeDBReader c = CpeDBReader.readFromGetMessages("D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//");
-		System.out.println( " Hashtable >>>>>> " + c.confs.toString());		System.out.println( " SerialNumber ---->  " + ((ConfParameter)c.confs.get("Device.DeviceInfo.SerialNumber")).value);	
-		//System.out.println( " SerialNumber ---->  " + ((ConfParameter)c.confs.get("InternetGatewayDevice.DeviceInfo.SerialNumber")).value);			//c.serialize("test.txt");		//System.out.println( " " + CpeDBReader.deserialize("test.txt"));
+		System.out.println( " Hashtable >>>>>> " + c.confs.toString());
+		System.out.println( " SerialNumber ---->  " + ((ConfParameter)c.confs.get("Device.DeviceInfo.SerialNumber")).value);	
+		//System.out.println( " SerialNumber ---->  " + ((ConfParameter)c.confs.get("InternetGatewayDevice.DeviceInfo.SerialNumber")).value);	
+		//c.serialize("test.txt");
+		//System.out.println( " " + CpeDBReader.deserialize("test.txt"));
 	}	
-}class ConfTreeNode {		String name;	HashMap children = new HashMap();	ConfObject data;		ConfTreeNode(String name){		this.name = name;	}		public ConfTreeNode getChild(String name){		return (ConfTreeNode)children.get(name);	}		public void addChild(String name, ConfTreeNode child) {		children.put(name, child);	}	}class ConfObject implements Serializable {	private static final long serialVersionUID = -572794791232157922L;		String name;	String writable;		ConfObject(){}		ConfObject(String name, String writable){		this.name=name;		this.writable = writable;	}}class ConfParameter extends ConfObject {	private static final long serialVersionUID = -5721624376352129129L;	String value;	String accessList;	String notification;		ConfParameter(){}		ConfParameter(String name, String writable, String value, String notification, String accessList) {		super(name, writable);		this.value = value;		this.notification = notification;		this.accessList = accessList;	}	}
+}
+
+class ConfTreeNode {
+	
+	String name;
+	HashMap children = new HashMap();
+	ConfObject data;
+	
+	ConfTreeNode(String name){
+		this.name = name;
+	}
+	
+	public ConfTreeNode getChild(String name){
+		return (ConfTreeNode)children.get(name);
+	}
+	
+	public void addChild(String name, ConfTreeNode child) {
+		children.put(name, child);
+	}
+	
+}
+
+class ConfObject implements Serializable {
+	private static final long serialVersionUID = -572794791232157922L;	
+	String name;
+	String writable;
+	
+	ConfObject(){}
+	
+	ConfObject(String name, String writable){
+		this.name=name;
+		this.writable = writable;
+	}
+}
+
+class ConfParameter extends ConfObject {
+	private static final long serialVersionUID = -5721624376352129129L;
+	String value;
+	String accessList;
+	String notification;
+	
+	ConfParameter(){}
+	
+	ConfParameter(String name, String writable, String value, String notification, String accessList) {
+		super(name, writable);
+		this.value = value;
+		this.notification = notification;
+		this.accessList = accessList;
+	}
+	
+}

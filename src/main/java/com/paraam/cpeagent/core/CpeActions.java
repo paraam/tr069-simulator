@@ -33,7 +33,6 @@ import org.dslforum.cwmp_1_0.Header;
 import org.dslforum.cwmp_1_0.ID;
 import org.dslforum.cwmp_1_0.Inform;
 import org.dslforum.cwmp_1_0.MethodList;
-import org.dslforum.cwmp_1_0.NoMoreRequests;
 import org.dslforum.cwmp_1_0.ParameterAttributeList;
 import org.dslforum.cwmp_1_0.ParameterAttributeStruct;
 import org.dslforum.cwmp_1_0.ParameterAttributeStruct.Notification;
@@ -59,7 +58,7 @@ public class CpeActions {
 		System.out.println( "Starting CpeConfDB");
 
 		//def c = CpeConfDB.readFromGetMessages('testfiles/parameters_zyxel2602/')	
-		CpeDBReader c = new CpeDBReader().readFromGetMessages("D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//");
+		CpeDBReader c = CpeDBReader.readFromGetMessages("D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//");
 		System.out.println( " Hashtable >>>>>> " + c.confs.toString());
 		System.out.println( " SerialNumber ---->  " + ((ConfParameter)c.confs.get("Device.DeviceInfo.SerialNumber")).value);	
 		//c.serialize("test.txt");
@@ -129,7 +128,13 @@ public class CpeActions {
 		return inEnvelope(resp, "00001");
 	}
 
-	public Envelope doGetParameterValues( GetParameterValues getParameterValues ) {
+        
+        public Envelope doGetParameterValues( GetParameterValues getParameterValues ) {
+                return this.doGetParameterValues(getParameterValues, true);
+        }
+        
+        
+	public Envelope doGetParameterValues( GetParameterValues getParameterValues, boolean learn) {
 		ParameterValueList pvl = new ParameterValueList();
 		String[] nameList = getParameterValues.getParameterNames().getStrings(); 
 		GetParameterValuesResponse valresp = new GetParameterValuesResponse();
@@ -140,6 +145,7 @@ public class CpeActions {
 				//System.out.println(" paramname ----> " + paramname);
 				HashMap valobj = this.confdb.confs;				
 				Iterator it = valobj.entrySet().iterator();
+                                int initialSize = pvl.getParameterValueStruct().size();
 				while (it.hasNext()) {
 					Map.Entry pairs = (Map.Entry)it.next();
 					String keyname = (String)pairs.getKey() ;
@@ -157,12 +163,19 @@ public class CpeActions {
 							//System.out.println("Adding Nested --->>>  " + cp.name + " = " + cp.value);
 						}
 					}			        
-				}				
-			} else if ( this.confdb.confs.keySet().contains( paramname) ) {
+				}
+                                if (learn && pvl.getParameterValueStruct().size() == initialSize) {
+                                        ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
+                                        this.confdb.learns.put(paramname, cp);
+                                        System.out.println("Learning Unknown Object --->>>  " + paramname);
+                                }
+			} else if ( this.confdb.confs.keySet().contains(paramname) ) {
 				Object obj = this.confdb.confs.get(nameList[i]);
 				if (obj instanceof ConfParameter) {
 					ConfParameter cp = (ConfParameter)obj;
 					if (cp.value == null) {
+                                                if(!learn)
+                                                    System.out.println("Getting Known Null Value --->>>  " + cp.name);
 						continue;
 					}
 					ParameterValueStruct pvs = new ParameterValueStruct();
@@ -171,9 +184,13 @@ public class CpeActions {
 					pvl.getParameterValueStruct().add(pvs);
 					//System.out.println("Adding Direct --->>>  " + cp.name + " = " + cp.value);
 				}
-			}
+			} else if (learn) {
+                                ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
+                                this.confdb.learns.put(paramname, cp);
+                                System.out.println("Learning Unknown Value --->>>  " + cp.name);
+                        }
 		}
-		valresp.setParameterList(pvl);		
+		valresp.setParameterList(pvl);
 		return inEnvelope(valresp, "00001");
 	}
 
@@ -225,7 +242,11 @@ public class CpeActions {
 					cp.value = pvs.getValue();
 					System.out.println("Setting Value --->>>  " + cp.name + " = " + cp.value);
 				}
-			}
+			} else {
+                            ConfParameter cp = new ConfParameter(pvs.getName(), "1", pvs.getValue(), null, null);
+                            this.confdb.learns.put(pvs.getName(), cp);
+                            System.out.println("Learning Value --->>>  " + cp.name + " = " + cp.value);
+                        }
 		}
 		valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
 		return inEnvelope(valresp, "00001");

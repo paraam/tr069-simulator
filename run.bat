@@ -1,2 +1,2 @@
 cd "%~dp0"
-java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml
+java -jar target/tr069-0.7.0-SNAPSHOT.jar server simulator.yml

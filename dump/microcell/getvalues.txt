@@ -1,920 +1,686 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   <SOAP-ENV:Header>
-      <cwmp:ID SOAP-ENV:mustUnderstand="1">16781903</cwmp:ID>
-   </SOAP-ENV:Header>
-   <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-      <cwmp:GetParameterValuesResponse>
-         <ParameterList SOAP-ENC:arrayType="cwmp:ParameterValueStruct[213]">
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceSummary</Name>
-               <Value xsi:type="xsd:string">FAPService:1.0(Baseline:1)</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.Manufacturer</Name>
-               <Value xsi:type="xsd:string">Cisco</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.ManufacturerOUI</Name>
-               <Value xsi:type="xsd:string">002652</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.ModelName</Name>
-               <Value xsi:type="xsd:string">CJJ005B00009</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.Description</Name>
-               <Value xsi:type="xsd:string">Femto Microcell</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.ProductClass</Name>
-               <Value xsi:type="xsd:string">CJJ005B00009</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.SerialNumber</Name>
-               <Value xsi:type="xsd:string">CB002145</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.HardwareVersion</Name>
-               <Value xsi:type="xsd:string">HW_2.0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.SoftwareVersion</Name>
-               <Value xsi:type="xsd:string">CJJ005B00009_1.0.5</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.SpecVersion</Name>
-               <Value xsi:type="xsd:string">1.0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.ProvisioningCode</Name>
-               <Value xsi:type="xsd:string">ACS</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.DeviceStatus</Name>
-               <Value xsi:type="xsd:string">UP</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress</Name>
-               <Value xsi:type="xsd:string">192.168.1.50</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.UpTime</Name>
-               <Value xsi:type="xsd:unsignedInt">45</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_SwModuleVersions</Name>
-               <Value xsi:type="xsd:unsignedInt">Bootloader: 205_001 171.14, Kernel: 205_002 178.0, Filesys: 205I004 411.29.1_C_526_4, RMM: 5.2.6bc4, Router: 1.0.17, GPS: GSW3.5.0_3.5.00.00-SDK-3EP1.00a</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_3GModuleVersion</Name>
-               <Value xsi:type="xsd:unsignedInt">Bootloader: 205_001 171.14, Kernel: 205_002 178.0, Filesys: 205I004 411.29.1_C_526_4</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_RouterModuleVersion</Name>
-               <Value xsi:type="xsd:unsignedInt">1.0.21 1.0.23</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_BootTime</Name>
-               <Value xsi:type="xsd:unsignedInt">0001-01-01T00:00:00</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_LastRebootCause</Name>
-               <Value xsi:type="xsd:unsignedInt">SW_UPGRADE</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.DeviceInfo.X_00000C_RebootHistoryNumberOfEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.URL</Name>
-               <Value xsi:type="xsd:string">http://192.168.1.50:8085/ws?wsdl</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.Username</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.Password</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.PeriodicInformEnable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.PeriodicInformInterval</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.X_00000C_CDPBaseURL</Name>
-               <Value xsi:type="xsd:unsignedInt">https://acs.cisco.com/baseurl</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.X_00000C_DefaultCRLBaseURL</Name>
-               <Value xsi:type="xsd:unsignedInt">https://acs.cisco.com/crlbaseurl</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.X_00000C_ProvisioningStatus</Name>
-               <Value xsi:type="xsd:unsignedInt">Service enabled</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.PeriodicInformTime</Name>
-               <Value xsi:type="xsd:dateTime">0001-01-01T00:00:00</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.ParameterKey</Name>
-               <Value xsi:type="xsd:string">unsetCommandKey</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.ConnectionRequestURL</Name>
-               <Value xsi:type="xsd:string">http://192.168.1.50:8030/wsdl</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.ConnectionRequestUsername</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.ConnectionRequestPassword</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.ManagementServer.UpgradesManaged</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.AddressingType</Name>
-               <Value xsi:type="xsd:string">DHCP</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.IPAddress</Name>
-               <Value xsi:type="xsd:string">172.18.4.108</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.SubnetMask</Name>
-               <Value xsi:type="xsd:string">255.255.255.0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.DefaultGateway</Name>
-               <Value xsi:type="xsd:string">172.18.4.254</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.DNSServers</Name>
-               <Value xsi:type="xsd:string">10.0.0.254</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.MACAddress</Name>
-               <Value xsi:type="xsd:string">ac:12:20:db:34:56</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.ConnectionUpTime</Name>
-               <Value xsi:type="xsd:unsignedInt">13</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.TotalBytesSent</Name>
-               <Value xsi:type="xsd:unsignedInt">7051</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.TotalBytesReceived</Name>
-               <Value xsi:type="xsd:unsignedInt">13385</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.TotalPacketsSent</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.LAN.TotalPacketsReceived</Name>
-               <Value xsi:type="xsd:unsignedInt">77</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Time.NTPServer1</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Time.NTPServer2</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Time.CurrentLocalTime</Name>
-               <Value xsi:type="xsd:dateTime">0001-01-01T00:00:43</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Time.LocalTimeZone</Name>
-               <Value xsi:type="xsd:string">GMT+09:00</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Time.Period</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.InterfaceNumberOfEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.Interface.1.Alias</Name>
-               <Value xsi:type="xsd:string">Eth 01</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.Interface.1.Enable</Name>
-               <Value xsi:type="xsd:boolean">true</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.Interface.1.Status</Name>
-               <Value xsi:type="xsd:string">Up</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.Interface.1.Name</Name>
-               <Value xsi:type="xsd:string">Eth 01</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Ethernet.Interface.1.MTU</Name>
-               <Value xsi:type="xsd:unsignedInt">1500</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.DiagnosticsState</Name>
-               <Value xsi:type="xsd:string">None</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.Host</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.NumberOfRepetitions</Name>
-               <Value xsi:type="xsd:unsignedInt">15</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.Timeout</Name>
-               <Value xsi:type="xsd:unsignedInt">15</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.DataBlockSize</Name>
-               <Value xsi:type="xsd:unsignedInt">56</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.SuccessCount</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.FailureCount</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.AverageResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.MinimumResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.IPPingDiagnostics.MaximumResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.DiagnosticsState</Name>
-               <Value xsi:type="xsd:string">None</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.Host</Name>
-               <Value xsi:type="xsd:string" />
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.Timeout</Name>
-               <Value xsi:type="xsd:unsignedInt">15</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.DataBlockSize</Name>
-               <Value xsi:type="xsd:unsignedInt">64</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.MaxHopCount</Name>
-               <Value xsi:type="xsd:unsignedInt">30</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.DSCP</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.ResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.TraceRouteDiagnostics.NumberOfRouteHops</Name>
-               <Value xsi:type="xsd:unsignedInt">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.DeviceType</Name>
-               <Value xsi:type="xsd:string">Standalone</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.DNPrefix</Name>
-               <Value xsi:type="xsd:string">DC=a1.companyNN.com,SubNetwork=1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.AccessMode</Name>
-               <Value xsi:type="xsd:string">Open Access</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.NonCSGUEAccessDecision</Name>
-               <Value xsi:type="xsd:string">Local</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.CSGMembershipDeterminedLocally</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.AccessControlList</Name>
-               <Value xsi:type="xsd:string">DCI,ASP</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MaxConcurrentCSGUsers</Name>
-               <Value xsi:type="xsd:unsignedInt">32</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.X_00000C_EnableCSGBroadcasts</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.SucceededConnections</Name>
-               <Value xsi:type="xsd:unsignedInt">18</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.FailedConnections</Name>
-               <Value xsi:type="xsd:unsignedInt">3</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.ConnectionUptime</Name>
-               <Value xsi:type="xsd:unsignedInt">450</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.ConnectionDowntime</Name>
-               <Value xsi:type="xsd:unsignedInt">155</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.MessagesSent</Name>
-               <Value xsi:type="xsd:unsignedInt">63445</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.MessagesReceived</Name>
-               <Value xsi:type="xsd:unsignedInt">242343</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.BytesSent</Name>
-               <Value xsi:type="xsd:unsignedInt">613213</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.BytesReceived</Name>
-               <Value xsi:type="xsd:unsignedInt">1234223</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.MinResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.MaxResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">17</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.X_00000C_MHS.Perf.AverageResponseTime</Name>
-               <Value xsi:type="xsd:unsignedInt">3</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.CSGID</Name>
-               <Value xsi:type="xsd:unsignedInt">27</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.HNBName</Name>
-               <Value xsi:type="xsd:string">KPHome</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.PerfMgmt.FileMgmt.URL</Name>
-               <Value xsi:type="xsd:string">/media/download/</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadEnable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadInterval</Name>
-               <Value xsi:type="xsd:unsignedInt">1800</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadTime</Name>
-               <Value xsi:type="xsd:dateTime">0001-01-01T00:00:00Z</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.GPSEquipped</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.MaxTxPower</Name>
-               <Value xsi:type="xsd:int">25</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.SupportedSystems</Name>
-               <Value xsi:type="xsd:string">UMTS</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.MaxChildSAPerIKE</Name>
-               <Value xsi:type="xsd:int">16</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.MaxIKESessions</Name>
-               <Value xsi:type="xsd:int">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.DuplexMode</Name>
-               <Value xsi:type="xsd:string">FDDMode</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.GPSEquipped</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.HSDPASupported</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.MaxHSDPADataRateSupported</Name>
-               <Value xsi:type="xsd:int">14400</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.HSUPASupported</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.MaxHSUPADataRateSupported</Name>
-               <Value xsi:type="xsd:int">1460</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.MaxHSPDSCHsSupported</Name>
-               <Value xsi:type="xsd:int">15</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.MaxHSSCCHsSupported</Name>
-               <Value xsi:type="xsd:int">2</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.FDDBandsSupported</Name>
-               <Value xsi:type="xsd:string">I,II,V</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.Capabilities.UMTS.GSMRxBandsSupported</Name>
-               <Value xsi:type="xsd:string">GSM850,P-GSM900,DCS1800,PCS1900</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.FAPControl.OpState</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.FAPControl.AdminState</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.FAPControl.RFTxStatus</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.FAPControl.SelfConfigEvents</Name>
-               <Value xsi:type="xsd:string">InitialREM</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.FAPControl.EnclosureTamperingDetected</Name>
-               <Value xsi:type="xsd:boolean">0</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.MaxIntraFreqCellEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">32</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.MaxInterFreqCellEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">32</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCellNumberOfEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">4</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCellNumberOfEntries</Name>
-               <Value xsi:type="xsd:unsignedInt">4</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.1.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.1.IMSI</Name>
-               <Value xsi:type="xsd:string">8148455769</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.1.MSISDN</Name>
-               <Value xsi:type="xsd:string">918148455769</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.1.MembershipExpires</Name>
-               <Value xsi:type="xsd:dateTime">2013-07-01T00:00:00Z</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.2.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.2.IMSI</Name>
-               <Value xsi:type="xsd:string">9840927659</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.2.MSISDN</Name>
-               <Value xsi:type="xsd:string">919840927659</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.2.MembershipExpires</Name>
-               <Value xsi:type="xsd:dateTime">2013-06-09T00:00:00Z</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.3.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.3.IMSI</Name>
-               <Value xsi:type="xsd:string">8148453411</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.3.MSISDN</Name>
-               <Value xsi:type="xsd:string">918148453411</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.3.MembershipExpires</Name>
-               <Value xsi:type="xsd:dateTime">2013-07-15T00:00:00Z</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.4.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.4.IMSI</Name>
-               <Value xsi:type="xsd:string">8148453221</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.4.MSISDN</Name>
-               <Value xsi:type="xsd:string">918148453221</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.AccessMgmt.MemberDetail.4.MembershipExpires</Name>
-               <Value xsi:type="xsd:dateTime">2013-06-21T00:00:00Z</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.UARFCNUL</Name>
-               <Value xsi:type="xsd:unsignedInt">800</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.UARFCNDL</Name>
-               <Value xsi:type="xsd:unsignedInt">850</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.UARFCNUL</Name>
-               <Value xsi:type="xsd:unsignedInt">800</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.UARFCNDL</Name>
-               <Value xsi:type="xsd:unsignedInt">850</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.UARFCNUL</Name>
-               <Value xsi:type="xsd:unsignedInt">800</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.UARFCNDL</Name>
-               <Value xsi:type="xsd:unsignedInt">850</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.Enable</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.MustInclude</Name>
-               <Value xsi:type="xsd:boolean">1</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PLMNID</Name>
-               <Value xsi:type="xsd:string">220</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.RNCID</Name>
-               <Value xsi:type="xsd:unsignedInt">300</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.CID</Name>
-               <Value xsi:type="xsd:unsignedInt">10</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.LAC</Name>
-               <Value xsi:type="xsd:unsignedInt">107</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.RAC</Name>
-               <Value xsi:type="xsd:unsignedInt">303</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.URA</Name>
-               <Value xsi:type="xsd:unsignedInt">560</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.UARFCNUL</Name>
-               <Value xsi:type="xsd:unsignedInt">800</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.UARFCNDL</Name>
-               <Value xsi:type="xsd:unsignedInt">850</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PCPICHScramblingCode</Name>
-               <Value xsi:type="xsd:unsignedInt">20</Value>
-            </ParameterValueStruct>
-            <ParameterValueStruct>
-               <Name>InternetGatewayDevice.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PCPICHTxPower</Name>
-               <Value xsi:type="xsd:int">220</Value>
-            </ParameterValueStruct>
-         </ParameterList>
-      </cwmp:GetParameterValuesResponse>
-   </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
+
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+
+<SOAP-ENV:Header>
+<cwmp:ID SOAP-ENV:mustUnderstand="1">16781903</cwmp:ID></SOAP-ENV:Header>
+<SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<cwmp:GetParameterValuesResponse>
+<ParameterList SOAP-ENC:arrayType="cwmp:ParameterValueStruct[213]">
+<ParameterValueStruct>
+<Name>Device.DeviceSummary</Name>
+<Value xsi:type="xsd:string">FAPService:1.0(Baseline:1)</Value>
+</ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.Manufacturer</Name>
+<Value xsi:type="xsd:string">Cisco</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.ManufacturerOUI</Name>
+<Value xsi:type="xsd:string">002652</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.ModelName</Name>
+<Value xsi:type="xsd:string">CJJ005B00009</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.Description</Name>
+<Value xsi:type="xsd:string">Femto Microcell</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.ProductClass</Name>
+<Value xsi:type="xsd:string">CJJ005B00009</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.SerialNumber</Name>
+<Value xsi:type="xsd:string">CB002145</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.HardwareVersion</Name>
+<Value xsi:type="xsd:string">HW_2.0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.SoftwareVersion</Name>
+<Value xsi:type="xsd:string">CJJ005B00009_1.0.5</Value>
+</ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.SpecVersion</Name>
+<Value xsi:type="xsd:string">1.0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.ProvisioningCode</Name>
+<Value xsi:type="xsd:string">ACS</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.DeviceStatus</Name>
+<Value xsi:type="xsd:string">UP</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress</Name>
+<Value xsi:type="xsd:string">192.168.1.50</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.DeviceInfo.UpTime</Name>
+<Value xsi:type="xsd:unsignedInt">45</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_SwModuleVersions</Name>
+<Value xsi:type="xsd:unsignedInt">Bootloader: 205_001 171.14, Kernel: 205_002 178.0, Filesys: 205I004 411.29.1_C_526_4, RMM: 5.2.6bc4, Router: 1.0.17, GPS: GSW3.5.0_3.5.00.00-SDK-3EP1.00a</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_3GModuleVersion</Name>
+<Value xsi:type="xsd:unsignedInt">Bootloader: 205_001 171.14, Kernel: 205_002 178.0, Filesys: 205I004 411.29.1_C_526_4</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_RouterModuleVersion</Name>
+<Value xsi:type="xsd:unsignedInt">1.0.21 1.0.23</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_BootTime</Name>
+<Value xsi:type="xsd:unsignedInt">0001-01-01T00:00:00</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_LastRebootCause</Name>
+<Value xsi:type="xsd:unsignedInt">SW_UPGRADE</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.DeviceInfo.X_00000C_RebootHistoryNumberOfEntries</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+
+<ParameterValueStruct><Name>Device.ManagementServer.URL</Name>
+<Value xsi:type="xsd:string">http://192.168.1.50:8085/ws?wsdl</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.Username</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.Password</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.PeriodicInformEnable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.PeriodicInformInterval</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+
+<ParameterValueStruct><Name>Device.ManagementServer.X_00000C_CDPBaseURL</Name>
+<Value xsi:type="xsd:unsignedInt">https://acs.cisco.com/baseurl</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.ManagementServer.X_00000C_DefaultCRLBaseURL</Name>
+<Value xsi:type="xsd:unsignedInt">https://acs.cisco.com/crlbaseurl</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.ManagementServer.X_00000C_ProvisioningStatus</Name>
+<Value xsi:type="xsd:unsignedInt">Service enabled</Value></ParameterValueStruct>
+
+<ParameterValueStruct>
+<Name>Device.ManagementServer.PeriodicInformTime</Name>
+<Value xsi:type="xsd:dateTime">0001-01-01T00:00:00</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.ParameterKey</Name>
+<Value xsi:type="xsd:string">unsetCommandKey</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.ConnectionRequestURL</Name>
+<Value xsi:type="xsd:string">http://192.168.1.50:8030/wsdl</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.ConnectionRequestUsername</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.ConnectionRequestPassword</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.ManagementServer.UpgradesManaged</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.AddressingType</Name>
+<Value xsi:type="xsd:string">DHCP</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.IPAddress</Name>
+<Value xsi:type="xsd:string">172.18.4.108</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.SubnetMask</Name>
+<Value xsi:type="xsd:string">255.255.255.0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.DefaultGateway</Name>
+<Value xsi:type="xsd:string">172.18.4.254</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.DNSServers</Name>
+<Value xsi:type="xsd:string">10.0.0.254</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.MACAddress</Name>
+<Value xsi:type="xsd:string">ac:12:20:db:34:56</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.ConnectionUpTime</Name>
+<Value xsi:type="xsd:unsignedInt">13</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.TotalBytesSent</Name>
+<Value xsi:type="xsd:unsignedInt">7051</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.TotalBytesReceived</Name>
+<Value xsi:type="xsd:unsignedInt">13385</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.TotalPacketsSent</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.LAN.TotalPacketsReceived</Name>
+<Value xsi:type="xsd:unsignedInt">77</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Time.NTPServer1</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Time.NTPServer2</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Time.CurrentLocalTime</Name>
+<Value xsi:type="xsd:dateTime">0001-01-01T00:00:43</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Time.LocalTimeZone</Name>
+<Value xsi:type="xsd:string">GMT+09:00</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Time.Period</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value>
+</ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.InterfaceNumberOfEntries</Name>
+<Value xsi:type="xsd:unsignedInt">1</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.Interface.1.Alias</Name>
+<Value xsi:type="xsd:string">Eth 01</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.Interface.1.Enable</Name>
+<Value xsi:type="xsd:boolean">true</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.Interface.1.Status</Name>
+<Value xsi:type="xsd:string">Up</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.Interface.1.Name</Name>
+<Value xsi:type="xsd:string">Eth 01</Value></ParameterValueStruct>
+<ParameterValueStruct><Name>Device.Ethernet.Interface.1.MTU</Name>
+<Value xsi:type="xsd:unsignedInt">1500</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.DiagnosticsState</Name>
+<Value xsi:type="xsd:string">None</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.Host</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.NumberOfRepetitions</Name>
+<Value xsi:type="xsd:unsignedInt">15</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.Timeout</Name>
+<Value xsi:type="xsd:unsignedInt">15</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.DataBlockSize</Name>
+<Value xsi:type="xsd:unsignedInt">56</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.SuccessCount</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.FailureCount</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.AverageResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.MinimumResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.IPPingDiagnostics.MaximumResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.DiagnosticsState</Name>
+<Value xsi:type="xsd:string">None</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.Host</Name>
+<Value xsi:type="xsd:string"></Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.Timeout</Name>
+<Value xsi:type="xsd:unsignedInt">15</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.DataBlockSize</Name>
+<Value xsi:type="xsd:unsignedInt">64</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.MaxHopCount</Name>
+<Value xsi:type="xsd:unsignedInt">30</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.DSCP</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.ResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.TraceRouteDiagnostics.NumberOfRouteHops</Name>
+<Value xsi:type="xsd:unsignedInt">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.DeviceType</Name>
+<Value xsi:type="xsd:string">Standalone</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.DNPrefix</Name>
+<Value xsi:type="xsd:string">DC=a1.companyNN.com,SubNetwork=1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.AccessMode</Name>
+<Value xsi:type="xsd:string">Open Access</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.NonCSGUEAccessDecision</Name>
+<Value xsi:type="xsd:string">Local</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.CSGMembershipDeterminedLocally</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.AccessControlList</Name>
+<Value xsi:type="xsd:string">DCI,ASP</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MaxConcurrentCSGUsers</Name>
+<Value xsi:type="xsd:unsignedInt">32</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.X_00000C_EnableCSGBroadcasts</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.SucceededConnections</Name>
+<Value xsi:type="xsd:unsignedInt">18</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.FailedConnections</Name>
+<Value xsi:type="xsd:unsignedInt">3</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.ConnectionUptime</Name>
+<Value xsi:type="xsd:unsignedInt">450</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.ConnectionDowntime</Name>
+<Value xsi:type="xsd:unsignedInt">155</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.MessagesSent</Name>
+<Value xsi:type="xsd:unsignedInt">63445</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.MessagesReceived</Name>
+<Value xsi:type="xsd:unsignedInt">242343</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.BytesSent</Name>
+<Value xsi:type="xsd:unsignedInt">613213</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.BytesReceived</Name>
+<Value xsi:type="xsd:unsignedInt">1234223</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.MinResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.MaxResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">17</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.X_00000C_MHS.Perf.AverageResponseTime</Name>
+<Value xsi:type="xsd:unsignedInt">3</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.CSGID</Name>
+<Value xsi:type="xsd:unsignedInt">27</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.HNBName</Name>
+<Value xsi:type="xsd:string">KPHome</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.PerfMgmt.FileMgmt.URL</Name>
+<Value xsi:type="xsd:string">/media/download/</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadEnable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadInterval</Name>
+<Value xsi:type="xsd:unsignedInt">1800</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.PerfMgmt.FileMgmt.PeriodicUploadTime</Name>
+<Value xsi:type="xsd:dateTime">0001-01-01T00:00:00Z</Value></ParameterValueStruct>
+<ParameterValueStruct>
+
+<Name>Device.Services.FAPService.1.Capabilities.GPSEquipped</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.MaxTxPower</Name>
+<Value xsi:type="xsd:int">25</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.SupportedSystems</Name>
+<Value xsi:type="xsd:string">UMTS</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.MaxChildSAPerIKE</Name>
+<Value xsi:type="xsd:int">16</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.MaxIKESessions</Name>
+<Value xsi:type="xsd:int">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.DuplexMode</Name>
+<Value xsi:type="xsd:string">FDDMode</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.GPSEquipped</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.HSDPASupported</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.MaxHSDPADataRateSupported</Name>
+<Value xsi:type="xsd:int">14400</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.HSUPASupported</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.MaxHSUPADataRateSupported</Name>
+<Value xsi:type="xsd:int">1460</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.MaxHSPDSCHsSupported</Name>
+<Value xsi:type="xsd:int">15</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.MaxHSSCCHsSupported</Name>
+<Value xsi:type="xsd:int">2</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.FDDBandsSupported</Name>
+<Value xsi:type="xsd:string">I,II,V</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.Capabilities.UMTS.GSMRxBandsSupported</Name>
+<Value xsi:type="xsd:string">GSM850,P-GSM900,DCS1800,PCS1900</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.FAPControl.OpState</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.FAPControl.AdminState</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.FAPControl.RFTxStatus</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.FAPControl.SelfConfigEvents</Name>
+<Value xsi:type="xsd:string">InitialREM</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.FAPControl.EnclosureTamperingDetected</Name>
+<Value xsi:type="xsd:boolean">0</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.MaxIntraFreqCellEntries</Name>
+<Value xsi:type="xsd:unsignedInt">32</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.MaxInterFreqCellEntries</Name>
+<Value xsi:type="xsd:unsignedInt">32</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCellNumberOfEntries</Name>
+<Value xsi:type="xsd:unsignedInt">4</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCellNumberOfEntries</Name>
+<Value xsi:type="xsd:unsignedInt">4</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.1.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.1.IMSI</Name>
+<Value xsi:type="xsd:string">8148455769</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.1.MSISDN</Name>
+<Value xsi:type="xsd:string">918148455769</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.1.MembershipExpires</Name>
+<Value xsi:type="xsd:dateTime">2013-07-01T00:00:00Z</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.2.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.2.IMSI</Name>
+<Value xsi:type="xsd:string">9840927659</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.2.MSISDN</Name>
+<Value xsi:type="xsd:string">919840927659</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.2.MembershipExpires</Name>
+<Value xsi:type="xsd:dateTime">2013-06-09T00:00:00Z</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.3.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.3.IMSI</Name>
+<Value xsi:type="xsd:string">8148453411</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.3.MSISDN</Name>
+<Value xsi:type="xsd:string">918148453411</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.3.MembershipExpires</Name>
+<Value xsi:type="xsd:dateTime">2013-07-15T00:00:00Z</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.4.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.4.IMSI</Name>
+<Value xsi:type="xsd:string">8148453221</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.4.MSISDN</Name>
+<Value xsi:type="xsd:string">918148453221</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.AccessMgmt.MemberDetail.4.MembershipExpires</Name>
+<Value xsi:type="xsd:dateTime">2013-06-21T00:00:00Z</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.1.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.2.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.3.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.IntraFreqCell.4.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.UARFCNUL</Name>
+<Value xsi:type="xsd:unsignedInt">800</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.UARFCNDL</Name>
+<Value xsi:type="xsd:unsignedInt">850</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.1.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.UARFCNUL</Name>
+<Value xsi:type="xsd:unsignedInt">800</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.UARFCNDL</Name>
+<Value xsi:type="xsd:unsignedInt">850</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.2.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.UARFCNUL</Name>
+<Value xsi:type="xsd:unsignedInt">800</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.UARFCNDL</Name>
+<Value xsi:type="xsd:unsignedInt">850</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.3.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.Enable</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.MustInclude</Name>
+<Value xsi:type="xsd:boolean">1</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PLMNID</Name>
+<Value xsi:type="xsd:string">220</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.RNCID</Name>
+<Value xsi:type="xsd:unsignedInt">300</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.CID</Name>
+<Value xsi:type="xsd:unsignedInt">10</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.LAC</Name>
+<Value xsi:type="xsd:unsignedInt">107</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.RAC</Name>
+<Value xsi:type="xsd:unsignedInt">303</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.URA</Name>
+<Value xsi:type="xsd:unsignedInt">560</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.UARFCNUL</Name>
+<Value xsi:type="xsd:unsignedInt">800</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.UARFCNDL</Name>
+<Value xsi:type="xsd:unsignedInt">850</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PCPICHScramblingCode</Name>
+<Value xsi:type="xsd:unsignedInt">20</Value></ParameterValueStruct>
+<ParameterValueStruct>
+<Name>Device.Services.FAPService.1.CellConfig.UMTS.RAN.FDDFAP.NeighborList.InterFreqCell.4.PCPICHTxPower</Name>
+<Value xsi:type="xsd:int">220</Value></ParameterValueStruct>
+
+</ParameterList></cwmp:GetParameterValuesResponse>
+</SOAP-ENV:Body></SOAP-ENV:Envelope>
