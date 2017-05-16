@@ -167,15 +167,15 @@ public class CpeActions {
                                 if (learn && pvl.getParameterValueStruct().size() == initialSize) {
                                         ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
                                         this.confdb.learns.put(paramname, cp);
-                                        System.out.println("Learning Unknown Object --->>>  " + paramname);
+                                        // System.out.println("Learning Unknown Object --->>>  " + paramname);
                                 }
 			} else if ( this.confdb.confs.keySet().contains(paramname) ) {
 				Object obj = this.confdb.confs.get(nameList[i]);
 				if (obj instanceof ConfParameter) {
 					ConfParameter cp = (ConfParameter)obj;
 					if (cp.value == null) {
-                                                if(!learn)
-                                                    System.out.println("Getting Known Null Value --->>>  " + cp.name);
+                                                //if(!learn)
+                                                //    System.out.println("Getting Known Null Value --->>>  " + cp.name);
 						continue;
 					}
 					ParameterValueStruct pvs = new ParameterValueStruct();
@@ -187,7 +187,7 @@ public class CpeActions {
 			} else if (learn) {
                                 ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
                                 this.confdb.learns.put(paramname, cp);
-                                System.out.println("Learning Unknown Value --->>>  " + cp.name);
+                                // System.out.println("Learning Unknown Value --->>>  " + cp.name);
                         }
 		}
 		valresp.setParameterList(pvl);
@@ -201,7 +201,7 @@ public class CpeActions {
 		String paramname = getParameterName.getParameterPath();
 
 		if (paramname.endsWith(".")) {
-			System.out.println(" paramname ----> " + paramname);
+			// System.out.println(" paramname ----> " + paramname);
 			HashMap valobj = this.confdb.confs;				
 			Iterator it = valobj.entrySet().iterator();
 			while (it.hasNext()) {
@@ -240,12 +240,12 @@ public class CpeActions {
 				if (obj instanceof ConfParameter) {
 					ConfParameter cp = (ConfParameter)obj;
 					cp.value = pvs.getValue();
-					System.out.println("Setting Value --->>>  " + cp.name + " = " + cp.value);
+					// System.out.println("Setting Value --->>>  " + cp.name + " = " + cp.value);
 				}
 			} else {
                             ConfParameter cp = new ConfParameter(pvs.getName(), "1", pvs.getValue(), null, null);
                             this.confdb.learns.put(pvs.getName(), cp);
-                            System.out.println("Learning Value --->>>  " + cp.name + " = " + cp.value);
+                            // System.out.println("Learning Value --->>>  " + cp.name + " = " + cp.value);
                         }
 		}
 		valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
@@ -260,7 +260,7 @@ public class CpeActions {
 		for (int i =0; i < nameList.length; i++) {
 			String paramname = nameList[i];
 			if (paramname.endsWith(".")) {
-				//System.out.println(" paramname ----> " + paramname);
+				// System.out.println(" paramname ----> " + paramname);
 				HashMap valobj = this.confdb.confs;				
 				Iterator it = valobj.entrySet().iterator();
 				while (it.hasNext()) {
@@ -319,7 +319,7 @@ public class CpeActions {
 					if (spvs.isAccessListChange()) {
 						cp.accessList 		= Arrays.toString(aclist);
 					}
-					System.out.println("Setting Value --->>>  " + cp.notification + " = " + cp.accessList);
+					// System.out.println("Setting Value --->>>  " + cp.notification + " = " + cp.accessList);
 				}
 			}
 		}
