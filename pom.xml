@@ -93,12 +93,12 @@
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-run</artifactId>
-            <version>1.3.0-SNAPSHOT</version>
+            <version>1.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-extras</artifactId>
-            <version>1.3.0-SNAPSHOT</version>
+            <version>1.3.1</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -208,7 +208,7 @@
             <plugin>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-maven-plugin</artifactId>
-                <version>1.3.0-SNAPSHOT</version>
+                <version>1.3.1</version>
                 <configuration>
                     <schemaBindingDirectory>src/main/jibx</schemaBindingDirectory>
                     <includeSchemaBindings>
