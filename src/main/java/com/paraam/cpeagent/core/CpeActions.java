@@ -115,7 +115,7 @@ public class CpeActions {
 		eventList.setEventStruct(eventKeyList);
 		inform.setEvent(eventList);
 
-		return inEnvelope(inform, "00001");
+		return inEnvelope(inform);
 	}
 	public Envelope doGetRPCMethods() {
 		GetRPCMethodsResponse resp = new GetRPCMethodsResponse();
@@ -125,7 +125,7 @@ public class CpeActions {
 				"Reboot", "Download", "ScheduleInform", "Upload", "FactoryReset"   };
 		methodList.setStrings(methods);
 		resp.setMethodList(methodList);
-		return inEnvelope(resp, "00001");
+		return inEnvelope(resp);
 	}
 
         
@@ -191,7 +191,7 @@ public class CpeActions {
                         }
 		}
 		valresp.setParameterList(pvl);
-		return inEnvelope(valresp, "00001");
+		return inEnvelope(valresp);
 	}
 
 	public Envelope doGetParameterNames( GetParameterNames getParameterName ) {
@@ -226,7 +226,7 @@ public class CpeActions {
 			//System.out.println("Adding Direct --->>>  " + cp.name + " = " + cp.value);
 		}
 		nameresp.setParameterList(pil);		
-		return inEnvelope(nameresp, "00001");
+		return inEnvelope(nameresp);
 	}	
 
 	public Envelope doSetParameterValues( SetParameterValues setParameterValues ) {
@@ -249,7 +249,8 @@ public class CpeActions {
                         }
 		}
 		valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
-		return inEnvelope(valresp, "00001");
+                ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value = setParameterValues.getParameterKey();
+		return inEnvelope(valresp);
 	}
 
 	public Envelope doGetParameterAttributes( GetParameterAttributes getParameterAttributes ) {		
@@ -297,7 +298,7 @@ public class CpeActions {
 			}
 		}
 		valresp.setParameterList(pal);
-		return inEnvelope(valresp, "00001");
+		return inEnvelope(valresp);
 
 	}
 
@@ -324,7 +325,7 @@ public class CpeActions {
 			}
 		}
 		valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
-		return inEnvelope(valresp, "00001");
+		return inEnvelope(valresp);
 	}
 
 	public Envelope doAddObject(AddObject addObject) {
@@ -332,18 +333,18 @@ public class CpeActions {
 		Random rn = new Random();
 		respobj.setInstanceNumber(rn.nextInt(424242424) + 1);
 		respobj.setStatus(org.dslforum.cwmp_1_0.AddObjectResponse.Status._0);
-		return inEnvelope( respobj, "00001" );
+		return inEnvelope(respobj);
 	}
 
 	public Envelope doDeleteObject(DeleteObject deleteObject) {
 		DeleteObjectResponse respobj = new DeleteObjectResponse();
 		respobj.setStatus(org.dslforum.cwmp_1_0.DeleteObjectResponse.Status._0);
-		return inEnvelope(respobj, "00001" );
+		return inEnvelope(respobj);
 	}
 	
 	public Envelope doReboot(Reboot reboot) {
 		RebootResponse respobj = new RebootResponse();
-		return inEnvelope(respobj, "00001" );
+		return inEnvelope(respobj);
 	}
 	
 	public Envelope doDownload(Download download) {
@@ -354,7 +355,7 @@ public class CpeActions {
 		cdsthread.start();
 		respobj.setStatus(org.dslforum.cwmp_1_0.DownloadResponse.Status._0);
 		respobj.setCompleteTime(new Date());
-		return inEnvelope( respobj, "00001");
+		return inEnvelope(respobj);
 	}
 
 	public Envelope doUpload(Upload upload) {
@@ -362,12 +363,12 @@ public class CpeActions {
 		respobj.setStartTime(new Date());
 		respobj.setStatus(org.dslforum.cwmp_1_0.UploadResponse.Status._0);
 		respobj.setCompleteTime(new Date());
-		return inEnvelope( respobj, "00001");
+		return inEnvelope(respobj);
 	}
 
 	public Envelope doFactoryReset(FactoryReset reboot) {
 		FactoryResetResponse respobj = new FactoryResetResponse();
-		return inEnvelope(respobj, "00001" );
+		return inEnvelope(respobj);
 	}
 	
 	/*
@@ -408,18 +409,17 @@ public class CpeActions {
 		return envlope;
 	}
 */
-	public static Envelope inEnvelope(Object cwmpObject, String headerID) {
+	public static Envelope inEnvelope(Object cwmpObject) {
 		Envelope envlope = new Envelope();
 		Body body = new Body();
 		Header header = new Header();
-		ID id = new ID();
-		id.setMustUnderstand(true);
-		id.setString(headerID);	
+		// ID id = new ID();
+		// id.setMustUnderstand(true);
+		// id.setString(headerID);	
 //                NoMoreRequests noMore = new NoMoreRequests();
 //                noMore.setString("0");
 		ArrayList headobj = new ArrayList();
-		if(!headerID.equals("00001"))
-                    headobj.add(id);	
+                //headobj.add(id);	
 //                headobj.add(noMore);
 		header.setObjects(headobj);
 		ArrayList bodyobj = new ArrayList();

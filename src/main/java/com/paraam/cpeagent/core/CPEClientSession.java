@@ -10,6 +10,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.UriBuilder;
 
 import org.codehaus.jettison.json.JSONObject;
+import org.dslforum.cwmp_1_0.ID;
 import org.dslforum.cwmp_1_0.AddObject;
 import org.dslforum.cwmp_1_0.DeleteObject;
 import org.dslforum.cwmp_1_0.Download;
@@ -37,6 +38,8 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.HTTPDigestAuthFilter;
 import java.io.IOException;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.dslforum.cwmp_1_0.ParameterNames;
 
 public class CPEClientSession {	
@@ -113,11 +116,12 @@ public class CPEClientSession {
 	public void handleACSRequest (ACSResponse acsresp) {
 		String response = acsresp.getResponse();
 		if (response != null && response.length() > 0 ) {				
-			Envelope 	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);		
-			Object 		reqobj 		= envReq.getBody().getObjects().get(0);
+			Envelope	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);
+            Object      idObj       = envReq.getHeader().getObjects().get(0);
+			Object  	reqobj 		= envReq.getBody().getObjects().get(0);
 			
 			System.out.println("Has New Request by ClassName ===== " + reqobj.getClass().getName());			
-			Envelope 	envResp 	= getClientResponse (cpeActions, reqobj);		
+			Envelope 	envResp 	= getClientResponse (cpeActions, idObj, reqobj);		
 			String 		respBody 	= JibxHelper.marshalObject(envResp, "cwmp_1_0");
 			
 			//System.out.println("Sending Client response =====>>>>>>>> " + respBody );
@@ -139,6 +143,14 @@ public class CPEClientSession {
 		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
 		    builder.cookie( c );
 		}
+                
+            try {
+                // wait a bit
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CPEClientSession.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
 		ClientResponse 	response 	= builder.post(ClientResponse.class, reqString);
                 ACSResponse 	acsresp 	= new ACSResponse();
 		acsresp.setCookies(response.getCookies());
@@ -155,7 +167,7 @@ public class CPEClientSession {
 		return acsresp;
 	}
 	
-	public Envelope getClientResponse (CpeActions cpeactions, Object reqobject) {		
+	public Envelope getClientResponse (CpeActions cpeactions, Object idobject, Object reqobject) {		
 		Envelope toreturn 	= null;
 		String reqname 		= reqobject.getClass().getSimpleName();
 		Integer switchId 	= ClientUtil.reqProps.get(reqname);
@@ -230,7 +242,13 @@ public class CPEClientSession {
 			break;
 
 		}
-		
+                
+                if (toreturn != null) {
+                    ID id = (ID)idobject;
+                    id.setString(id.getString());
+                    toreturn.getHeader().getObjects().add(idobject);
+                }
+                
 		return toreturn;
 	}
 	

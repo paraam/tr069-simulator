@@ -3,6 +3,7 @@ package com.paraam.cpeagent.core;
 import java.util.ArrayList;
 
 import org.dslforum.cwmp_1_0.Envelope;
+import org.dslforum.cwmp_1_0.ID;
 import org.dslforum.cwmp_1_0.EventStruct;
 
 public class CPEWorker implements Runnable {
@@ -74,7 +75,14 @@ public class CPEWorker implements Runnable {
 		eventKeyList.add(eventStruct);
 		CpeActions cpeactions = new CpeActions(confdb);
 		Envelope informMessage = cpeactions.doInform(eventKeyList);
-
+                
+                //if (!strangeACS) {
+                    ID id = new ID();
+                    id.setMustUnderstand(true);
+                    id.setString("1");
+                    informMessage.getHeader().getObjects().add(id);
+                //}
+                
 		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
 		session.sendInform(informMessage);	
    
