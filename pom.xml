@@ -14,35 +14,8 @@
             <id>repo.codahale.com</id>
             <url>http://repo.codahale.com/</url>
         </repository>
-        <repository>
-            <id>central-snapshot</id>
-            <name>Central Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
 
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central-snapshot</id>
-            <name>Central Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-    
     
     <properties>
         <dropwizard.version>0.6.1</dropwizard.version>
