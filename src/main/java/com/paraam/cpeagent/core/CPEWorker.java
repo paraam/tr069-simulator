@@ -76,12 +76,14 @@ public class CPEWorker implements Runnable {
 		CpeActions cpeactions = new CpeActions(confdb);
 		Envelope informMessage = cpeactions.doInform(eventKeyList);
                 
-                //if (!strangeACS) {
+                boolean strangeACS = false;
+                
+                if (!strangeACS) {
                     ID id = new ID();
                     id.setMustUnderstand(true);
                     id.setString("1");
                     informMessage.getHeader().getObjects().add(id);
-                //}
+                }
                 
 		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
 		session.sendInform(informMessage);	

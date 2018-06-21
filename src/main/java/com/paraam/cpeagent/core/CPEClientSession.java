@@ -143,7 +143,7 @@ public class CPEClientSession {
 		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
 		    builder.cookie( c );
 		}
-                
+
             try {
                 // wait a bit
                 Thread.sleep(2000);
@@ -243,10 +243,14 @@ public class CPEClientSession {
 
 		}
                 
-                if (toreturn != null) {
-                    ID id = (ID)idobject;
-                    id.setString(id.getString());
-                    toreturn.getHeader().getObjects().add(idobject);
+                boolean strangeACS = false;
+                
+                if(!strangeACS) {
+                    if (toreturn != null) {
+                        ID id = (ID)idobject;
+                        id.setString(id.getString());
+                        toreturn.getHeader().getObjects().add(idobject);
+                    }
                 }
                 
 		return toreturn;

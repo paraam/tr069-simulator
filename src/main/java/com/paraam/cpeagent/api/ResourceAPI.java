@@ -1,5 +1,6 @@
 package com.paraam.cpeagent.api;
 
+import com.paraam.cpeagent.core.ConnectionFactory;
 import java.net.URI;
 
 import javax.ws.rs.core.UriBuilder;
@@ -8,8 +9,9 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
 
-public class ResourceAPI {
+    public class ResourceAPI {
 	
 	//String urlstr = "http://192.168.1.50:8085/ws?wsdl";
 
@@ -27,10 +29,12 @@ public class ResourceAPI {
 
     public WebResource getResourceAPI(String urlstr) {
     	if(service == null) {
-    		ClientConfig 	config 		= new DefaultClientConfig();
-    		Client 			client 		= Client.create(config);
-    		service 					= client.resource(getBaseURI(urlstr));
-    	}
+    		//ClientConfig 	config 		= new DefaultClientConfig();
+    		URLConnectionClientHandler ch   = new URLConnectionClientHandler(new ConnectionFactory());
+                Client 	        client 		= new Client(ch);
+                service 			= client.resource(getBaseURI(urlstr));
+        }
+        
     	return service;
     }
     
