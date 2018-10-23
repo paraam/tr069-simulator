@@ -81,30 +81,38 @@ public class CpeActions {
 		Inform inform = new Inform();
 		DeviceIdStruct deviceId = new DeviceIdStruct();
 		inform.setDeviceId(deviceId);
+                inform.setMaxEnvelopes(1);
 		inform.setCurrentTime(new Date());
 		deviceId.setManufacturer(((ConfParameter)confdb.confs.get(confdb.props.getProperty("Manufacturer"))).value);
 		deviceId.setOUI(((ConfParameter)         confdb.confs.get(confdb.props.getProperty("ManufacturerOUI"))).value);
 		deviceId.setSerialNumber(((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value);
-		deviceId.setProductClass(((ConfParameter)confdb.confs.get(confdb.props.getProperty("ModelName"))).value);
+		deviceId.setProductClass(((ConfParameter)confdb.confs.get(confdb.props.getProperty("ProductClass"))).value);
 		ParameterValueList pvlist = new ParameterValueList();
 
-		// use a static list, for now
-		String[] pList = new String[] {
-				confdb.props.getProperty("HardwareVersion"),
-				confdb.props.getProperty("ProvisioningCode"),
-				confdb.props.getProperty("SoftwareVersion"),
-				confdb.props.getProperty("SpecVersion"),		             
-				confdb.props.getProperty("DeviceSummary"),
-				confdb.props.getProperty("ConnectionRequestURL"),
-				confdb.props.getProperty("ParameterKey"),
-				confdb.props.getProperty("ExternalIPAddress")
-		};
+		// use a mixed list of fixed and custom keys
+		ArrayList<String> pList = new ArrayList<String>();
+                
+                pList.add(confdb.props.getProperty("HardwareVersion"));
+                pList.add(confdb.props.getProperty("ProvisioningCode"));
+                pList.add(confdb.props.getProperty("SoftwareVersion"));
+                pList.add(confdb.props.getProperty("SpecVersion"));
+                pList.add(confdb.props.getProperty("DeviceSummary"));
+                pList.add(confdb.props.getProperty("ConnectionRequestURL"));
+                pList.add(confdb.props.getProperty("ParameterKey"));
+                pList.add(confdb.props.getProperty("ExternalIPAddress"));
+		
+                try {
+                        pList.addAll(Arrays.asList(confdb.props.getProperty("AdditionalInformParameters").split(",")));
+                } catch (NullPointerException ex) {
+                        System.out.println(" INFO: No additional parameters will be included in Inform messages");
+                }
+                
 		ArrayList arr = new ArrayList();
-		for (int i=0; i < pList.length; i++) {			
-			ParameterValueStruct pvstruct = new ParameterValueStruct();
-			pvstruct.setName(pList[i]);
-			pvstruct.setValue(((ConfParameter)confdb.confs.get(pList[i])).value);			
-			arr.add(pvstruct);
+		for (String p: pList) {
+                        ParameterValueStruct pvstruct = new ParameterValueStruct();
+                        pvstruct.setName(p);
+                        pvstruct.setValue(((ConfParameter)confdb.confs.get(p)).value);			
+                        arr.add(pvstruct);
 		}
 		pvlist.setParameterValueStruct(arr);
 		inform.setParameterList(pvlist);
