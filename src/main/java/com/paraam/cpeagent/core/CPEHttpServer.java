@@ -21,13 +21,15 @@ public class CPEHttpServer implements Runnable {
 	String 	username	= null;
 	String 	passwd		= null;
 	String 	authtype	= null;
+        String  useragent       = null;
 	int 	port;
 
-	public CPEHttpServer (CpeDBReader confdb, String username, String passwd, String authtype) {
+	public CPEHttpServer (CpeDBReader confdb, String username, String passwd, String authtype, String useragent) {
 		this.confdb = confdb;
 		this.username 	= username;
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
+                this.useragent  = useragent;
 	}
 
 	public void run() {
@@ -69,7 +71,7 @@ public class CPEHttpServer implements Runnable {
 				System.out.println("Sending Connection Request Inform Message at " + (new Date()));				
 
 
-				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
+				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent);
 				session.sendInform(informMessage);
 
 				//new CpeSession([ informMessage ]).run();

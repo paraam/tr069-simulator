@@ -12,7 +12,7 @@ public class CPEMain {
 		for (int i = 0; i < 3; i++) {
 			startip = startip + i;
 			//CPEWorker worker = new CPEWorker(ipadr+startip, port+i);
-			CPEWorker worker = new CPEWorker(ipadr+startip, port+i, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, String.valueOf(1));
+			CPEWorker worker = new CPEWorker(ipadr+startip, port+i, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, "TR068 Simulator/0.7.0", String.valueOf(1));
 			Thread cpthread = new Thread(worker, "WorkerThread_"+i);
 			cpthread.start();
 		}

@@ -13,7 +13,7 @@ To run this simulator,<br>
 
 <b>agent.csv</b> file is the csv configuration file that contains the following:<br>
 <div class="highlight"><pre>
-<span class="c1">startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype</span>
+<span class="c1">startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype, useragent</span>
 <span class="kd">192.168.1.111, 192.168.1.120, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
 <span class="kd">192.168.2.211, 192.168.2.220, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
 </pre></div>
@@ -27,6 +27,7 @@ Dump Location Path<br>
 Username<br>
 Password<br>
 Authtype<br>
+Useragent<br>
 
 You can modify these parameter according to your requirements. To simulate multiple CPE devices, provide the start and<br>
 end ipaddress. Periodic Inform Interval is in seconds. Simulator will send Inform request based on this parameter.<br><br> 

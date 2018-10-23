@@ -69,12 +69,16 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				String 	username	= null;
 				String 	passwd		= null;
 				String 	authtype	= null;
+                                String  useragent       = "TR069 Simulator/0.7.0";
 				
-				if(tokens.length >= 10) { 
+				if (tokens.length >= 10) { 
 					username	= tokens[7].trim();
 					passwd		= tokens[8].trim();
-					authtype	= tokens[9].trim();	
+					authtype	= tokens[9].trim();
 				}
+                                if (tokens.length >= 11) {
+                                        useragent       = tokens[10].trim();
+                                }
 				ArrayList<String> iplist = new ArrayList<String>();
 				if (!util.isValidIPAddress(startip)) {
 					continue;
@@ -89,17 +93,17 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				int ipsize 		= iplist.size();
                                 if (ipsize == 1) {
                                         ipadr                   = iplist.get(0);
-                                        CPEWorker worker        = new CPEWorker(ipadr, port, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, "");
+                                        CPEWorker worker        = new CPEWorker(ipadr, port, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, "");
                                         Thread cpthread         = new Thread(worker, "WorkerThread_" + threadcnt++);
                                         cpthread.start();
-                                        continue;
-                                }                                
-				for (int i = 0; i < ipsize; i++) {
-					ipadr 			= iplist.get(i);
-					CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, String.valueOf(threadcnt));
-					Thread cpthread 	= new Thread(worker, "WorkerThread_" + threadcnt++);
-					cpthread.start();
-				}
+                                } else {
+                                        for (int i = 0; i < ipsize; i++) {
+                                                ipadr 			= iplist.get(i);
+                                                CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, String.valueOf(threadcnt));
+                                                Thread cpthread 	= new Thread(worker, "WorkerThread_" + threadcnt++);
+                                                cpthread.start();
+                                        }
+                                }
 			}
 		}
 	}

@@ -50,6 +50,7 @@ public class CPEClientSession {
 	String username 	= null; 
 	String passwd		= null; 
 	String authtype		= null;
+        String useragent        = null;
         
         List<NewCookie> cookies;
 	
@@ -72,20 +73,21 @@ public class CPEClientSession {
 		
 	}
 	
-	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype) {
+	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent) {
 		this.cpeActions = cpeActions;		
-		this.authtype 	= authtype;
 		this.username 	= username;
-		this.passwd 	= passwd;		
+		this.passwd 	= passwd;
+		this.authtype 	= authtype;
+                this.useragent  = useragent;
 		String urlstr 	= ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("MgmtServer_URL"))).value;  //"http://192.168.1.50:8085/ws?wsdl";
 		System.out.println("ACS MGMT URL -------> " + urlstr);
 		service = ResourceAPI.getInstance().getResourceAPI(urlstr);		
 		if (username != null && passwd != null) {
 			if (authtype.equalsIgnoreCase("digest")) {
-				service.addFilter(new HTTPDigestAuthFilter(username, passwd));
-			} else {
-				service.addFilter(new HTTPBasicAuthFilter(username, passwd));
-			}
+			    service.addFilter(new HTTPDigestAuthFilter(username, passwd));
+                        } else if (authtype.equalsIgnoreCase("basic")) {
+                            service.addFilter(new HTTPBasicAuthFilter(username, passwd));
+			} // else use no authentication
 			//System.out.println("==========================> " + username + " " + passwd);
 		}
 		//System.out.println(" 2nd time ==============> " + username + " " + passwd);
@@ -138,10 +140,10 @@ public class CPEClientSession {
 	private ACSResponse sendData (WebResource service, String reqString) {
 		
 		Builder builder = service.accept(MediaType.APPLICATION_XML)
-				.type(MediaType.APPLICATION_XML);
+				.type(MediaType.APPLICATION_XML).header("User-Agent", this.useragent);
 		for ( NewCookie c : cookies ) {
 		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
-		    builder.cookie( c );
+		   builder = builder.cookie( c );
 		}
 
             try {
@@ -226,7 +228,7 @@ public class CPEClientSession {
 		case ClientUtil.SCHEDULE_INFORM_ID:
 			ScheduleInform schInform 	= (ScheduleInform)reqobject;
 			int 			delaysec 	= schInform.getDelaySeconds();
-			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype);
+			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent);
 			Thread 	sithread 			= new Thread (siclass, "SchInformThread");
 			sithread.start();			
 			break;
@@ -376,13 +378,15 @@ public class CPEClientSession {
 		int delaysecs;
 		String username 	= null; 
 		String passwd		= null; 
-		String authtype		= null; 
+		String authtype		= null;
+                String useragent        = null;
 
-		public SchedulerInform (int delaysecs, String username, String passwd, String authtype) {
+		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent) {
 			this.delaysecs = delaysecs;
 			this.username 	= username;
 			this.passwd 	= passwd;
 			this.authtype 	= authtype;
+                        this.useragent  = useragent;
 		}
 
 		public void run () {
@@ -395,7 +399,7 @@ public class CPEClientSession {
 				Envelope informMessage = cpeActions.doInform(eventKeyList);
 
 				System.out.println("Sending ScheduleInform Message at " + (new Date()));
-				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype);
+				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent);
 				session.sendInform(informMessage);
 
 			} catch (Exception e) {

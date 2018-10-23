@@ -30,8 +30,8 @@ import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
     public WebResource getResourceAPI(String urlstr) {
     	if(service == null) {
     		//ClientConfig 	config 		= new DefaultClientConfig();
-    		URLConnectionClientHandler ch   = new URLConnectionClientHandler(new ConnectionFactory());
-                Client 	        client 		= new Client(ch);
+    		//URLConnectionClientHandler ch   = new URLConnectionClientHandler(new ConnectionFactory());
+                Client 	        client 		= new Client();
                 service 			= client.resource(getBaseURI(urlstr));
         }
         

@@ -202,6 +202,7 @@ public class CpeDBReader implements Serializable {
 			tprops.setProperty("PeriodicInformInterval", "InternetGatewayDevice.ManagementServer.PeriodicInformInterval");
 			tprops.setProperty("SerialNumber", "InternetGatewayDevice.DeviceInfo.SerialNumber");
 			tprops.setProperty("ExternalIPAddress", "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress");
+                        tprops.setProperty("AdditionalInformParameters", "");
 			System.out.println("Properties has been loaded from Default Keys >>>>>> ");
 		}
 		return tprops;
