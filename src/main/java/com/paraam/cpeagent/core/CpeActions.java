@@ -137,128 +137,153 @@ public class CpeActions {
 	}
 
         
-        public Envelope doGetParameterValues( GetParameterValues getParameterValues ) {
-                return this.doGetParameterValues(getParameterValues, true);
-        }
+	public Envelope doGetParameterValues( GetParameterValues getParameterValues ) {
+			return this.doGetParameterValues(getParameterValues, true);
+	}
         
         
 	public Envelope doGetParameterValues( GetParameterValues getParameterValues, boolean learn) {
-		ParameterValueList pvl = new ParameterValueList();
-		String[] nameList = getParameterValues.getParameterNames().getStrings(); 
-		GetParameterValuesResponse valresp = new GetParameterValuesResponse();
+			ParameterValueList pvl = new ParameterValueList();
+			String[] nameList = getParameterValues.getParameterNames().getStrings(); 
+			GetParameterValuesResponse valresp = new GetParameterValuesResponse();
 
-		for (int i =0; i < nameList.length; i++) {			
-			String paramname = nameList[i];
-			if (paramname.endsWith(".")) {
-				//System.out.println(" paramname ----> " + paramname);
-				HashMap valobj = this.confdb.confs;				
-				Iterator it = valobj.entrySet().iterator();
-                                int initialSize = pvl.getParameterValueStruct().size();
-				while (it.hasNext()) {
-					Map.Entry pairs = (Map.Entry)it.next();
-					String keyname = (String)pairs.getKey() ;
-					if (keyname.startsWith(paramname)) {
-						Object obj = pairs.getValue();
-						if (obj instanceof ConfParameter) {
-							ConfParameter cp = (ConfParameter)obj;
-							if (cp.value == null) {
-								continue;
+			for (int i =0; i < nameList.length; i++) {			
+					String paramname = nameList[i];
+					if (paramname.endsWith(".")) {
+							//System.out.println(" paramname ----> " + paramname);
+							HashMap valobj = this.confdb.confs;				
+							Iterator it = valobj.entrySet().iterator();
+							int initialSize = pvl.getParameterValueStruct().size();
+							while (it.hasNext()) {
+									Map.Entry pairs = (Map.Entry)it.next();
+									String keyname = (String)pairs.getKey() ;
+									if (keyname.startsWith(paramname)) {
+											Object obj = pairs.getValue();
+											if (obj instanceof ConfParameter) {
+													ConfParameter cp = (ConfParameter)obj;
+													if (cp.value == null) {
+															continue;
+													}
+													ParameterValueStruct pvs = new ParameterValueStruct();
+													pvs.setName(cp.name);
+													pvs.setValue(cp.value);
+													pvl.getParameterValueStruct().add(pvs);
+													//System.out.println("Adding Nested --->>>  " + cp.name + " = " + cp.value);
+											}
+									}			        
 							}
-							ParameterValueStruct pvs = new ParameterValueStruct();
-							pvs.setName(cp.name);
-							pvs.setValue(cp.value);
-							pvl.getParameterValueStruct().add(pvs);
-							//System.out.println("Adding Nested --->>>  " + cp.name + " = " + cp.value);
-						}
-					}			        
-				}
-                                if (learn && pvl.getParameterValueStruct().size() == initialSize) {
-                                        ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
-                                        this.confdb.learns.put(paramname, cp);
-                                        // System.out.println("Learning Unknown Object --->>>  " + paramname);
-                                }
-			} else if ( this.confdb.confs.keySet().contains(paramname) ) {
-				Object obj = this.confdb.confs.get(nameList[i]);
-				if (obj instanceof ConfParameter) {
-					ConfParameter cp = (ConfParameter)obj;
-					if (cp.value == null) {
-                                                //if(!learn)
-                                                //    System.out.println("Getting Known Null Value --->>>  " + cp.name);
-						continue;
+							if (learn && pvl.getParameterValueStruct().size() == initialSize) {
+									ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
+									this.confdb.learns.put(paramname, cp);
+									System.out.println("Learning Unknown DataModel Path --->>>  " + paramname);
+							}
+					} else if ( this.confdb.confs.keySet().contains(paramname) ) {
+							Object obj = this.confdb.confs.get(nameList[i]);
+							if (obj instanceof ConfParameter) {
+									ConfParameter cp = (ConfParameter)obj;
+									if (cp.value == null) {
+											//if(learn)
+											//    System.out.println("Getting Known Null Value --->>>  " + cp.name);
+											continue;
+									}
+									ParameterValueStruct pvs = new ParameterValueStruct();
+									pvs.setName(cp.name);
+									pvs.setValue(cp.value);
+									pvl.getParameterValueStruct().add(pvs);
+									//System.out.println("Getting Known Value --->>>  " + cp.name + " = " + cp.value);
+							}
+					} else if (learn) {
+							ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
+							this.confdb.learns.put(paramname, cp);
+							System.out.println("Learning Unknown Parameter Name --->>>  " + cp.name);
 					}
-					ParameterValueStruct pvs = new ParameterValueStruct();
-					pvs.setName(cp.name);
-					pvs.setValue(cp.value);
-					pvl.getParameterValueStruct().add(pvs);
-					//System.out.println("Adding Direct --->>>  " + cp.name + " = " + cp.value);
-				}
-			} else if (learn) {
-                                ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
-                                this.confdb.learns.put(paramname, cp);
-                                // System.out.println("Learning Unknown Value --->>>  " + cp.name);
-                        }
-		}
-		valresp.setParameterList(pvl);
-		return inEnvelope(valresp);
+			}
+			valresp.setParameterList(pvl);
+			return inEnvelope(valresp);
 	}
 
 	public Envelope doGetParameterNames( GetParameterNames getParameterName ) {
+			return this.doGetParameterNames(getParameterName, true);
+	}
 
-		GetParameterNamesResponse nameresp = new GetParameterNamesResponse();	
-		ParameterInfoList pil = new ParameterInfoList();		
-		String paramname = getParameterName.getParameterPath();
+	public Envelope doGetParameterNames( GetParameterNames getParameterName, boolean learn ) {
 
-		if (paramname.endsWith(".")) {
-			// System.out.println(" paramname ----> " + paramname);
-			HashMap valobj = this.confdb.confs;				
-			Iterator it = valobj.entrySet().iterator();
-			while (it.hasNext()) {
-				Map.Entry pairs = (Map.Entry)it.next();
-				String keyname = (String)pairs.getKey() ;
-				if (keyname.startsWith(paramname)) {
-					Object obj = pairs.getValue();
+			GetParameterNamesResponse nameresp = new GetParameterNamesResponse();	
+			ParameterInfoList pil = new ParameterInfoList();		
+			String paramname = getParameterName.getParameterPath();
+
+			if (paramname.endsWith(".")) {
+					// System.out.println("Adding Children Parameter Names ----> " + paramname);
+					HashMap valobj = this.confdb.confs;				
+					Iterator it = valobj.entrySet().iterator();
+					while (it.hasNext()) {
+							Map.Entry pairs = (Map.Entry)it.next();
+							String keyname = (String)pairs.getKey() ;
+							if (keyname.startsWith(paramname)) {
+									Object obj = pairs.getValue();
+									ConfObject co = (ConfObject)obj;
+									ParameterInfoStruct pvs = new ParameterInfoStruct();
+									pvs.setName(co.name);
+									pvs.setWritable(new Integer(co.writable));
+									pil.getParameterInfoStruct().add(pvs);
+							}			        
+					}
+					if(learn) {
+							valobj = this.confdb.learns;				
+							it = valobj.entrySet().iterator();
+							while (it.hasNext()) {
+									Map.Entry pairs = (Map.Entry)it.next();
+									String keyname = (String)pairs.getKey() ;
+									if (keyname.startsWith(paramname) && !keyname.equals(paramname)) {
+											Object obj = pairs.getValue();
+											ConfObject co = (ConfObject)obj;
+											ParameterInfoStruct pvs = new ParameterInfoStruct();
+											pvs.setName(co.name);
+											pvs.setWritable(new Integer(co.writable));
+											pil.getParameterInfoStruct().add(pvs);
+											//System.out.println("Adding Learned Parameter Name ----> " + co.name);
+									}			        
+							}
+					}				
+			} else if ( this.confdb.confs.keySet().contains( paramname) ) {
+					Object obj = this.confdb.confs.get(paramname);
 					ConfObject co = (ConfObject)obj;
 					ParameterInfoStruct pvs = new ParameterInfoStruct();
 					pvs.setName(co.name);
 					pvs.setWritable(new Integer(co.writable));
 					pil.getParameterInfoStruct().add(pvs);
-				}			        
-			}				
-		} else if ( this.confdb.confs.keySet().contains( paramname) ) {
-			Object obj = this.confdb.confs.get(paramname);
-			ConfObject co = (ConfObject)obj;
-			ParameterInfoStruct pvs = new ParameterInfoStruct();
-			pvs.setName(co.name);
-			pvs.setWritable(new Integer(co.writable));
-			pil.getParameterInfoStruct().add(pvs);
-			//System.out.println("Adding Direct --->>>  " + cp.name + " = " + cp.value);
-		}
-		nameresp.setParameterList(pil);		
-		return inEnvelope(nameresp);
+					//System.out.println("Adding Single Parameter Name --->>>  " + cp.name + " = " + cp.value);
+			}
+			nameresp.setParameterList(pil);		
+			return inEnvelope(nameresp);
 	}	
-
-	public Envelope doSetParameterValues( SetParameterValues setParameterValues ) {
-		ParameterValueList pvl = new ParameterValueList();
-		ArrayList<ParameterValueStruct> nameList = setParameterValues.getParameterList().getParameterValueStruct();
-		SetParameterValuesResponse valresp = new SetParameterValuesResponse();		
-		for (int i =0; i < nameList.size(); i++) {			
-			ParameterValueStruct pvs = nameList.get(i);
-			if ( this.confdb.confs.keySet().contains( pvs.getName()) ) {
-				Object obj = this.confdb.confs.get(pvs.getName());
-				if (obj instanceof ConfParameter) {
-					ConfParameter cp = (ConfParameter)obj;
-					cp.value = pvs.getValue();
-					// System.out.println("Setting Value --->>>  " + cp.name + " = " + cp.value);
-				}
-			} else {
-                            ConfParameter cp = new ConfParameter(pvs.getName(), "1", pvs.getValue(), null, null);
-                            this.confdb.learns.put(pvs.getName(), cp);
-                            // System.out.println("Learning Value --->>>  " + cp.name + " = " + cp.value);
-                        }
-		}
-		valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
-                ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value = setParameterValues.getParameterKey();
-		return inEnvelope(valresp);
+    
+    public Envelope doSetParameterValues( SetParameterValues setParameterValues ) {
+            return this.doSetParameterValues(setParameterValues, true);
+    }
+    
+	public Envelope doSetParameterValues( SetParameterValues setParameterValues, boolean learn ) {
+			ParameterValueList pvl = new ParameterValueList();
+			ArrayList<ParameterValueStruct> nameList = setParameterValues.getParameterList().getParameterValueStruct();
+			SetParameterValuesResponse valresp = new SetParameterValuesResponse();		
+			for (int i =0; i < nameList.size(); i++) {			
+					ParameterValueStruct pvs = nameList.get(i);
+					if ( this.confdb.confs.keySet().contains( pvs.getName()) ) {
+							Object obj = this.confdb.confs.get(pvs.getName());
+							if (obj instanceof ConfParameter) {
+									ConfParameter cp = (ConfParameter)obj;
+									cp.value = pvs.getValue();
+									//System.out.println("Setting Value --->>>  " + cp.name + " = " + cp.value);
+							}
+					} else if (learn) {
+							ConfParameter cp = new ConfParameter(pvs.getName(), "1", pvs.getValue(), null, null);
+							this.confdb.learns.put(pvs.getName(), cp);
+							System.out.println("Learning Unknown Parameter Name and Value --->>>  " + cp.name + " = " + cp.value);
+					}
+			}
+			valresp.setStatus(org.dslforum.cwmp_1_0.SetParameterValuesResponse.Status._0);
+			((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value = setParameterValues.getParameterKey();
+			return inEnvelope(valresp);
 	}
 
 	public Envelope doGetParameterAttributes( GetParameterAttributes getParameterAttributes ) {		

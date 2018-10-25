@@ -265,7 +265,7 @@ public class CPEClientSession {
                         allParameterNames.setParameterPath(cpeActions.confdb.props.getProperty("RootNode"));
                         Envelope envNames = cpeActions.doGetParameterNames(allParameterNames);
                         String 		namesDump 	= JibxHelper.marshalObject(envNames, "cwmp_1_0");
-                        CpeDBReader.serialize(dumploc + "getnames_" + serial + ".xml", new XmlFormatter().format(namesDump));
+						CpeDBReader.serialize(dumploc + "getnames_" + serial + ".xml", new XmlFormatter().format(namesDump));
 
                         ParameterNames pn = new ParameterNames();
                         Set<String> namesSet = cpeActions.confdb.confs.keySet();
