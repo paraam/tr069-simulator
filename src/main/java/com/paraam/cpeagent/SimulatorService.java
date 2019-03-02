@@ -7,6 +7,7 @@ import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.paraam.cpeagent.core.CPEUtil;
 import com.paraam.cpeagent.core.CPEWorker;
+import com.paraam.cpeagent.core.XmlFormatter;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
@@ -69,16 +70,20 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				String 	username	= null;
 				String 	passwd		= null;
 				String 	authtype	= null;
-                                String  useragent       = "TR069 Simulator/0.7.0";
+                String  useragent   = "TR069 Simulator/0.7.0";
+                String xmlformatter = "";
 				
 				if (tokens.length >= 10) { 
 					username	= tokens[7].trim();
 					passwd		= tokens[8].trim();
 					authtype	= tokens[9].trim();
 				}
-                                if (tokens.length >= 11) {
-                                        useragent       = tokens[10].trim();
-                                }
+                if (tokens.length >= 11) {
+                    useragent       = tokens[10].trim();
+                }
+                if (tokens.length >= 12) {
+                    xmlformatter    = tokens[11].trim();
+                }
 				ArrayList<String> iplist = new ArrayList<String>();
 				if (!util.isValidIPAddress(startip)) {
 					continue;
@@ -93,13 +98,13 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				int ipsize 		= iplist.size();
                                 if (ipsize == 1) {
                                         ipadr                   = iplist.get(0);
-                                        CPEWorker worker        = new CPEWorker(ipadr, port, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, "");
+                                        CPEWorker worker        = new CPEWorker(ipadr, port, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, xmlformatter, "");
                                         Thread cpthread         = new Thread(worker, "WorkerThread_" + threadcnt++);
                                         cpthread.start();
                                 } else {
                                         for (int i = 0; i < ipsize; i++) {
                                                 ipadr 			= iplist.get(i);
-                                                CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, String.valueOf(threadcnt));
+                                                CPEWorker worker 	= new CPEWorker(ipadr, port + threadcnt, acsurl, requrl, infmprd, dumploc, username, passwd, authtype, useragent, xmlformatter, String.valueOf(threadcnt));
                                                 Thread cpthread 	= new Thread(worker, "WorkerThread_" + threadcnt++);
                                                 cpthread.start();
                                         }

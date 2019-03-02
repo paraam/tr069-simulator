@@ -15,19 +15,20 @@ public class CPEWorker implements Runnable {
 	int informperiod = 1800;
 	String instanceId = "";
 	String dumploc;
-	String 	username	= null;
-	String 	passwd		= null;
-	String 	authtype	= null;
-        String  useragent       = null;
-	
+	String username	= null;
+	String passwd = null;
+	String authtype	= null;
+    String useragent = null;
+	String xmlformatter = "";
+    
 	public static void main(String args[]) {		
 		String mgmturl 	= "http://192.168.1.50:8085/ws?wsdl";
-		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, "TR069 Simulator/0.7.0", String.valueOf(1));
+		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, "TR069 Simulator/0.7.0", null, String.valueOf(1));
 		Thread cpthread = new Thread(worker, "WorkerThread");
 		cpthread.start();
 	}
 	
-	public CPEWorker(String ip, int port, String acsurl, String requrl, int informperiod, String dumploc, String username, String passwd, String authtype, String useragent, String instanceId) {
+	public CPEWorker(String ip, int port, String acsurl, String requrl, int informperiod, String dumploc, String username, String passwd, String authtype, String useragent, String xmlformatter, String instanceId) {
 		this.ip 		= ip;
 		this.port		= port;
 		this.acsurl 	= acsurl;
@@ -37,7 +38,8 @@ public class CPEWorker implements Runnable {
 		this.username 	= username;
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
-                this.useragent  = useragent;
+        this.useragent  = useragent;
+        this.xmlformatter = xmlformatter;
 		this.informperiod = informperiod;
 	}
 	
@@ -58,11 +60,23 @@ public class CPEWorker implements Runnable {
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("ExternalIPAddress"))).value = ip;
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.PeriodicInformInterval")).value = "1800";
 
-		CPEHttpServer httpserver = new CPEHttpServer(confdb, username, passwd, authtype, useragent);
+        XmlFormatter xmlfmt;
+        
+        if(xmlformatter.equals("normal")) {
+            xmlfmt = new XmlFormatter();
+        }
+        else if(xmlformatter.equals("stripdec")) {
+            xmlfmt = new XmlFormatter(true);
+        }
+        else {
+            xmlfmt = null;
+        }
+        
+		CPEHttpServer httpserver = new CPEHttpServer(confdb, username, passwd, authtype, useragent, xmlfmt);
 		Thread serverthread = new Thread(httpserver, "Http_Server"); 
 		serverthread.start();
 		
-		CPEPeriodicInform periodicInform = new CPEPeriodicInform(confdb, username, passwd, authtype, useragent);
+		CPEPeriodicInform periodicInform = new CPEPeriodicInform(confdb, username, passwd, authtype, useragent, xmlfmt);
 		Thread informthread = new Thread(periodicInform, "Periodic_Inform");
 		informthread.start();
 		
@@ -75,6 +89,9 @@ public class CPEWorker implements Runnable {
 		EventStruct eventStruct = new EventStruct();
 		eventStruct.setEventCode("0 BOOTSTRAP");
 		eventKeyList.add(eventStruct);
+        eventStruct = new EventStruct();
+        eventStruct .setEventCode("1 BOOT");
+        eventKeyList.add(eventStruct);
 		CpeActions cpeactions = new CpeActions(confdb);
 		Envelope informMessage = cpeactions.doInform(eventKeyList);
                 
@@ -87,8 +104,8 @@ public class CPEWorker implements Runnable {
                     informMessage.getHeader().getObjects().add(id);
                 }
                 
-		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent);
-		session.sendInform(informMessage);	
+		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlfmt);
+		session.sendInform(informMessage, xmlfmt);	
    
 	}
 

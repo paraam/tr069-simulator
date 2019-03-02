@@ -50,9 +50,10 @@ public class CPEClientSession {
 	String username 	= null; 
 	String passwd		= null; 
 	String authtype		= null;
-        String useragent        = null;
+    String useragent        = null;
+    XmlFormatter xmlformatter = null;
         
-        List<NewCookie> cookies;
+    List<NewCookie> cookies;
 	
 	public static void main(String[] args) {
 		ClientConfig 	config 			= new DefaultClientConfig();
@@ -73,12 +74,14 @@ public class CPEClientSession {
 		
 	}
 	
-	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent) {
+	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent, XmlFormatter xmlformatter) {
 		this.cpeActions = cpeActions;		
 		this.username 	= username;
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
-                this.useragent  = useragent;
+        this.useragent  = useragent;
+        this.xmlformatter = xmlformatter;
+        
 		String urlstr 	= ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("MgmtServer_URL"))).value;  //"http://192.168.1.50:8085/ws?wsdl";
 		System.out.println("ACS MGMT URL -------> " + urlstr);
 		service = ResourceAPI.getInstance().getResourceAPI(urlstr);		
@@ -93,9 +96,13 @@ public class CPEClientSession {
 		//System.out.println(" 2nd time ==============> " + username + " " + passwd);
 	}	
 	
-	public void sendInform (Envelope envelope) {
-		
-		String informBody = new XmlFormatter().format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
+	public void sendInform (Envelope envelope, XmlFormatter xmlFormatter) {
+        String informBody;
+		if (xmlFormatter == null)
+            informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
+        else
+            informBody = xmlFormatter.format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
+        
 		//String informBody  = getInformString();
 		//System.out.println("Sending informBody >>>>> " );
 		this.cookies = new ArrayList<NewCookie>();
@@ -109,13 +116,13 @@ public class CPEClientSession {
 		acsresp = sendData (service, "");	
 		//System.out.println("Response for empty request <<<<<<===== " + response);
 		
-		handleACSRequest (acsresp);
+		handleACSRequest (acsresp, xmlFormatter);
 		
                 String serial = ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("SerialNumber"))).value;
                 this.dumpCurrentConfiguration(this.cpeActions.confdb.getDumpLocation(), serial);
 	}
 	
-	public void handleACSRequest (ACSResponse acsresp) {
+	public void handleACSRequest (ACSResponse acsresp, XmlFormatter xmlFormatter) {
 		String response = acsresp.getResponse();
 		if (response != null && response.length() > 0 ) {				
 			Envelope	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);
@@ -124,13 +131,17 @@ public class CPEClientSession {
 			
 			System.out.println("Has New Request by ClassName ===== " + reqobj.getClass().getName());			
 			Envelope 	envResp 	= getClientResponse (cpeActions, idObj, reqobj);		
-			String 		respBody 	= JibxHelper.marshalObject(envResp, "cwmp_1_0");
-			
+			String 		respBody;
+            if (xmlFormatter == null)
+                respBody = JibxHelper.marshalObject(envResp, "cwmp_1_0");
+            else
+                respBody = xmlFormatter.format(JibxHelper.marshalObject(envResp, "cwmp_1_0"));
+            
 			//System.out.println("Sending Client response =====>>>>>>>> " + respBody );
 			ACSResponse newresp 	= sendData (service, respBody);			
 			//System.out.println("Response for new request <<<<<<===== " + newresp);
 
-			handleACSRequest (newresp);
+			handleACSRequest (newresp, xmlFormatter);
 			
 		}		
 		//System.out.println(data.toString()) ;		
@@ -154,7 +165,7 @@ public class CPEClientSession {
             }
                 
 		ClientResponse 	response 	= builder.post(ClientResponse.class, reqString);
-                ACSResponse 	acsresp 	= new ACSResponse();
+        ACSResponse 	acsresp 	= new ACSResponse();
 		acsresp.setCookies(response.getCookies());
 		acsresp.setHeaders(response.getHeaders());		
                 //if (response.getClientResponseStatus() == ClientResponse.Status.OK) {
@@ -228,7 +239,7 @@ public class CPEClientSession {
 		case ClientUtil.SCHEDULE_INFORM_ID:
 			ScheduleInform schInform 	= (ScheduleInform)reqobject;
 			int 			delaysec 	= schInform.getDelaySeconds();
-			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent);
+			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent, xmlformatter);
 			Thread 	sithread 			= new Thread (siclass, "SchInformThread");
 			sithread.start();			
 			break;
@@ -379,14 +390,16 @@ public class CPEClientSession {
 		String username 	= null; 
 		String passwd		= null; 
 		String authtype		= null;
-                String useragent        = null;
+        String useragent        = null;
+        XmlFormatter xmlformatter = null;
 
-		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent) {
+		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent, XmlFormatter xmlformatter) {
 			this.delaysecs = delaysecs;
 			this.username 	= username;
 			this.passwd 	= passwd;
 			this.authtype 	= authtype;
-                        this.useragent  = useragent;
+            this.useragent  = useragent;
+            this.xmlformatter = xmlformatter;
 		}
 
 		public void run () {
@@ -399,8 +412,8 @@ public class CPEClientSession {
 				Envelope informMessage = cpeActions.doInform(eventKeyList);
 
 				System.out.println("Sending ScheduleInform Message at " + (new Date()));
-				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent);
-				session.sendInform(informMessage);
+				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent, xmlformatter);
+				session.sendInform(informMessage, xmlformatter);
 
 			} catch (Exception e) {
 				e.printStackTrace();

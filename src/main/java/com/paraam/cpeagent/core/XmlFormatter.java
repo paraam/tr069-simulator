@@ -23,11 +23,17 @@ import java.io.Writer;
  * </code>
  */
 public class XmlFormatter {
-
+    boolean stripXmlDeclaration;
+            
     public XmlFormatter() {
+        this.stripXmlDeclaration = false;
     }
 
-    public String format(String unformattedXml) {
+    public XmlFormatter(boolean stripXmlDeclaration) {
+        this.stripXmlDeclaration = stripXmlDeclaration;
+    }
+    
+    public String format(String unformattedXml) {        
         try {
             final Document document = parseXmlFile(unformattedXml);
 
@@ -39,7 +45,7 @@ public class XmlFormatter {
             XMLSerializer serializer = new XMLSerializer(out, format);
             serializer.serialize(document);
 
-            return out.toString();
+            return stripXmlDeclaration ? out.toString().replaceAll("<\\?xml.*\\?>\\n*", "") : out.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
