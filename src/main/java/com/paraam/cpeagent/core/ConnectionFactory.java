@@ -19,11 +19,11 @@ public class ConnectionFactory implements HttpURLConnectionFactory {
     Proxy proxy;
 
     private void initializeProxy() {
-        if (System.getProperties().containsKey("http.proxyHost")) {
+        if (System.getProperties().containsKey("https.proxyHost")) {
                 proxy = new Proxy(Proxy.Type.HTTP,
                         new InetSocketAddress(
-                        System.getProperty("http.proxyHost"),
-                        Integer.getInteger("http.proxyPort", 80)));
+                        System.getProperty("https.proxyHost"),
+                        Integer.getInteger("https.proxyPort", /* default port: */ 80)));
         } else {
                 proxy = Proxy.NO_PROXY;
         }

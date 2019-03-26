@@ -147,7 +147,7 @@ public class SetParameterAttributesStruct
         private static final Notification[] instances = new Notification[]{_0,
                 _1, _2};
 
-        private Notification(String value) {
+        public Notification(String value) {
             this.value = value;
         }
 
