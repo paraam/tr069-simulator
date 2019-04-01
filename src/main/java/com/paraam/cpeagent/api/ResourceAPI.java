@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
 
-    public class ResourceAPI {
+public class ResourceAPI {
 	
 	//String urlstr = "http://192.168.1.50:8085/ws?wsdl";
 

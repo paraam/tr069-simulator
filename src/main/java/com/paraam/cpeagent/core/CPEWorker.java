@@ -100,7 +100,7 @@ public class CPEWorker implements Runnable {
                 if (!strangeACS) {
                     ID id = new ID();
                     id.setMustUnderstand(true);
-                    id.setString("1");
+                    id.setString("11121");
                     informMessage.getHeader().getObjects().add(id);
                 }
                 

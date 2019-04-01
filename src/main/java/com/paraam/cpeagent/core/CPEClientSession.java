@@ -37,6 +37,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.HTTPDigestAuthFilter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -279,20 +280,19 @@ public class CPEClientSession {
 						CpeDBReader.serialize(dumploc + "getnames_" + serial + ".xml", new XmlFormatter().format(namesDump));
 
                         ParameterNames pn = new ParameterNames();
-                        Set<String> namesSet = cpeActions.confdb.confs.keySet();
+                        Set<String> namesSet = new HashSet<String>();
+                        namesSet.add(cpeActions.confdb.props.getProperty("RootNode"));
                         pn.setStrings(namesSet.toArray(new String[namesSet.size()]));
+                        
                         GetParameterValues allParameterValues = new GetParameterValues();
                         allParameterValues.setParameterNames(pn);
-                        Envelope 	envValues	= cpeActions.doGetParameterValues(allParameterValues, false);		
+                        Envelope 	envValues	= cpeActions.doGetParameterValues(allParameterValues, false, cpeActions.confdb.confs);		
                         String 		valuesDump 	= JibxHelper.marshalObject(envValues, "cwmp_1_0");
                         CpeDBReader.serialize(dumploc + "getvalues_" + serial + ".xml", new XmlFormatter().format(valuesDump));
                         
-                        ParameterNames lpn = new ParameterNames();
-                        Set<String> learnedNamesSet = cpeActions.confdb.learns.keySet();
-                        lpn.setStrings(learnedNamesSet.toArray(new String[learnedNamesSet.size()]));
                         GetParameterValues learnedParameterValues = new GetParameterValues();
-                        learnedParameterValues.setParameterNames(lpn);
-                        Envelope 	envLearnedValues	= cpeActions.doGetParameterValues(learnedParameterValues, false);		
+                        learnedParameterValues.setParameterNames(pn);
+                        Envelope 	envLearnedValues	= cpeActions.doGetParameterValues(learnedParameterValues, false, cpeActions.confdb.learns);		
                         String 		learnedValuesDump 	= JibxHelper.marshalObject(envLearnedValues, "cwmp_1_0");
                         CpeDBReader.serialize(dumploc + "learnedvalues_" + serial + ".xml", new XmlFormatter().format(learnedValuesDump));
                 } catch (IOException ioex) {

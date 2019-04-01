@@ -31,9 +31,9 @@ import org.dslforum.cwmp_1_0.ParameterValueStruct;
 public class CpeDBReader implements Serializable {
 	
 	private static final long serialVersionUID = -2634321577569129211L;
-        private String dumploc;
+    private String dumploc;
 	HashMap<String, ConfObject> 	confs 	= new HashMap<String, ConfObject>();
-        HashMap<String, ConfObject>     learns  = new HashMap<String, ConfObject>();
+    HashMap<String, ConfObject>     learns  = new HashMap<String, ConfObject>();
 	Properties                      props 	= new Properties();	
 	
 	private CpeDBReader() { }

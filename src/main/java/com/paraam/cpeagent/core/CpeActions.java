@@ -138,11 +138,10 @@ public class CpeActions {
 
         
 	public Envelope doGetParameterValues( GetParameterValues getParameterValues ) {
-			return this.doGetParameterValues(getParameterValues, true);
+			return this.doGetParameterValues(getParameterValues, true, this.confdb.confs);
 	}
         
-        
-	public Envelope doGetParameterValues( GetParameterValues getParameterValues, boolean learn) {
+	public Envelope doGetParameterValues( GetParameterValues getParameterValues, boolean learn, HashMap valobj) {
 			ParameterValueList pvl = new ParameterValueList();
 			String[] nameList = getParameterValues.getParameterNames().getStrings(); 
 			GetParameterValuesResponse valresp = new GetParameterValuesResponse();
@@ -150,8 +149,7 @@ public class CpeActions {
 			for (int i =0; i < nameList.length; i++) {			
 					String paramname = nameList[i];
 					if (paramname.endsWith(".")) {
-							//System.out.println(" paramname ----> " + paramname);
-							HashMap valobj = this.confdb.confs;				
+							//System.out.println(" paramname ----> " + paramname);			
 							Iterator it = valobj.entrySet().iterator();
 							int initialSize = pvl.getParameterValueStruct().size();
 							while (it.hasNext()) {
