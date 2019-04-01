@@ -261,9 +261,7 @@ public class CPEClientSession {
                 
                 if(!strangeACS) {
                     if (toreturn != null) {
-                        ID id = (ID)idobject;
-                        id.setString(id.getString());
-                        toreturn.getHeader().getObjects().add(idobject);
+                        toreturn.getHeader().getObjects().add((ID)idobject);
                     }
                 }
                 

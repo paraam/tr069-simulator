@@ -100,7 +100,8 @@ public class CPEWorker implements Runnable {
                 if (!strangeACS) {
                     ID id = new ID();
                     id.setMustUnderstand(true);
-                    id.setString(String.format("%s_%s", this.instanceId, "SIM_TR69_ID"));
+                    String pk = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value;
+                    id.setString(pk.equals("") ? String.format("%s_%s", this.instanceId.equals("") ? "1" : this.instanceId, "SIM_TR69_ID") : pk);
                     informMessage.getHeader().getObjects().add(id);
                 }
                 
