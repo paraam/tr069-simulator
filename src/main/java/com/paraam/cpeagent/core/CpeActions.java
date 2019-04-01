@@ -81,8 +81,9 @@ public class CpeActions {
 		Inform inform = new Inform();
 		DeviceIdStruct deviceId = new DeviceIdStruct();
 		inform.setDeviceId(deviceId);
-                inform.setMaxEnvelopes(1);
+		inform.setMaxEnvelopes(1);
 		inform.setCurrentTime(new Date());
+        inform.setRetryCount(0);
 		deviceId.setManufacturer(((ConfParameter)confdb.confs.get(confdb.props.getProperty("Manufacturer"))).value);
 		deviceId.setOUI(((ConfParameter)         confdb.confs.get(confdb.props.getProperty("ManufacturerOUI"))).value);
 		deviceId.setSerialNumber(((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value);
