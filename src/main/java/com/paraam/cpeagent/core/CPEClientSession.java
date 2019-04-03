@@ -52,7 +52,7 @@ public class CPEClientSession {
 	String passwd		= null; 
 	String authtype		= null;
     String useragent        = null;
-    XmlFormatter xmlformatter = null;
+    XmlFormatter xmlFmt = null;
         
     List<NewCookie> cookies;
 	
@@ -75,13 +75,13 @@ public class CPEClientSession {
 		
 	}
 	
-	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent, XmlFormatter xmlformatter) {
+	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent, XmlFormatter xmlFmt) {
 		this.cpeActions = cpeActions;		
 		this.username 	= username;
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
         this.useragent  = useragent;
-        this.xmlformatter = xmlformatter;
+        this.xmlFmt = xmlFmt;
         
 		String urlstr 	= ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("MgmtServer_URL"))).value;  //"http://192.168.1.50:8085/ws?wsdl";
 		System.out.println("ACS MGMT URL -------> " + urlstr);
@@ -97,12 +97,12 @@ public class CPEClientSession {
 		//System.out.println(" 2nd time ==============> " + username + " " + passwd);
 	}	
 	
-	public void sendInform (Envelope envelope, XmlFormatter xmlFormatter) {
+	public void sendInform (Envelope envelope) {
         String informBody;
-		if (xmlFormatter == null)
+		if (this.xmlFmt == null)
             informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
         else
-            informBody = xmlFormatter.format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
+            informBody = this.xmlFmt.format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
         
 		//String informBody  = getInformString();
 		//System.out.println("Sending informBody >>>>> " );
@@ -117,13 +117,13 @@ public class CPEClientSession {
 		acsresp = sendData (service, "");	
 		//System.out.println("Response for empty request <<<<<<===== " + response);
 		
-		handleACSRequest (acsresp, xmlFormatter);
+		handleACSRequest (acsresp);
 		
                 String serial = ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("SerialNumber"))).value;
                 this.dumpCurrentConfiguration(this.cpeActions.confdb.getDumpLocation(), serial);
 	}
 	
-	public void handleACSRequest (ACSResponse acsresp, XmlFormatter xmlFormatter) {
+	public void handleACSRequest (ACSResponse acsresp) {
 		String response = acsresp.getResponse();
 		if (response != null && response.length() > 0 ) {				
 			Envelope	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);
@@ -133,16 +133,16 @@ public class CPEClientSession {
 			System.out.println("Has New Request by ClassName ===== " + reqobj.getClass().getName());			
 			Envelope 	envResp 	= getClientResponse (cpeActions, idObj, reqobj);		
 			String 		respBody;
-            if (xmlFormatter == null)
+            if (this.xmlFmt == null)
                 respBody = JibxHelper.marshalObject(envResp, "cwmp_1_0");
             else
-                respBody = xmlFormatter.format(JibxHelper.marshalObject(envResp, "cwmp_1_0"));
+                respBody = this.xmlFmt.format(JibxHelper.marshalObject(envResp, "cwmp_1_0"));
             
 			//System.out.println("Sending Client response =====>>>>>>>> " + respBody );
 			ACSResponse newresp 	= sendData (service, respBody);			
 			//System.out.println("Response for new request <<<<<<===== " + newresp);
 
-			handleACSRequest (newresp, xmlFormatter);
+			handleACSRequest (newresp);
 			
 		}		
 		//System.out.println(data.toString()) ;		
@@ -240,7 +240,7 @@ public class CPEClientSession {
 		case ClientUtil.SCHEDULE_INFORM_ID:
 			ScheduleInform schInform 	= (ScheduleInform)reqobject;
 			int 			delaysec 	= schInform.getDelaySeconds();
-			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent, xmlformatter);
+			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent, xmlFmt);
 			Thread 	sithread 			= new Thread (siclass, "SchInformThread");
 			sithread.start();			
 			break;
@@ -389,15 +389,15 @@ public class CPEClientSession {
 		String passwd		= null; 
 		String authtype		= null;
         String useragent        = null;
-        XmlFormatter xmlformatter = null;
+        XmlFormatter xmlFmt = null;
 
-		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent, XmlFormatter xmlformatter) {
+		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent, XmlFormatter xmlFmt) {
 			this.delaysecs = delaysecs;
 			this.username 	= username;
 			this.passwd 	= passwd;
 			this.authtype 	= authtype;
             this.useragent  = useragent;
-            this.xmlformatter = xmlformatter;
+            this.xmlFmt = xmlFmt;
 		}
 
 		public void run () {
@@ -410,8 +410,8 @@ public class CPEClientSession {
 				Envelope informMessage = cpeActions.doInform(eventKeyList);
 
 				System.out.println("Sending ScheduleInform Message at " + (new Date()));
-				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent, xmlformatter);
-				session.sendInform(informMessage, xmlformatter);
+				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent, xmlFmt);
+				session.sendInform(informMessage);
 
 			} catch (Exception e) {
 				e.printStackTrace();

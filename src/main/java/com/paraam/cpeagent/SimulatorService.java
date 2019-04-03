@@ -7,7 +7,6 @@ import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.paraam.cpeagent.core.CPEUtil;
 import com.paraam.cpeagent.core.CPEWorker;
-import com.paraam.cpeagent.core.XmlFormatter;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
@@ -71,7 +70,7 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				String 	passwd		= null;
 				String 	authtype	= null;
                 String  useragent   = "TR069 Simulator/0.7.0";
-                String xmlformatter = "";
+                String  xmlformatter = "";
 				
 				if (tokens.length >= 10) { 
 					username	= tokens[7].trim();

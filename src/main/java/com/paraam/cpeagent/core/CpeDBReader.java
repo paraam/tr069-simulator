@@ -176,15 +176,15 @@ public class CpeDBReader implements Serializable {
 			File infile = new File( filepath);
 			if (infile.exists()) {
 				is = new FileInputStream(infile);
-				System.out.println("Properties has been loaded from FLAT File >>>>>> ");
+				System.out.println("Properties has been loaded from FLAT File >>>>>> " + filepath);
 			} else {
 				is = this.getClass().getResourceAsStream(filepath);
-				System.out.println("Properties has been loaded from JAR File >>>>>> ");
+				System.out.println("Properties has been loaded from JAR File >>>>>> " + filepath);
 			}
 			if (is != null) {
 				tprops = new Properties();
-				tprops.load(is);			
-				System.out.println("Properties has been loaded successfully >>>>>> "  + props.toString());
+				tprops.load(is);
+				System.out.println("Properties has been loaded successfully >>>>>> "  + tprops.toString());
 			}
 		} catch (IOException ex) {
 			System.out.println("Exception in reading CPE Keys property file " + ex.getMessage());
@@ -197,12 +197,12 @@ public class CpeDBReader implements Serializable {
 		if (tprops == null) {
 			tprops = new Properties();
 			tprops.setProperty("RootNode", "InternetGatewayDevice.");
-                        tprops.setProperty("MgmtServer_URL", "InternetGatewayDevice.ManagementServer.URL");
+			tprops.setProperty("MgmtServer_URL", "InternetGatewayDevice.ManagementServer.URL");
 			tprops.setProperty("ConnectionRequestURL", "InternetGatewayDevice.ManagementServer.ConnectionRequestURL");
 			tprops.setProperty("PeriodicInformInterval", "InternetGatewayDevice.ManagementServer.PeriodicInformInterval");
 			tprops.setProperty("SerialNumber", "InternetGatewayDevice.DeviceInfo.SerialNumber");
 			tprops.setProperty("ExternalIPAddress", "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress");
-                        tprops.setProperty("AdditionalInformParameters", "");
+			tprops.setProperty("AdditionalInformParameters", "");
 			System.out.println("Properties has been loaded from Default Keys >>>>>> ");
 		}
 		return tprops;

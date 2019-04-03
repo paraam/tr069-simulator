@@ -41,7 +41,7 @@ public class CPEPeriodicInform implements Runnable {
 
 				System.out.println("Sending Periodic Message at " + (new Date()));				
 				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlformatter);
-				session.sendInform(informMessage, xmlformatter);
+				session.sendInform(informMessage);
 				
 			}						
 		} catch (InterruptedException e) {
