@@ -23,7 +23,7 @@ public class CPEWorker implements Runnable {
     
 	public static void main(String args[]) {		
 		String mgmturl 	= "http://192.168.1.50:8085/ws?wsdl";
-		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, "TR069 Simulator/0.7.0", null, String.valueOf(1));
+		CPEWorker worker = new CPEWorker("192.168.1.50", 8030, mgmturl, "/wsdl", 1800, "/dump/microcell/", null, null, null, "TR069 Simulator/0.7.0", "", String.valueOf(1));
 		Thread cpthread = new Thread(worker, "WorkerThread");
 		cpthread.start();
 	}
@@ -60,23 +60,22 @@ public class CPEWorker implements Runnable {
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("ExternalIPAddress"))).value = ip;
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.PeriodicInformInterval")).value = "1800";
 
-        XmlFormatter xmlfmt;
+        XmlFormatter xmlFmt = null;
         
-        if(xmlformatter.equals("normal")) {
-            xmlfmt = new XmlFormatter();
-        }
-        else if(xmlformatter.equals("stripdec")) {
-            xmlfmt = new XmlFormatter(true);
-        }
-        else {
-            xmlfmt = null;
+        if(xmlformatter != null) {
+            if(xmlformatter.equals("normal")) {
+                xmlFmt = new XmlFormatter();
+            }
+            else if(xmlformatter.equals("stripdec")) {
+                xmlFmt = new XmlFormatter(true);
+            }
         }
         
-		CPEHttpServer httpserver = new CPEHttpServer(confdb, username, passwd, authtype, useragent, xmlfmt);
+		CPEHttpServer httpserver = new CPEHttpServer(confdb, username, passwd, authtype, useragent, xmlFmt);
 		Thread serverthread = new Thread(httpserver, "Http_Server"); 
 		serverthread.start();
 		
-		CPEPeriodicInform periodicInform = new CPEPeriodicInform(confdb, username, passwd, authtype, useragent, xmlfmt);
+		CPEPeriodicInform periodicInform = new CPEPeriodicInform(confdb, username, passwd, authtype, useragent, xmlFmt);
 		Thread informthread = new Thread(periodicInform, "Periodic_Inform");
 		informthread.start();
 		
@@ -105,8 +104,8 @@ public class CPEWorker implements Runnable {
                     informMessage.getHeader().getObjects().add(id);
                 }
                 
-		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlfmt);
-		session.sendInform(informMessage, xmlfmt);	
+		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlFmt);
+		session.sendInform(informMessage);	
    
 	}
 
