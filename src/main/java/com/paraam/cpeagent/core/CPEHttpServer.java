@@ -12,6 +12,7 @@ import java.util.Date;
 
 import org.dslforum.cwmp_1_0.Envelope;
 import org.dslforum.cwmp_1_0.EventStruct;
+import org.dslforum.cwmp_1_0.ID;
 
 public class CPEHttpServer implements Runnable {
 
@@ -70,8 +71,17 @@ public class CPEHttpServer implements Runnable {
 				CpeActions cpeactions = new CpeActions(confdb);
 				Envelope informMessage = cpeactions.doInform(eventKeyList);
 				
+                        boolean strangeACS = false;
+                
+                        if (!strangeACS) {
+                            ID id = new ID();
+                            id.setMustUnderstand(true);
+                            String sn = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value;
+                            id.setString(String.format("CR_%s_SIM_TR69_ID", sn));
+                            informMessage.getHeader().getObjects().add(id);
+                        }
+                
 				System.out.println("Sending Connection Request Inform Message at " + (new Date()));				
-
 
 				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlFmt);
 				session.sendInform(informMessage);

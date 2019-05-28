@@ -91,6 +91,9 @@ public class CPEWorker implements Runnable {
         eventStruct = new EventStruct();
         eventStruct .setEventCode("1 BOOT");
         eventKeyList.add(eventStruct);
+        eventStruct = new EventStruct();
+        eventStruct .setEventCode("4 VALUE CHANGE");
+        eventKeyList.add(eventStruct);
 		CpeActions cpeactions = new CpeActions(confdb);
 		Envelope informMessage = cpeactions.doInform(eventKeyList);
                 
@@ -100,7 +103,7 @@ public class CPEWorker implements Runnable {
                     ID id = new ID();
                     id.setMustUnderstand(true);
                     String pk = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value;
-                    id.setString(pk.equals("") ? String.format("%s_%s", this.instanceId.equals("") ? "1" : this.instanceId, "SIM_TR69_ID") : pk);
+                    id.setString(String.format("BS_%s_SIM_TR69_ID", this.instanceId.equals("") ? "0" : this.instanceId));
                     informMessage.getHeader().getObjects().add(id);
                 }
                 

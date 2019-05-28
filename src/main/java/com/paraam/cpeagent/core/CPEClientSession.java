@@ -111,7 +111,7 @@ public class CPEClientSession {
 		Envelope classobj 		= (Envelope)JibxHelper.unmarshalMessage(acsresp.getResponse(), cwmpver);		
 		InformResponse iresp 	= (InformResponse)classobj.getBody().getObjects().get(0);		
 		//System.out.println("Received InformResponse Max Envelopes ===== " + iresp.getMaxEnvelopes());
-                this.cookies = acsresp.getCookies();
+        this.cookies = acsresp.getCookies();
 		
 		//System.out.println("Sending empty request =====>>>>>>>> " );
 		acsresp = sendData (service, "");	
@@ -127,7 +127,16 @@ public class CPEClientSession {
 		String response = acsresp.getResponse();
 		if (response != null && response.length() > 0 ) {				
 			Envelope	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);
-            Object      idObj       = envReq.getHeader().getObjects().get(0);
+            Object      idObj;
+            try {
+                idObj = envReq.getHeader().getObjects().get(0);
+            }
+            catch(IndexOutOfBoundsException oob) {
+                idObj = new ID();
+                ((ID)idObj).setMustUnderstand(true);
+                String sn = ((ConfParameter)cpeActions.confdb.confs.get(cpeActions.confdb.props.getProperty("SerialNumber"))).value;
+                ((ID)idObj).setString(String.format("NOID_%s_SIM_TR69_ID", sn));
+            }
 			Object  	reqobj 		= envReq.getBody().getObjects().get(0);
 			
 			System.out.println("Has New Request by ClassName ===== " + reqobj.getClass().getName());			
@@ -151,8 +160,12 @@ public class CPEClientSession {
 	
 	private ACSResponse sendData (WebResource service, String reqString) {
 		
-		Builder builder = service.accept(MediaType.APPLICATION_XML)
-				.type(MediaType.APPLICATION_XML).header("User-Agent", this.useragent);
+		Builder builder = service
+            .accept(MediaType.APPLICATION_XML)
+		    .type(MediaType.APPLICATION_XML)
+//                .accept(MediaType.TEXT_XML)
+//                .type(MediaType.TEXT_XML)
+            .header("User-Agent", this.useragent);
 		for ( NewCookie c : cookies ) {
 		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
 		   builder = builder.cookie( c );
