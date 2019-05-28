@@ -69,7 +69,7 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
 				String 	username	= null;
 				String 	passwd		= null;
 				String 	authtype	= null;
-                String  useragent   = "TR069 Simulator/0.7.0";
+                String  useragent   = "";
                 String  xmlformatter = "";
 				
 				if (tokens.length >= 10) { 

@@ -14,8 +14,8 @@ To run this simulator,<br>
 <b>agent.csv</b> file is the csv configuration file that contains the following:<br>
 <div class="highlight"><pre>
 <span class="c1">startip, endip, acs_url, conn_req_url, http_port, periodic_inform, dump_location, username, password, authtype, useragent, xmlformat</span>
-<span class="kd">192.168.1.111, 192.168.1.120, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
-<span class="kd">192.168.2.211, 192.168.2.220, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic</span>
+<span class="kd">192.168.1.111, 192.168.1.120, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic, TR069 Simulator, stripdec</span>
+<span class="kd">192.168.2.211, 192.168.2.220, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic, TR069 Simulator, stripdec</span>
 </pre></div>
 Start IPAddress <br> 
 End IPAddress<br>
@@ -49,7 +49,7 @@ methods are currently supported. If authentication is not supported, these field
 
 <b>To run:</b><br>
 <div class="highlight"><pre>
-java -jar target/tr069-0.6.2-SNAPSHOT.jar server simulator.yml<br>
+java -jar target/tr069-0.7.0-SNAPSHOT.jar server simulator.yml<br>
 </pre></div>
 Or simply doubleclick the batch launcher (for Windows).
 <b>Note:</b> Java must be available in your system.
