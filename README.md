@@ -17,17 +17,20 @@ To run this simulator,<br>
 <span class="kd">192.168.1.111, 192.168.1.120, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic, TR069 Simulator, stripdec</span>
 <span class="kd">192.168.2.211, 192.168.2.220, http://tr069.me/tr069/ws?wsdl&probe=257ebf, /wsdl, 8035, 300, /dump/microcell/, user1, passwd1, basic, TR069 Simulator, stripdec</span>
 </pre></div>
-Start IPAddress <br> 
-End IPAddress<br>
+Start IP Address <br> 
+End IP Address<br>
 ACS Server URL<br>
 Connection Request URL<br>
 Http Port<br>
-Period Inform Interval<br>
+Period Inform Interval (in seconds)<br>
 Dump Location Path<br>
 Username<br>
 Password<br>
 Authtype<br>
 Useragent<br>
+XML Formatter<br>
+Serial Number Format (printf style)<br>
+Serial Number (integer)<br>
 
 You can modify these parameter according to your requirements. To simulate multiple CPE devices, provide the start and<br>
 end ipaddress. Periodic Inform Interval is in seconds. Simulator will send Inform request based on this parameter.<br><br> 
@@ -53,6 +56,20 @@ java -jar target/tr069-0.7.0-SNAPSHOT.jar server simulator.yml<br>
 </pre></div>
 Or simply doubleclick the batch launcher (for Windows).
 <b>Note:</b> Java must be available in your system.
+
+### agent.csv Configuration
+
+- Start IP and End IP define a range of IP addresses, and the system runs a simulator thread for each
+- The HTTP Port defines the port on which a simulator listens for connection requests
+- The simulator reports a ConnectionRequestURL constructed from the IP address, port, and the path configured in agent.csv
+- The Dump Location is a relative path to the folder containing the device configuration data
+- User name, password, and authentication type are used to authenticate the device with ACS
+
+### Connection Request Testing
+
+1. The connection request URL reported by the device as a TR-069 parameter is determined by the agent.csv IP address configuration, not the actual IP address
+2. For connection request testing, you can put connection requests in the JMS queue using Postman with the test harness. In this case enter a URL that corresponds with the actual visible IP address and port of the simulator
+3. For functional tests, the agent.csv configuration will have to be set up so the device reports a valid connection request URL
 
 ### Requirement
 

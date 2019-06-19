@@ -6,8 +6,8 @@
     </prerequisites>
 
     <groupId>tr069</groupId>
-    <artifactId>tr069</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <artifactId>tr069-simulator</artifactId>
+    <version>0.7.1-SNAPSHOT</version>
     <name>TR069 Simulator</name>	
     <repositories>
         <repository>
@@ -185,7 +185,7 @@
                     <excludeSchemaBindings>
                         <excludeSchemaBindings>*binding.out.xml</excludeSchemaBindings>
                     </excludeSchemaBindings>
-                    <verbose>false</verbose>
+                    <verbose>true</verbose>
                 </configuration>
                 <executions>
                     <execution>

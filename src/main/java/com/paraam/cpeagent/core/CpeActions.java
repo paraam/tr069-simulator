@@ -147,55 +147,66 @@ public class CpeActions {
 			String[] nameList = getParameterValues.getParameterNames().getStrings(); 
 			GetParameterValuesResponse valresp = new GetParameterValuesResponse();
 
-			for (int i =0; i < nameList.length; i++) {			
+			if ((nameList.length == 1) && nameList[0].trim().isEmpty()) {
+				for(ConfObject conf : this.confdb.confs.values()) {
+					if (conf instanceof ConfParameter) {
+						final ParameterValueStruct pvs = new ParameterValueStruct();
+						pvs.setName(conf.name);
+						pvs.setValue(((ConfParameter)conf).value);
+						pvl.getParameterValueStruct().add(pvs);
+					}
+				}
+			} else {
+				for (int i = 0; i < nameList.length; i++) {
 					String paramname = nameList[i];
 					if (paramname.endsWith(".")) {
-							//System.out.println(" paramname ----> " + paramname);			
-							Iterator it = valobj.entrySet().iterator();
-							int initialSize = pvl.getParameterValueStruct().size();
-							while (it.hasNext()) {
-									Map.Entry pairs = (Map.Entry)it.next();
-									String keyname = (String)pairs.getKey() ;
-									if (keyname.startsWith(paramname)) {
-											Object obj = pairs.getValue();
-											if (obj instanceof ConfParameter) {
-													ConfParameter cp = (ConfParameter)obj;
-													if (cp.value == null) {
-															continue;
-													}
-													ParameterValueStruct pvs = new ParameterValueStruct();
-													pvs.setName(cp.name);
-													pvs.setValue(cp.value);
-													pvl.getParameterValueStruct().add(pvs);
-													//System.out.println("Adding Nested --->>>  " + cp.name + " = " + cp.value);
-											}
-									}			        
-							}
-							if (learn && pvl.getParameterValueStruct().size() == initialSize) {
-									ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
-									this.confdb.learns.put(paramname, cp);
-									System.out.println("Learning Unknown DataModel Path --->>>  " + paramname);
-							}
-					} else if ( this.confdb.confs.keySet().contains(paramname) ) {
-							Object obj = this.confdb.confs.get(nameList[i]);
-							if (obj instanceof ConfParameter) {
-									ConfParameter cp = (ConfParameter)obj;
+						//System.out.println(" paramname ----> " + paramname);
+						Iterator it = valobj.entrySet().iterator();
+						int initialSize = pvl.getParameterValueStruct().size();
+						while (it.hasNext()) {
+							Map.Entry pairs = (Map.Entry) it.next();
+							String keyname = (String) pairs.getKey();
+							if (keyname.startsWith(paramname)) {
+								Object obj = pairs.getValue();
+								if (obj instanceof ConfParameter) {
+									ConfParameter cp = (ConfParameter) obj;
 									if (cp.value == null) {
-											//if(learn)
-											//    System.out.println("Getting Known Null Value --->>>  " + cp.name);
-											continue;
+										continue;
 									}
 									ParameterValueStruct pvs = new ParameterValueStruct();
 									pvs.setName(cp.name);
 									pvs.setValue(cp.value);
 									pvl.getParameterValueStruct().add(pvs);
-									//System.out.println("Getting Known Value --->>>  " + cp.name + " = " + cp.value);
+									//System.out.println("Adding Nested --->>>  " + cp.name + " = " + cp.value);
+								}
 							}
-					} else if (learn) {
+						}
+						if (learn && pvl.getParameterValueStruct().size() == initialSize) {
 							ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
 							this.confdb.learns.put(paramname, cp);
-							System.out.println("Learning Unknown Parameter Name --->>>  " + cp.name);
+							System.out.println("Learning Unknown DataModel Path --->>>  " + paramname);
+						}
+					} else if (this.confdb.confs.keySet().contains(paramname)) {
+						Object obj = this.confdb.confs.get(nameList[i]);
+						if (obj instanceof ConfParameter) {
+							ConfParameter cp = (ConfParameter) obj;
+							if (cp.value == null) {
+								//if(learn)
+								//    System.out.println("Getting Known Null Value --->>>  " + cp.name);
+								continue;
+							}
+							ParameterValueStruct pvs = new ParameterValueStruct();
+							pvs.setName(cp.name);
+							pvs.setValue(cp.value);
+							pvl.getParameterValueStruct().add(pvs);
+							//System.out.println("Getting Known Value --->>>  " + cp.name + " = " + cp.value);
+						}
+					} else if (learn) {
+						ConfParameter cp = new ConfParameter(paramname, "0", "", null, null);
+						this.confdb.learns.put(paramname, cp);
+						System.out.println("Learning Unknown Parameter Name --->>>  " + cp.name);
 					}
+				}
 			}
 			valresp.setParameterList(pvl);
 			return inEnvelope(valresp);
