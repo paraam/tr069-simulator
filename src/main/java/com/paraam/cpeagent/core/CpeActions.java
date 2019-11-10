@@ -222,6 +222,9 @@ public class CpeActions {
 			ParameterInfoList pil = new ParameterInfoList();		
 			String paramname = getParameterName.getParameterPath();
 
+            if (paramname.equals(""))
+                paramname = confdb.props.getProperty("RootNode");
+            
 			if (paramname.endsWith(".")) {
 					// System.out.println("Adding Children Parameter Names ----> " + paramname);
 					HashMap valobj = this.confdb.confs;				
@@ -229,7 +232,7 @@ public class CpeActions {
 					while (it.hasNext()) {
 							Map.Entry pairs = (Map.Entry)it.next();
 							String keyname = (String)pairs.getKey() ;
-							if (keyname.startsWith(paramname)) {
+							if (isMatching(paramname, keyname, getParameterName.isNextLevel())){
 									Object obj = pairs.getValue();
 									ConfObject co = (ConfObject)obj;
 									ParameterInfoStruct pvs = new ParameterInfoStruct();
@@ -479,4 +482,17 @@ public class CpeActions {
 		Envelope envelope = new Envelope(body: new Body(any: [cwmpObject]), header: header);		
 		return envelope
 	}*/
+
+    private boolean isMatching(String paramname, String keyname) {
+        return this.isMatching(paramname, keyname, false);
+    }
+    
+    private boolean isMatching(String paramname, String keyname, boolean isNextLevel) {
+        return keyname.startsWith(paramname)
+                && (!isNextLevel || depthOf(paramname) == depthOf(keyname) + 1);
+    }
+    
+    private int depthOf(String param) {
+        return param.split(".").length;
+    }
 }

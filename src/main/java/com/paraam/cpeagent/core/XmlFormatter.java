@@ -24,13 +24,24 @@ import java.io.Writer;
  */
 public class XmlFormatter {
     boolean stripXmlDeclaration;
+    boolean xsiTypeWorkaround;
             
     public XmlFormatter() {
         this.stripXmlDeclaration = false;
+        this.xsiTypeWorkaround = false;
+    }
+    
+    public XmlFormatter(String xmlFormatString) {
+        this.stripXmlDeclaration = xmlFormatString.contains("stripdec");
+        this.xsiTypeWorkaround = xmlFormatString.contains("faketypes");
     }
 
-    public XmlFormatter(boolean stripXmlDeclaration) {
-        this.stripXmlDeclaration = stripXmlDeclaration;
+    public boolean isStripXmlDeclarationEnabled() {
+        return stripXmlDeclaration;
+    }
+
+    public boolean isXsiTypeWorkaroundEnabled() {
+        return xsiTypeWorkaround;
     }
     
     public String format(String unformattedXml) {        
@@ -41,11 +52,20 @@ public class XmlFormatter {
             format.setLineWidth(65);
             format.setIndenting(true);
             format.setIndent(2);
-            Writer out = new StringWriter();
-            XMLSerializer serializer = new XMLSerializer(out, format);
+            Writer writerOut = new StringWriter();
+            XMLSerializer serializer = new XMLSerializer(writerOut, format);
             serializer.serialize(document);
 
-            return stripXmlDeclaration ? out.toString().replaceAll("<\\?xml.*\\?>\\n*", "") : out.toString();
+            String out = writerOut.toString();
+            
+            if(stripXmlDeclaration)
+                out = out.replaceAll("<\\?xml.*\\?>\\n*", "");
+            
+            if(xsiTypeWorkaround)
+                out = out.replaceAll("<Value>", "<Value xsi:type=\"xsd:string\">")
+                         .replaceAll("<Value/>", "<Value xsi:type=\"xsd:string\"></Value>");
+            
+            return out;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

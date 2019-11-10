@@ -7,7 +7,7 @@
 
     <groupId>tr069</groupId>
     <artifactId>tr069-simulator</artifactId>
-    <version>0.7.1-SNAPSHOT</version>
+    <version>0.7.5-SNAPSHOT</version>
     <name>TR069 Simulator</name>	
     <repositories>
         <repository>

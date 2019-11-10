@@ -89,8 +89,8 @@ public class CPEClientSession {
 		if (username != null && passwd != null) {
 			if (authtype.equalsIgnoreCase("digest")) {
 			    service.addFilter(new HTTPDigestAuthFilter(username, passwd));
-                        } else if (authtype.equalsIgnoreCase("basic")) {
-                            service.addFilter(new HTTPBasicAuthFilter(username, passwd));
+            } else if (authtype.equalsIgnoreCase("basic")) {
+                service.addFilter(new HTTPBasicAuthFilter(username, passwd));
 			} // else use no authentication
 			//System.out.println("==========================> " + username + " " + passwd);
 		}

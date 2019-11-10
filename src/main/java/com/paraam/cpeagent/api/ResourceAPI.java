@@ -7,9 +7,9 @@ import javax.ws.rs.core.UriBuilder;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResourceAPI {
 	
@@ -17,6 +17,7 @@ public class ResourceAPI {
 
 	private static 	ResourceAPI INSTANCE 	= null;	
 	private 		WebResource service		= null;
+    private         Map<String, WebResource> services = new HashMap<String, WebResource>();
 
 	private ResourceAPI() { }
 	
@@ -28,15 +29,15 @@ public class ResourceAPI {
     }
 
     public WebResource getResourceAPI(String urlstr) {
-    	if(service == null) {
+    	if(!services.containsKey(urlstr)) {
     		//ClientConfig 	config 		= new DefaultClientConfig();
             //Client          client      = Client.create(config);
             URLConnectionClientHandler ch   = new URLConnectionClientHandler(new ConnectionFactory());
             Client 	        client 		= new Client(ch);
-            service 			= client.resource(getBaseURI(urlstr));
+            services.put(urlstr, client.resource(getBaseURI(urlstr)));
         }
         
-    	return service;
+    	return services.get(urlstr);
     }
     
     private URI getBaseURI(String urlstr) {

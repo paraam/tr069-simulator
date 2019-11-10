@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
+import com.paraam.cpeagent.core.CPEHttpServer;
+import com.paraam.cpeagent.core.CPEPeriodicInform;
 import com.paraam.cpeagent.core.CPEUtil;
 import com.paraam.cpeagent.core.CPEWorker;
 import com.yammer.dropwizard.Service;
@@ -57,12 +59,18 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
                 config.getSimulatorLocation(), config.getAuthUserName(), config.getAuthPassword(),
                 config.getAuthType(), config.getUserAgent(), config.getXmlFormat(),
                 config.getSerialNumberFmt(), config.getSerialNumber());
+        final CPEHttpServer httpserver = worker.getNewHttpServer();
+		Thread serverthread = new Thread(httpserver, "Http_Server"); 
+		serverthread.start();
+		final CPEPeriodicInform periodicInform = worker.getNewPeriodicInform();
+		Thread informthread = new Thread(periodicInform, "Periodic_Inform");
+		informthread.start();
         final Thread cpthread = new Thread(worker, "WorkerThread_" + 0);
         cpthread.start();
     }
 
     private AgentConfig readAgentConfig() {
-        final String confDir = File.separator + "conf";
+        final String confDir = "." + File.separator + "conf";
         final String filepath = confDir + File.separator + "agent.csv";
         //System.out.println("Current Filepath Checking >>>> " + filepath );
         final File userfile = new File(filepath);
@@ -119,9 +127,12 @@ public class SimulatorService extends Service<SimulatorConfiguration> {
             config.setXmlFormat(csvline[11].trim());
         }
 
-        if (csvline.length >= 14) {
+        if (csvline.length >= 13) {
             config.setSerialNumberFmt(csvline[12].trim());
-            config.setSerialNumber(Integer.parseInt(csvline[14].trim()));
+            config.setSerialNumber(0);
+        }
+        if (csvline.length >= 14) {
+            config.setSerialNumber(Integer.parseInt(csvline[13].trim()));
         }
         return config;
     }

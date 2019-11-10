@@ -15,7 +15,7 @@ public class AgentConfig {
     private String authType;
     private String userAgent;
     private String xmlFormat;
-    private String serialNumberFmt = "%08d";
+    private String serialNumberFmt = "CPE%08d";
     private int serialNumber = 0;
 
     public String getIpAddress() {

@@ -18,9 +18,10 @@ public class CPEWorker implements Runnable {
 	String passwd = null;
 	String authtype	= null;
     String useragent = null;
-	String xmlformatter = "";
-	String serialNumberFormat = "%08d";
+	String serialNumberFormat = "CPE%08d";
 	int serialNumber = 0;
+    XmlFormatter xmlFmt = null;
+    CpeDBReader confdb = null;
     
 	public static void main(String args[]) {		
 		String mgmturl 	= "http://192.168.1.50:8085/ws?wsdl";
@@ -43,19 +44,14 @@ public class CPEWorker implements Runnable {
 		this.passwd 	= passwd;
 		this.authtype 	= authtype;
         this.useragent  = useragent;
-        this.xmlformatter = xmlformatter;
 		this.informperiod = informperiod;
 		this.serialNumberFormat = serialNumberFormat;
 		this.serialNumber = serialNumber;
-	}
-	
-        @Override
-	public void run () {
-		
-		String connreqURL  = "http://" + ip + ":" + port + requrl;
+        
+        String connreqURL  = "http://" + ip + ":" + port + requrl;
 		//System.out.println("ConnectionRequestURL >>>>>> " + connreqURL);
-		CpeDBReader confdb = CpeDBReader.readFromGetMessages(dumploc);
-		//CpeDBReader confdb = CpeDBReader.readFromGetMessages("D://Paraam//ACS//groovy_src//groovycpe//testfiles//parameters_zyxel2602//");
+		this.confdb = CpeDBReader.readFromGetMessages(dumploc);
+
 		//final CpeActions cpeActions = new CpeActions(confdb);
 		//System.out.println("Loaded Properties >>>>>>>>> "  + confdb.props.toString());
 
@@ -65,54 +61,55 @@ public class CPEWorker implements Runnable {
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("SerialNumber"))).value = serialNo;
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("ExternalIPAddress"))).value = ip;
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.PeriodicInformInterval")).value = "1800";
-
-        XmlFormatter xmlFmt = null;
         
-        if(xmlformatter != null) {
-            if(xmlformatter.equals("normal")) {
-                xmlFmt = new XmlFormatter();
-            }
-            else if(xmlformatter.equals("stripdec")) {
-                xmlFmt = new XmlFormatter(true);
-            }
-        }
-        
-		CPEHttpServer httpserver = new CPEHttpServer(confdb, username, passwd, authtype, useragent, xmlFmt);
-		Thread serverthread = new Thread(httpserver, "Http_Server"); 
-		serverthread.start();
-		
-		CPEPeriodicInform periodicInform = new CPEPeriodicInform(confdb, username, passwd, authtype, useragent, xmlFmt);
-		Thread informthread = new Thread(periodicInform, "Periodic_Inform");
-		informthread.start();
+        if(xmlformatter != null)
+            this.xmlFmt = new XmlFormatter(xmlformatter);
 		
 		((ConfParameter)confdb.confs.get(confdb.props.getProperty("MgmtServer_URL"))).value = acsurl; // "http://192.168.1.50:8085/ws?wsdl";
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.ManagementServer.URL")).value = "http://192.168.1.50:8085/ws?wsdl";
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.DeviceInfo.SerialNumber")).value = "CP0816NT029";
 		//((ConfParameter)confdb.confs.get("InternetGatewayDevice.DeviceInfo.SoftwareVersion")).value = "GroovyCPE_FW.1";
 		
-		ArrayList<EventStruct> eventKeyList = new ArrayList<EventStruct>();
-		EventStruct eventStruct = new EventStruct();
-		eventStruct.setEventCode("0 BOOTSTRAP");
-		eventKeyList.add(eventStruct);
-        eventStruct = new EventStruct();
-        eventStruct .setEventCode("1 BOOT");
-        eventKeyList.add(eventStruct);
-		CpeActions cpeactions = new CpeActions(confdb);
-		Envelope informMessage = cpeactions.doInform(eventKeyList);
-                
-                boolean strangeACS = false;
-                
-                if (!strangeACS) {
-                    ID id = new ID();
-                    id.setMustUnderstand(true);
-                    String pk = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value;
-                    id.setString(pk.equals("") ? String.format("%d_%s", this.serialNumber, "SIM_TR69_ID") : pk);
-                    informMessage.getHeader().getObjects().add(id);
-                }
-                
-		CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlFmt);
-		session.sendInform(informMessage);	
-   
+	}
+	
+    public CPEHttpServer getNewHttpServer() {
+        return new CPEHttpServer(confdb, username, passwd, authtype, useragent, xmlFmt);
+    }
+    
+    public CPEPeriodicInform getNewPeriodicInform() {
+        return new CPEPeriodicInform(confdb, username, passwd, authtype, useragent, xmlFmt);
+    }
+    
+    @Override
+	public void run () {
+        boolean bootstrapped = false;
+        while (!bootstrapped) {
+            String bootstrapAcs = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("MgmtServer_URL"))).value;
+            ArrayList<EventStruct> eventKeyList = new ArrayList<EventStruct>();
+            EventStruct eventStruct = new EventStruct();
+            eventStruct.setEventCode("0 BOOTSTRAP");
+            eventKeyList.add(eventStruct);
+            eventStruct = new EventStruct();
+            eventStruct .setEventCode("1 BOOT");
+            eventKeyList.add(eventStruct);
+            CpeActions cpeactions = new CpeActions(confdb);
+            Envelope informMessage = cpeactions.doInform(eventKeyList);
+
+                    boolean strangeACS = false;
+
+                    if (!strangeACS) {
+                        ID id = new ID();
+                        id.setMustUnderstand(true);
+                        String pk = ((ConfParameter)confdb.confs.get(confdb.props.getProperty("ParameterKey"))).value;
+                        id.setString(pk.equals("") ? String.format("%d_%s", this.serialNumber, "SIM_TR69_ID") : pk);
+                        informMessage.getHeader().getObjects().add(id);
+                    }
+
+            CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlFmt);
+            session.sendInform(informMessage);
+            
+            bootstrapped = bootstrapAcs.equals(((ConfParameter)confdb.confs.get(confdb.props.getProperty("MgmtServer_URL"))).value);
+        }
 	}
 
 }
