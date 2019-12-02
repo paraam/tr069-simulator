@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header>
+      <cwmp:ID soapenv:mustUnderstand="true">00001</cwmp:ID>
+   </soapenv:Header>
+   <soapenv:Body>
+      <cwmp:Inform>
+         <DeviceId>
+            <Manufacturer>Cisco</Manufacturer>
+            <OUI>002652</OUI>
+            <ProductClass>CJJ005B00009</ProductClass>
+            <SerialNumber>CB002145_3</SerialNumber>
+         </DeviceId>
+         <Event>
+            <EventStruct>
+               <EventCode>0 BOOTSTRAP</EventCode>
+            </EventStruct>
+         </Event>
+         <MaxEnvelopes>0</MaxEnvelopes>
+         <CurrentTime>2015-10-05T02:23:01.337Z</CurrentTime>
+         <RetryCount>0</RetryCount>
+         <ParameterList>
+            <ParameterValueStruct>
+               <Name>Device.DeviceInfo.HardwareVersion</Name>
+               <Value>HW_2.0</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.DeviceInfo.ProvisioningCode</Name>
+               <Value>ACS</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.DeviceInfo.SoftwareVersion</Name>
+               <Value>CJJ005B00009_1.0.5</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.DeviceInfo.SpecVersion</Name>
+               <Value>1.0</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.DeviceSummary</Name>
+               <Value>FAPService:1.0(Baseline:1)</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.ManagementServer.ConnectionRequestURL</Name>
+               <Value>http://192.168.1.213:30008/wsdl</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.ManagementServer.ParameterKey</Name>
+               <Value>unsetCommandKey</Value>
+            </ParameterValueStruct>
+            <ParameterValueStruct>
+               <Name>Device.WANDevice.1.WANConnectionDevice.1.WANPPPConnection.1.ExternalIPAddress</Name>
+               <Value>192.168.1.213</Value>
+            </ParameterValueStruct>
+         </ParameterList>
+      </cwmp:Inform>
+   </soapenv:Body>
+</soapenv:Envelope>

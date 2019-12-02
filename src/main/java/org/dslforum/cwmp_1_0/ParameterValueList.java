@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 public class ParameterValueList {
 	private ArrayList<ParameterValueStruct> parameterValueStruct = new ArrayList<ParameterValueStruct>();
+    private ArrayAttributes.ArrayType arrayType = new ArrayAttributes.ArrayType();
 
 	public ArrayList<ParameterValueStruct> getParameterValueStruct() {
 		return parameterValueStruct;
@@ -27,7 +28,14 @@ public class ParameterValueList {
 
 	public void setParameterValueStruct( ArrayList<ParameterValueStruct> parameterValueStruct) {
 		this.parameterValueStruct = parameterValueStruct;
+        this.setArrayType(String.format("cwmp:ParameterValueStruct[%d]", this.parameterValueStruct.size()));
 	}
 	
-	
+	public String getArrayType() {
+		return arrayType.getArrayType();
+	}
+
+	public void setArrayType(String arrayType) {
+        this.arrayType.setArrayType(arrayType);
+	}	
 }

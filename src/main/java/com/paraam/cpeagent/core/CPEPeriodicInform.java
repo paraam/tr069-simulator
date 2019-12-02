@@ -13,9 +13,16 @@ public class CPEPeriodicInform implements Runnable {
 	String 	username	= null;
 	String 	passwd		= null;
 	String 	authtype	= null;
-	
-	public CPEPeriodicInform (CpeDBReader confdb, String username, String passwd, String authtype) {		
-		this.confdb = confdb;		
+    String  useragent   = null;
+	XmlFormatter xmlformatter = null;
+    
+	public CPEPeriodicInform (CpeDBReader confdb, String username, String passwd, String authtype, String useragent, XmlFormatter xmlformatter) {		
+		this.confdb = confdb;
+        this.username = username;
+        this.passwd = passwd;
+        this.authtype = authtype;
+        this.useragent = useragent;
+        this.xmlformatter = xmlformatter;
 	}
 	
 	public void run() {
@@ -33,7 +40,7 @@ public class CPEPeriodicInform implements Runnable {
 				Envelope informMessage = cpeactions.doInform(eventKeyList);
 
 				System.out.println("Sending Periodic Message at " + (new Date()));				
-				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype);
+				CPEClientSession session = new CPEClientSession(cpeactions, username, passwd, authtype, useragent, xmlformatter);
 				session.sendInform(informMessage);
 				
 			}						

@@ -10,6 +10,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.UriBuilder;
 
 import org.codehaus.jettison.json.JSONObject;
+import org.dslforum.cwmp_1_0.ID;
 import org.dslforum.cwmp_1_0.AddObject;
 import org.dslforum.cwmp_1_0.DeleteObject;
 import org.dslforum.cwmp_1_0.Download;
@@ -35,6 +36,12 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.HTTPDigestAuthFilter;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.dslforum.cwmp_1_0.ParameterNames;
 
 public class CPEClientSession {	
 	
@@ -44,6 +51,10 @@ public class CPEClientSession {
 	String username 	= null; 
 	String passwd		= null; 
 	String authtype		= null;
+    String useragent        = null;
+    XmlFormatter xmlFmt = null;
+        
+    List<NewCookie> cookies;
 	
 	public static void main(String[] args) {
 		ClientConfig 	config 			= new DefaultClientConfig();
@@ -52,7 +63,7 @@ public class CPEClientSession {
 		JSONObject 		data 			= new JSONObject();
 		JSONObject 		status 			= new JSONObject();		
 		String			filefolder  	= "//dump//microcell//";
-		CpeDBReader 	confdb 			= new CpeDBReader().readFromGetMessages(filefolder);
+		CpeDBReader 	confdb 			= CpeDBReader.readFromGetMessages(filefolder);
 		CpeActions 		cpeAction 		= new CpeActions(confdb);	
 		
 		ArrayList<EventStruct> eventKeyList = new ArrayList<EventStruct>();
@@ -64,56 +75,80 @@ public class CPEClientSession {
 		
 	}
 	
-	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype) {
+	public CPEClientSession (CpeActions cpeActions, String username, String passwd, String authtype, String useragent, XmlFormatter xmlFmt) {
 		this.cpeActions = cpeActions;		
-		this.authtype 	= authtype;
 		this.username 	= username;
-		this.passwd 	= passwd;		
+		this.passwd 	= passwd;
+		this.authtype 	= authtype;
+        this.useragent  = useragent;
+        this.xmlFmt = xmlFmt;
+        
 		String urlstr 	= ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("MgmtServer_URL"))).value;  //"http://192.168.1.50:8085/ws?wsdl";
 		System.out.println("ACS MGMT URL -------> " + urlstr);
 		service = ResourceAPI.getInstance().getResourceAPI(urlstr);		
 		if (username != null && passwd != null) {
 			if (authtype.equalsIgnoreCase("digest")) {
-				service.addFilter(new HTTPDigestAuthFilter(username, passwd));
-			} else {
-				service.addFilter(new HTTPBasicAuthFilter(username, passwd));
-			}
+			    service.addFilter(new HTTPDigestAuthFilter(username, passwd));
+            } else if (authtype.equalsIgnoreCase("basic")) {
+                service.addFilter(new HTTPBasicAuthFilter(username, passwd));
+			} // else use no authentication
 			//System.out.println("==========================> " + username + " " + passwd);
 		}
 		//System.out.println(" 2nd time ==============> " + username + " " + passwd);
 	}	
 	
 	public void sendInform (Envelope envelope) {
-		
-		String informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
+        String informBody;
+		if (this.xmlFmt == null)
+            informBody = JibxHelper.marshalObject(envelope, "cwmp_1_0");
+        else
+            informBody = this.xmlFmt.format(JibxHelper.marshalObject(envelope, "cwmp_1_0"));
+        
 		//String informBody  = getInformString();
 		//System.out.println("Sending informBody >>>>> " );
-		List<NewCookie> cookies = new ArrayList<NewCookie>();
-		ACSResponse acsresp 	= sendData (service, informBody, cookies);		
+		this.cookies = new ArrayList<NewCookie>();
+		ACSResponse acsresp 	= sendData (service, informBody);		
 		Envelope classobj 		= (Envelope)JibxHelper.unmarshalMessage(acsresp.getResponse(), cwmpver);		
 		InformResponse iresp 	= (InformResponse)classobj.getBody().getObjects().get(0);		
 		//System.out.println("Received InformResponse Max Envelopes ===== " + iresp.getMaxEnvelopes());
+        this.cookies = acsresp.getCookies();
 		
 		//System.out.println("Sending empty request =====>>>>>>>> " );
-		acsresp = sendData (service, "", acsresp.getCookies());		
+		acsresp = sendData (service, "");	
 		//System.out.println("Response for empty request <<<<<<===== " + response);
 		
 		handleACSRequest (acsresp);
 		
+                String serial = ((ConfParameter)this.cpeActions.confdb.confs.get(this.cpeActions.confdb.props.getProperty("SerialNumber"))).value;
+                this.dumpCurrentConfiguration(this.cpeActions.confdb.getDumpLocation(), serial);
 	}
 	
 	public void handleACSRequest (ACSResponse acsresp) {
 		String response = acsresp.getResponse();
 		if (response != null && response.length() > 0 ) {				
-			Envelope 	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);		
-			Object 		reqobj 		= envReq.getBody().getObjects().get(0);
+			Envelope	envReq 		= (Envelope)JibxHelper.unmarshalMessage(response, cwmpver);
+            Object      idObj;
+            try {
+                idObj = envReq.getHeader().getObjects().get(0);
+            }
+            catch(IndexOutOfBoundsException oob) {
+                idObj = new ID();
+                ((ID)idObj).setMustUnderstand(true);
+                String sn = ((ConfParameter)cpeActions.confdb.confs.get(cpeActions.confdb.props.getProperty("SerialNumber"))).value;
+                ((ID)idObj).setString(String.format("NOID_%s_SIM_TR69_ID", sn));
+            }
+			Object  	reqobj 		= envReq.getBody().getObjects().get(0);
 			
 			System.out.println("Has New Request by ClassName ===== " + reqobj.getClass().getName());			
-			Envelope 	envResp 	= getClientResponse (cpeActions, reqobj);		
-			String 		respBody 	= JibxHelper.marshalObject(envResp, "cwmp_1_0");
-			
+			Envelope 	envResp 	= getClientResponse (cpeActions, idObj, reqobj);		
+			String 		respBody;
+            if (this.xmlFmt == null)
+                respBody = JibxHelper.marshalObject(envResp, "cwmp_1_0");
+            else
+                respBody = this.xmlFmt.format(JibxHelper.marshalObject(envResp, "cwmp_1_0"));
+            
 			//System.out.println("Sending Client response =====>>>>>>>> " + respBody );
-			ACSResponse newresp 	= sendData (service, respBody, acsresp.getCookies());			
+			ACSResponse newresp 	= sendData (service, respBody);			
 			//System.out.println("Response for new request <<<<<<===== " + newresp);
 
 			handleACSRequest (newresp);
@@ -121,34 +156,45 @@ public class CPEClientSession {
 		}		
 		//System.out.println(data.toString()) ;		
 		
-	}
+        }
 	
-	private ACSResponse sendData (WebResource service, String reqString, List<NewCookie> cookies) {
+	private ACSResponse sendData (WebResource service, String reqString) {
 		
-		Builder builder = service.accept(MediaType.APPLICATION_XML)
-				.type(MediaType.APPLICATION_XML);
+		Builder builder = service
+            .accept(MediaType.APPLICATION_XML)
+		    .type(MediaType.APPLICATION_XML)
+//                .accept(MediaType.TEXT_XML)
+//                .type(MediaType.TEXT_XML)
+            .header("User-Agent", this.useragent);
 		for ( NewCookie c : cookies ) {
 		    //System.out.println( "Request Setting cookie  ======================== " + c.getName() + " = " + c.getValue() );
-		    builder.cookie( c );
+		   builder = builder.cookie( c );
 		}
+
+            try {
+                // wait a bit
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CPEClientSession.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
 		ClientResponse 	response 	= builder.post(ClientResponse.class, reqString);
-		String 			rdata 		= response.getEntity(String.class);		
-		ACSResponse 	acsresp 	= new ACSResponse();
-		acsresp.setResponse(rdata);
+        ACSResponse 	acsresp 	= new ACSResponse();
 		acsresp.setCookies(response.getCookies());
 		acsresp.setHeaders(response.getHeaders());		
-		if (rdata == null || rdata.length() <= 0) {
-			//System.out.println("Response data is NULL ------> " + rdata + ". Closing connection  >>>>>>> ");
-			//response.close();
-		}
-		//System.out.println( "Printing Response  Headers      -------------------- " + response.getHeaders());
-		//System.out.println( "Printing Response getCookies    -------------------- " +  response.getCookies());
-		//System.out.println( "Printing Response Data -------------------- " +  response. );
-		System.out.println(rdata);
+                //if (response.getClientResponseStatus() == ClientResponse.Status.OK) {
+                //if (response.hasEntity()) {
+                if (response.getClientResponseStatus() == ClientResponse.Status.OK) {
+                    String 		rdata 	= response.getEntity(String.class);		
+                    acsresp.setResponse(rdata);
+                    System.out.println(rdata);
+                } else {
+                    System.out.println(response.getClientResponseStatus());
+                }		
 		return acsresp;
 	}
 	
-	public Envelope getClientResponse (CpeActions cpeactions, Object reqobject) {		
+	public Envelope getClientResponse (CpeActions cpeactions, Object idobject, Object reqobject) {		
 		Envelope toreturn 	= null;
 		String reqname 		= reqobject.getClass().getSimpleName();
 		Integer switchId 	= ClientUtil.reqProps.get(reqname);
@@ -207,7 +253,7 @@ public class CPEClientSession {
 		case ClientUtil.SCHEDULE_INFORM_ID:
 			ScheduleInform schInform 	= (ScheduleInform)reqobject;
 			int 			delaysec 	= schInform.getDelaySeconds();
-			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype);
+			SchedulerInform siclass 	= new SchedulerInform(delaysec, username, passwd, authtype, useragent, xmlFmt);
 			Thread 	sithread 			= new Thread (siclass, "SchInformThread");
 			sithread.start();			
 			break;
@@ -223,11 +269,49 @@ public class CPEClientSession {
 			break;
 
 		}
-		
+                
+                boolean strangeACS = false;
+                
+                if(!strangeACS) {
+                    if (toreturn != null) {
+                        toreturn.getHeader().getObjects().add((ID)idobject);
+                    }
+                }
+                
 		return toreturn;
 	}
 	
 	
+        public void dumpCurrentConfiguration(String dumploc, String serial) {
+                try {
+                        GetParameterNames allParameterNames = new GetParameterNames();
+                        allParameterNames.setParameterPath(cpeActions.confdb.props.getProperty("RootNode"));
+                        Envelope envNames = cpeActions.doGetParameterNames(allParameterNames);
+                        String 		namesDump 	= JibxHelper.marshalObject(envNames, "cwmp_1_0");
+						CpeDBReader.serialize(dumploc + "getnames_" + serial + ".xml", new XmlFormatter().format(namesDump));
+
+                        ParameterNames pn = new ParameterNames();
+                        Set<String> namesSet = new HashSet<String>();
+                        namesSet.add(cpeActions.confdb.props.getProperty("RootNode"));
+                        pn.setStrings(namesSet.toArray(new String[namesSet.size()]));
+                        
+                        GetParameterValues allParameterValues = new GetParameterValues();
+                        allParameterValues.setParameterNames(pn);
+                        Envelope 	envValues	= cpeActions.doGetParameterValues(allParameterValues, false, cpeActions.confdb.confs);		
+                        String 		valuesDump 	= JibxHelper.marshalObject(envValues, "cwmp_1_0");
+                        CpeDBReader.serialize(dumploc + "getvalues_" + serial + ".xml", new XmlFormatter().format(valuesDump));
+                        
+                        GetParameterValues learnedParameterValues = new GetParameterValues();
+                        learnedParameterValues.setParameterNames(pn);
+                        Envelope 	envLearnedValues	= cpeActions.doGetParameterValues(learnedParameterValues, false, cpeActions.confdb.learns);		
+                        String 		learnedValuesDump 	= JibxHelper.marshalObject(envLearnedValues, "cwmp_1_0");
+                        CpeDBReader.serialize(dumploc + "learnedvalues_" + serial + ".xml", new XmlFormatter().format(learnedValuesDump));
+                } catch (IOException ioex) {
+                        ioex.printStackTrace();
+                }
+        }
+                
+                
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri("http://192.168.1.50:8085/ws?wsdl").build();
 	}	
@@ -316,13 +400,17 @@ public class CPEClientSession {
 		int delaysecs;
 		String username 	= null; 
 		String passwd		= null; 
-		String authtype		= null; 
+		String authtype		= null;
+        String useragent        = null;
+        XmlFormatter xmlFmt = null;
 
-		public SchedulerInform (int delaysecs, String username, String passwd, String authtype) {
+		public SchedulerInform (int delaysecs, String username, String passwd, String authtype, String useragent, XmlFormatter xmlFmt) {
 			this.delaysecs = delaysecs;
 			this.username 	= username;
 			this.passwd 	= passwd;
 			this.authtype 	= authtype;
+            this.useragent  = useragent;
+            this.xmlFmt = xmlFmt;
 		}
 
 		public void run () {
@@ -335,7 +423,7 @@ public class CPEClientSession {
 				Envelope informMessage = cpeActions.doInform(eventKeyList);
 
 				System.out.println("Sending ScheduleInform Message at " + (new Date()));
-				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype);
+				CPEClientSession session = new CPEClientSession(cpeActions, username, passwd, authtype, useragent, xmlFmt);
 				session.sendInform(informMessage);
 
 			} catch (Exception e) {
@@ -344,5 +432,5 @@ public class CPEClientSession {
 		}
 	}
 	
-	
+
 }

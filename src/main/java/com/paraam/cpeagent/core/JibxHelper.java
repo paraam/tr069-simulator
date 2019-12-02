@@ -37,7 +37,7 @@ public class JibxHelper {
 	/**
 	 * Unmarshal this xml Message to an object.
 	 * @param xml
-	 * @param system
+	 * @param version
 	 * @return
 	 */
 	public static Object unmarshalMessage(String xml, String version)

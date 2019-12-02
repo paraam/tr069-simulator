@@ -15,6 +15,10 @@ local.properties
 .classpath
 .settings/
 .loadpath
+nb-configuration.xml
+nbactions.xml
+target
+
 
 # External tool builders
 .externalToolBuilders/
@@ -213,3 +217,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+
+#################
+## Idea
+#################
+.idea
+*.iml

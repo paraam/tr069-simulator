@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 public class EventList {
 	private ArrayList<EventStruct> eventStruct = new ArrayList<EventStruct>();
+    private ArrayAttributes.ArrayType arrayType = new ArrayAttributes.ArrayType();;
 
 	public ArrayList<EventStruct> getEventStruct() {
 		return eventStruct;
@@ -27,6 +28,14 @@ public class EventList {
 
 	public void setEventStruct(ArrayList<EventStruct> eventStruct) {
 		this.eventStruct = eventStruct;
+        this.setArrayType(String.format("cwmp:EventStruct[%d]", this.eventStruct.size()));
 	}	
 	
+    public String getArrayType() {
+		return arrayType.getArrayType();
+	}
+
+	public void setArrayType(String arrayType) {
+        this.arrayType.setArrayType(arrayType);
+	}	
 }

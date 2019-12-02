@@ -6,6 +6,9 @@
     <value style="text" get-method="getString" set-method="setString"/>
     <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
   </mapping>
+  <mapping class="org.dslforum.cwmp_1_0.NoMoreRequests" name="NoMoreRequests" ns="urn:dslforum-org:cwmp-1-0">
+    <value style="text" get-method="getString" set-method="setString"/>
+  </mapping>
   <mapping class="org.dslforum.cwmp_1_0.HoldRequests" name="HoldRequests" ns="urn:dslforum-org:cwmp-1-0">
     <value style="text" get-method="isBoolean" set-method="setBoolean"/>
     <value style="attribute" name="mustUnderstand" ns="http://schemas.xmlsoap.org/soap/envelope/" get-method="isMustUnderstand" set-method="setMustUnderstand" usage="optional"/>
@@ -42,6 +45,7 @@
     <value style="element" name="CommandKey" get-method="getCommandKey" set-method="setCommandKey"/>
   </mapping>
   <mapping abstract="true" type-name="tns:EventList" class="org.dslforum.cwmp_1_0.EventList">
+    <value style="attribute" name="arrayType" ns="http://schemas.xmlsoap.org/soap/encoding/" get-method="getArrayType" set-method="setArrayType" usage="optional"/>
   	<collection field="eventStruct" >
   		<structure name="EventStruct" type="org.dslforum.cwmp_1_0.EventStruct">
     		<value style="element" name="EventCode" get-method="getEventCode" set-method="setEventCode"/>
@@ -53,7 +57,8 @@
     <value style="element" name="Name" get-method="getName" set-method="setName"/>
     <value style="element" name="Value" get-method="getValue" set-method="setValue"/>
   </mapping>  
-  <mapping abstract="true" type-name="tns:ParameterValueList" class="org.dslforum.cwmp_1_0.ParameterValueList">  
+  <mapping abstract="true" type-name="tns:ParameterValueList" class="org.dslforum.cwmp_1_0.ParameterValueList">
+    <value style="attribute" name="arrayType" ns="http://schemas.xmlsoap.org/soap/encoding/" get-method="getArrayType" set-method="setArrayType" usage="optional"/>
 	<collection field="parameterValueStruct" >
   		<structure name="ParameterValueStruct" type="org.dslforum.cwmp_1_0.ParameterValueStruct">
     		<value style="element" name="Name" get-method="getName" set-method="setName"/>
